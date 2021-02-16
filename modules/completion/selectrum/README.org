@@ -1,0 +1,83 @@
+#+TITLE:   completion/selectrum
+#+DATE:    February 16, 2021
+#+SINCE:   v3.0.0
+#+STARTUP: inlineimages
+
+* Table of Contents :TOC_2:noexport:
+- [[#description][Description]]
+  - [[#module-flags][Module Flags]]
+  - [[#plugins][Plugins]]
+- [[#prerequisites][Prerequisites]]
+- [[#usage][Usage]]
+  - [[#inserting-oss-licenses][Inserting OSS licenses]]
+- [[#configuration][Configuration]]
+  - [[#registering-a-new-file-template][Registering a new file template]]
+  - [[#changing-existing-file-templates][Changing existing file templates]]
+  - [[#adding-new-oss-licenses][Adding new OSS licenses]]
+- [[#troubleshooting][Troubleshooting]]
+- [[#appendix][Appendix]]
+  - [[#api][API]]
+  - [[#commands][Commands]]
+  - [[#variables][Variables]]
+
+* Description
+This module adds file templates for blank files, powered by yasnippet.
+
+** Module Flags
+This module provides no flags.
+
+** Plugins
+This module installs no plugins.
+
+* Prerequisites
+This module has no prerequisites.
+
+* Usage
+File templates are automatically expanded when opening empty files.
+
+They are also regular yasnippet snippets, which can be expanded by typing their
+trigger and pressing =TAB=. By convention, the triggers for file templates are
+prefixed with two underscores ~__~.
+
+** Inserting OSS licenses
+A special command is available for inserting software licenses: ~M-x
++file-templates/insert-license~.
+
+#+begin_quote
+Licenses with a ~-bp~ suffix are boilerplate templates; shorter versions meant
+for comment headers in code.
+#+end_quote
+
+* Configuration
+** Registering a new file template
+Look into the documentation of ~set-file-template!~ and ~set-file-templates!~.
+** Changing existing file templates
+Simply register a new template (using ~set-file-template!~) that matches the same
+file. The new template would be pushed to the top of ~+file-template-alist~ and
+thus would take priority while searching for a template to insert.
+** Adding new OSS licenses
+The ~+file-templates/insert-license~ command searches for snippets under
+~text-mode~ that are named ~__license-ABC~, where ABC is the short name of the
+license. e.g. ~__license-mit~.
+
+So long as these files exist, ~+file-templates/insert-license~ will recognize
+them.
+
+* Troubleshooting
+If a file template isn't expanding where you expect it to, run ~M-x
++file-templates/debug~. This will report to you what file template rule would
+apply for the correct file.
+
+* Appendix
+** API
++ ~set-file-template! PRED &rest PLIST~
++ ~set-file-templates! &rest TEMPLATES~
+
+** Commands
++ ~+file-templates/insert-license~
++ ~+file-templates/debug~
+
+** Variables
++ ~+file-templates-dir~
++ ~+file-templates-default-trigger~
++ ~+file-templates-alist~
