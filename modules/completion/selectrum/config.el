@@ -12,18 +12,7 @@
   :config
   (defadvice! +selectrum-refresh-on-cycle (&rest _)
     :after 'marginalia-cycle
-    (when (bound-and-true-p selectrum-mode) (selectrum-exhibit)))
-
-  (map!
-   :g "C-s-r" #'selectrum-repeat
-   (:map selectrum-minibuffer-map
-    :geni "M-RET" #'selectrum-submit-exact-input
-    :geni "C-j"   #'selectrum-next-candidate
-    :geni "C-S-j" #'selectrum-next-page
-    :geni "C-s-j" #'selectrum-goto-end
-    :geni "C-k"   #'selectrum-previous-candidate
-    :geni "C-S-k" #'selectrum-previous-page
-    :geni "C-s-k" #'selectrum-goto-beginning)))
+    (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
 
 (use-package! selectrum-prescient
   :when (featurep! +prescient)
@@ -79,17 +68,6 @@
 (use-package! embark
   :defer t
   :init
-  (map!
-   :g "C-s-e" #'embark-act
-   (:map minibuffer-local-completion-map
-    "C-c C-o" #'embark-export
-    "C-c C-c" #'embark-act-noexit)
-   (:map embark-file-map
-    :desc "Open Dired on target" :g "j" #'ffap-dired
-    :desc "Open target with sudo" :g "s" #'sudo-edit
-    :desc "Open target with vlf" :g "l" #'vlf)
-   (:map embark-file-map
-    :desc "Cycle marginalia views" :g "A" #'marginalia-cycle))
   (setq embark-action-indicator #'+embark-which-key-action-indicator
         embark-become-indicator embark-action-indicator))
 

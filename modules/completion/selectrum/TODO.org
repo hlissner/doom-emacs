@@ -2,3 +2,4 @@
 ** TODO SPC-s-p
 ** TODO SPC-s-b
 ** TODO Start-up with recent files
+** TODO Add vanilla keybindings
