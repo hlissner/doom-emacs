@@ -7,13 +7,8 @@
         selectrum-num-candidates-displayed 15
         selectrum-extend-current-candidate-highlight t
         selectrum-fix-minibuffer-height t)
-  (when (featurep! +orderless)
-
-    (setq completion-styles '(substring partial-completion)
-          selectrum-refine-candidates-function #'orderless-filter
-          selectrum-highlight-candidates-function #'orderless-highlight-matches))
-
-
+  (unless (featurep! +orderless)
+    (setq completion-styles '(substring partial-completion)))
   :config
   (defadvice! +selectrum-refresh-on-cycle (&rest _)
     :after 'marginalia-cycle
@@ -50,7 +45,8 @@
   :config
   (setq completion-styles '(orderless))
   (setq orderless-skip-highlighting (lambda () selectrum-active-p))
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches))
+  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches
+        selectrum-refine-candidates-function #'orderless-filter))
 
 (use-package! consult
   :defer t
