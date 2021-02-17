@@ -28,8 +28,9 @@
   (interactive)
   (call-interactively
    (cond ((fboundp 'counsel-yank-pop)    #'counsel-yank-pop)
+         ((fboundp 'consult-yank-pop)    #'consult-yank-pop)
          ((fboundp 'helm-show-kill-ring) #'helm-show-kill-ring)
-         ((error "No kill-ring search backend available. Enable ivy or helm!")))))
+         ((error "No kill-ring search backend available. Enable ivy, helm or selectrum!")))))
 
 ;;;###autoload
 (defun +default/yank-buffer-path (&optional root)
