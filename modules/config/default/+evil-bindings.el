@@ -313,8 +313,9 @@
        :desc "Switch buffer"           "<" #'switch-to-buffer)
       :desc "Switch to last buffer" "`"    #'evil-switch-to-windows-last-buffer
       :desc "Resume last search"    "'"
-      (cond ((featurep! :completion ivy)   #'ivy-resume)
-            ((featurep! :completion helm)  #'helm-resume))
+      (cond ((featurep! :completion ivy)        #'ivy-resume)
+            ((featurep! :completion helm)       #'helm-resume)
+            ((featurep! :completion selectrum)  #'selectrum-repeat))
 
       :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
       :desc "Search project"               "/" #'+default/search-project
