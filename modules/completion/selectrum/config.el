@@ -13,15 +13,6 @@
           selectrum-refine-candidates-function #'orderless-filter
           selectrum-highlight-candidates-function #'orderless-highlight-matches))
 
-  (when (featurep! +prescient)
-    (use-package! selectrum-prescient
-      :after selectrum
-      :hook ((selectrum-mode . selectrum-prescient-mode)
-             (selectrum-mode . prescient-persist-mode))
-      :config
-      (setq selectrum-preprocess-candidates-function #'selectrum-prescient--preprocess)
-      (add-hook 'selectrum-candidate-selected-hook #'selectrum-prescient--remember)
-      (add-hook 'selectrum-candidate-inserted-hook #'selectrum-prescient--remember)))
 
   :config
   (defadvice! +selectrum-refresh-on-cycle (&rest _)
@@ -38,6 +29,15 @@
     :geni "C-k"   #'selectrum-previous-candidate
     :geni "C-S-k" #'selectrum-previous-page
     :geni "C-s-k" #'selectrum-goto-beginning)))
+
+(use-package! selectrum-prescient
+  :when (featurep! +prescient)
+  :hook (selectrum-mode . selectrum-prescient-mode)
+  :hook (selectrum-mode . prescient-persist-mode)
+  :config
+  (setq selectrum-preprocess-candidates-function #'selectrum-prescient--preprocess)
+  (add-hook 'selectrum-candidate-selected-hook #'selectrum-prescient--remember)
+  (add-hook 'selectrum-candidate-inserted-hook #'selectrum-prescient--remember))
 
 (use-package! orderless
   :when (featurep! +orderless)
