@@ -68,63 +68,56 @@ If prefix ARG is set, prompt for a directory to search from."
 :query STRING
   Determines the initial input to search for.
 :in PATH
-  Sets what directory to base the search out of. Defaults to the current
-  project's root.
+  Sets what directory to base the search out of. Defaults to the current project's root.
 :recursive BOOL
   Whether or not to search files recursively from the base directory."
   (declare (indent defun))
   (unless (executable-find "rg")
     (user-error "Couldn't find ripgrep in your PATH"))
   (require 'consult)
-  (let* ((this-command 'consult-ripgrep)
+  (setq deactivate-mark t)
+  (let* ((this-command 'consult--grep)
          (project-root (or (doom-project-root) default-directory))
          (directory (or in project-root))
-         (ripgrep-command (seq-remove 'null
-                                      (append (butlast consult-ripgrep-command)
-                                              (list
-                                               (when all-files "-uu")
-                                               (unless recursive " --maxdepth 1")
-                                               "--hidden"
-                                               "-g!.git")
-                                              args
-                                              '("-e"))))
          (prompt (or prompt
-                     (format "%s [%s]: "
-                             (mapconcat #'identity ripgrep-command " ")
-                             (cond ((equal directory default-directory) "./")
-                                   ((equal directory project-root) (projectile-project-name))
+                     (format "rg [%s]: "
+                             (cond ((equal directory default-directory)
+                                    "./")
+                                   ((equal directory project-root)
+                                    (projectile-project-name))
                                    ((file-relative-name directory project-root))))))
          (query (or query
                     (when (doom-region-active-p)
                       (replace-regexp-in-string
                        "[! |]" (lambda (substr)
-                                 (cond ((string= substr " ") "  ")
-                                       ((string= substr "|") "\\\\\\\\|")
+                                 (cond ((and (string= substr " ")
+                                             (not (featurep! +fuzzy)))
+                                        "  ")
+                                       ((string= substr "|")
+                                        "\\\\\\\\|")
                                        ((concat "\\\\" substr))))
-                       (rxt-quote-pcre (doom-thing-at-point-or-region))))
-                    " ")))
-    ;; (setq deactivate-mark t)
+                       (rxt-quote-pcre (doom-thing-at-point-or-region))))))
+         (ripgrep-command (format "rg %s . -e"
+                                  (string-trim
+                                   (concat (if all-files "-uu")
+                                           (unless recursive "--maxdepth 1")
+                                           "--null --line-buffered --color=always --max-columns=500 --no-heading --line-number"
+                                           " --hidden -g!.git "
+                                           (mapconcat #'shell-quote-argument args " ")))
+                                  args)))
     (consult--grep prompt ripgrep-command directory query)))
 
 ;;;###autoload
 (defun +selectrum/project-search (&optional arg initial-query directory)
-  "Performs a live project search from the project root using ripgrep.
+  "Peforms a live project search from the project root using ripgrep.
 If ARG (universal argument), include all files, even hidden or compressed ones,
 in the search."
   (interactive "P")
-  (+selectrum-file-search
-    :prompt (format "Find text on project files \[%s\]"
-                    (if (or (and (not directory) (doom-project-root))
-                            (and directory (equal directory (doom-project-root))))
-                        (projectile-project-name)
-                      (file-relative-name (or directory (doom-project-root) default-directory))))
-    :query initial-query
-    :in directory
-    :all-files arg))
+  (+selectrum-file-search :query initial-query :in directory :all-files arg))
 
 ;;;###autoload
 (defun +selectrum/project-search-from-cwd (&optional arg initial-query)
-  "Performs a project search recursively from the current directory.
+  "Performs a live project search from the current directory.
 If ARG (universal argument), include all files, even hidden or compressed ones."
   (interactive "P")
   (+selectrum/project-search arg initial-query default-directory))
