@@ -45,6 +45,7 @@
   (define-key!
     [remap apropos] #'consult-apropos
     [remap bookmark-jump]  #'consult-bookmark
+    [remap evil-show-marks] #'consult-mark
     [remap goto-line] #'consult-goto-line
     [remap imenu] #'consult-imenu
     [remap switch-to-buffer] #'consult-buffer
