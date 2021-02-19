@@ -43,19 +43,19 @@
   :init
   (fset 'multi-occur #'consult-multi-occur)
   (define-key!
-    [remap apropos] #'consult-apropos
-    [remap bookmark-jump]  #'consult-bookmark
-    [remap evil-show-marks] #'consult-mark
-    [remap goto-line] #'consult-goto-line
-    [remap imenu] #'consult-imenu
-    [remap switch-to-buffer] #'consult-buffer
+    [remap apropos]                       #'consult-apropos
+    [remap bookmark-jump]                 #'consult-bookmark
+    [remap evil-show-marks]               #'consult-mark
+    [remap goto-line]                     #'consult-goto-line
+    [remap imenu]                         #'consult-imenu
+    [remap locate]                        #'consult-locate
+    [remap load-theme]                    #'consult-theme
+    [remap man]                           #'consult-man
+    [remap recentf-open-files]            #'consult-recent-file)
+    [remap switch-to-buffer]              #'consult-buffer
     [remap switch-to-buffer-other-window] #'consult-buffer-other-window
-    [remap switch-to-buffer-other-frame] #'consult-buffer-other-frame
-    [remap man] #'consult-man
-    [remap yank-pop] #'consult-yank-pop
-    [remap locate] #'consult-locate
-    [remap load-theme] #'consult-theme
-    [remap recentf-open-files] #'consult-recent-file)
+    [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
+    [remap yank-pop]                      #'consult-yank-pop
   :config
   (setq consult-project-root-function #'doom-project-root)
   (setq completion-in-region-function #'consult-completion-in-region)
