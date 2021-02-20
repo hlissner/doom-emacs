@@ -73,3 +73,8 @@ in the search."
 If ARG (universal argument), include all files, even hidden or compressed ones."
   (interactive "P")
   (+selectrum/project-search arg initial-query default-directory))
+
+;;;###autoload
+(defun +consult-line-symbol-at-point ()
+  (interactive)
+  (consult-line (thing-at-point 'symbol)))
