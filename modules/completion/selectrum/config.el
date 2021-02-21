@@ -5,8 +5,7 @@
   :init
   (setq selectrum-display-action nil
         selectrum-num-candidates-displayed 15
-        selectrum-extend-current-candidate-highlight t
-        selectrum-fix-minibuffer-height t)
+        selectrum-extend-current-candidate-highlight t)
   (unless (featurep! +orderless)
     (setq completion-styles '(substring partial-completion)))
   :config
@@ -35,8 +34,7 @@
   :config
   (setq completion-styles '(orderless))
   (setq orderless-skip-highlighting (lambda () selectrum-active-p))
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches
-        selectrum-refine-candidates-function #'orderless-filter))
+  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
 
 (use-package! consult
   :defer t
