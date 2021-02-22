@@ -34,7 +34,7 @@
   :config
   (setq completion-styles '(orderless))
   (setq orderless-skip-highlighting (lambda () selectrum-active-p))
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
+  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches))
 
 (use-package! consult
   :defer t
