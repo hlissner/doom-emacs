@@ -29,7 +29,37 @@ one face."
     (user-error "Couldn't find ripgrep in your PATH"))
   (require 'consult)
   (setq deactivate-mark t)
-  (consult-ripgrep))
+  (let* ((this-command 'consult--grep)
+         (project-root (or (doom-project-root) default-directory))
+         (directory (or in project-root))
+         (args (split-string
+                (string-trim
+                 (concat (if all-files "-uu")
+                         (unless recursive "--maxdepth 1")
+                         "--null --line-buffered --color=always --max-columns=500 --no-heading --line-number"
+                         " --hidden -g!.git "
+                         (mapconcat #'shell-quote-argument args " ")))
+                " "))
+         (prompt (or prompt
+                     (format "rg [%s]: "
+                             (cond ((equal directory default-directory)
+                                    "./")
+                                   ((equal directory project-root)
+                                    (projectile-project-name))
+                                   ((file-relative-name directory project-root))))))
+         (query (or query
+                    (when (doom-region-active-p)
+                      (replace-regexp-in-string
+                       "[! |]" (lambda (substr)
+                                 (cond ((and (string= substr " ")
+                                             (not (featurep! +fuzzy)))
+                                        "  ")
+                                       ((string= substr "|")
+                                        "\\\\\\\\|")
+                                       ((concat "\\\\" substr))))
+                       (rxt-quote-pcre (doom-thing-at-point-or-region))))))
+         (ripgrep-command `("rg" ,@args "." "-e")))
+    (consult--grep prompt ripgrep-command directory query)))
 
 ;;;###autoload
 (defun +selectrum/project-search (&optional arg initial-query directory)
