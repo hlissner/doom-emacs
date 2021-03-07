@@ -9,7 +9,8 @@
   (unless (featurep! +orderless)
     (setq completion-styles '(substring partial-completion)))
   :config
-  (setq selectrum-fix-vertical-window-height 17)
+  (setq selectrum-fix-vertical-window-height 17
+        selectrum-max-window-height 17)
   (defadvice! +selectrum-refresh-on-cycle (&rest _)
     :after 'marginalia-cycle
     (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
