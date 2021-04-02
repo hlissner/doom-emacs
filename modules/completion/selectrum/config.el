@@ -24,6 +24,18 @@
   (add-hook 'selectrum-candidate-selected-hook #'selectrum-prescient--remember)
   (add-hook 'selectrum-candidate-inserted-hook #'selectrum-prescient--remember))
 
+(defun flex-if-twiddle (pattern _index _total)
+  (when (string-suffix-p "~" pattern)
+    `(orderless-flex . ,(substring pattern 0 -1))))
+
+(defun first-initialism (pattern index _total)
+  (if (= index 0) 'orderless-initialism))
+
+(defun without-if-bang (pattern _index _total)
+  "Define a '!not' exclusion prefix for literal strings."
+  (when (string-prefix-p "!" pattern)
+    `(orderless-without-literal . ,(substring pattern 1))))
+
 (use-package! orderless
   :when (featurep! +orderless)
   :defer t
@@ -36,6 +48,9 @@
   (setq completion-styles '(orderless))
   (setq orderless-skip-highlighting (lambda () selectrum-active-p))
   (setq selectrum-highlight-candidates-function #'orderless-highlight-matches))
+  (setq orderless-matching-styles '(orderless-regexp)
+        orderless-style-dispatchers '(flex-if-twiddle
+                                      without-if-bang))
 
 (use-package! consult
   :defer t
