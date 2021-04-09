@@ -682,7 +682,9 @@
 
       ;;; <leader> s --- search
       (:prefix-map ("s" . "search")
-       :desc "Search buffer"                "b" #'swiper
+       :desc "Search buffer"                "b"
+       (cond ((featurep! :completion ivy)       #'swiper)
+             ((featurep! :completion selectrum) #'consult-line))
        :desc "Search all open buffers"      "B" #'swiper-all
        :desc "Search current directory"     "d" #'+default/search-cwd
        :desc "Search other directory"       "D" #'+default/search-other-cwd
