@@ -4,6 +4,12 @@
 *** TODO Add keybinding for embark-act
 ** TODO Fix ivy references in README.
 ** TODO ~+orderless~ doesn't work
+** TODO Weird =SPC /= bug
+when first launching doom, =SPC /= bugs out with
+#+begin_src
+projectile-project-root: Defining as dynamic an already lexical var
+#+end_src
+but this goes away after doing =SPC f p=.
 * PROJ List of things needed for Ivy parity
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
