@@ -89,7 +89,6 @@
         embark-become-indicator embark-action-indicator))
 
 (use-package! marginalia
-  :after selectrum
   :hook (doom-first-input . marginalia-mode)
   :init
   (setq-default marginalia-annotators '(marginalia-annotators-heavy)))
