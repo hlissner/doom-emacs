@@ -91,7 +91,9 @@
 (use-package! marginalia
   :hook (doom-first-input . marginalia-mode)
   :init
-  (setq-default marginalia-annotators '(marginalia-annotators-heavy)))
+  (setq-default marginalia-annotators '(marginalia-annotators-heavy))
+  :config
+  (add-to-list 'marginalia-command-categories '(persp-switch-to-buffer . buffer)))
 
 (use-package! embark-consult
   :after (embark consult)
