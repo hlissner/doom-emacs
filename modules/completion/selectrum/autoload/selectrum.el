@@ -37,7 +37,7 @@ one face."
                  (concat (if all-files "-uu")
                          (unless recursive "--maxdepth 1")
                          "--null --line-buffered --color=always --max-columns=500 --no-heading --line-number"
-                         " --hidden -g!.git "
+                         " --hidden -g !.git "
                          (mapconcat #'shell-quote-argument args " ")))
                 " "))
          (prompt (or prompt
@@ -58,7 +58,7 @@ one face."
                                         "\\\\\\\\|")
                                        ((concat "\\\\" substr))))
                        (rxt-quote-pcre (doom-thing-at-point-or-region))))))
-         (ripgrep-command `("rg" ,@args "." "-e")))
+         (ripgrep-command (mapconcat #'identity `("rg" ,@args "." "-e ARG OPTS" ) " ")))
     (consult--grep prompt ripgrep-command directory query)))
 
 ;;;###autoload
