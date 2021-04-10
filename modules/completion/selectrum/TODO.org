@@ -4,3 +4,4 @@
 ** TODO Start-up with recent files
 ** TODO Add vanilla keybindings
 *** TODO Add keybinding for embark-act
+** TODO Fix ivy references in README.
