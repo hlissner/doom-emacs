@@ -49,7 +49,7 @@
                                     orderless-regexp))
   :config
   (setq completion-styles '(orderless))
-  (setq orderless-skip-highlighting (lambda () selectrum-active-p))
+  (setq orderless-skip-highlighting (lambda () selectrum-is-active))
   (setq selectrum-refine-candidates-function #'orderless-filter)
   (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
   (setq orderless-matching-styles '(orderless-regexp)
