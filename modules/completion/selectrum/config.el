@@ -47,10 +47,10 @@
   :config
   (setq completion-styles '(orderless))
   (setq orderless-skip-highlighting (lambda () selectrum-active-p))
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches))
+  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
   (setq orderless-matching-styles '(orderless-regexp)
         orderless-style-dispatchers '(flex-if-twiddle
-                                      without-if-bang))
+                                      without-if-bang)))
 
 (use-package! consult
   :defer t
@@ -65,11 +65,11 @@
     [remap locate]                        #'consult-locate
     [remap load-theme]                    #'consult-theme
     [remap man]                           #'consult-man
-    [remap recentf-open-files]            #'consult-recent-file)
+    [remap recentf-open-files]            #'consult-recent-file
     [remap switch-to-buffer]              #'consult-buffer
     [remap switch-to-buffer-other-window] #'consult-buffer-other-window
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
-    [remap yank-pop]                      #'consult-yank-pop
+    [remap yank-pop]                      #'consult-yank-pop)
   :config
   (setq consult-project-root-function #'doom-project-root)
   (setq completion-in-region-function #'consult-completion-in-region)
