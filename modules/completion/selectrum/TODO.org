@@ -1,5 +1,8 @@
 * PROJ List of things not working
-** TODO Start-up with recent files
+** TODO Fulctions very slow on startup:
+- =consult-recent-files=
+- =consult-bookmark=
+Probably due to live preview, but gets much faster on subsequent calls.
 ** TODO Add vanilla keybindings
 *** TODO Add keybinding for embark-act
 ** TODO Fix ivy references in README.
