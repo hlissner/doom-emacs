@@ -1,21 +1,21 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/selectrum/packages.el
 
-(package! selectrum :pin "9c5f142107d28868748a5801fb53ca7c5ad75fec")
+(package! selectrum :pin "093f7e96a323179ee2a68a5a674e7fa2c5d721b8")
 
 (when (featurep! +prescient)
-  (package! selectrum-prescient :pin "bf0ddeb0b687e6af50ad82558bd32c17a2c0311b"))
+  (package! selectrum-prescient :pin "ed2b762241bbea03e374dc9dcd4fbe207c6b2ea4"))
 
 (when (featurep! +orderless)
   (package! orderless :pin "87ab7e47e343285f7afd42779c78551332b8fd84"))
 
-(package! consult :pin "846c715ee1df94292a9bb2467810bd7959ccf078")
+(package! consult :pin "e04a404c8d8ca137be2b3b7cf664a11712639c31")
 (when (featurep! :checkers syntax)
-  (package! consult-flycheck :pin "846c715ee1df94292a9bb2467810bd7959ccf078"))
+  (package! consult-flycheck :pin "e04a404c8d8ca137be2b3b7cf664a11712639c31"))
 (when (featurep! :tools lsp)
   (package! consult-lsp :pin "ed3cfd2e67fc5117819c0c739814780bb4c2d716"))
 
-(package! embark :pin "5f3097824f8c3d17bcd70c4e4ce597bcfcf2196f")
-(package! embark-consult :pin "5f3097824f8c3d17bcd70c4e4ce597bcfcf2196f")
+(package! embark :pin "4d7e8e4d3be7aaff56730f76a066db2acad65371")
+(package! embark-consult :pin "4d7e8e4d3be7aaff56730f76a066db2acad65371")
 
-(package! marginalia :pin "668265af921285c726b2239dae32459bd1064d03")
+(package! marginalia :pin "5159256d04d123899b88ee6e7eba0c27f66d0fe2")
