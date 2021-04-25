@@ -205,3 +205,7 @@ instead is more sensible."
 (use-package! lsp-ivy
   :when (featurep! :completion ivy)
   :commands lsp-ivy-workspace-symbol lsp-ivy-global-workspace-symbol)
+
+(use-package! consult-lsp
+  :when (featurep! :completion consult)
+  :commands consult-lsp-symbols)

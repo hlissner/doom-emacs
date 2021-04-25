@@ -17,3 +17,5 @@ https://github.com/minad/marginalia/issues/59
 In ivy, backspace on =/foo/bar/!= (where =!= is the cursor) leads to =/foo/!=
 In selectrum, it leads to =/foo/bar!=
 ** TODO =SPC s B=
+* PROJ Other
+** TODO bind =consult-lsp-diagnostics= to something?

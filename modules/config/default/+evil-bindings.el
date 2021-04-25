@@ -393,14 +393,19 @@
         (:when (featurep! :completion helm)
          :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
          :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol)
+        (:when (featurep! :completion selectrum)
+         :desc "Jump to symbol in current workspace" "j"   #'consult-lsp-symbols
+         :desc "Jump to symbol in any workspace"     "J"   (lambda () (interactive)
+                                                             (universal-argument)
+                                                             (call-interactively #'consult-lsp-symbols)))
         (:when (featurep! :ui treemacs +lsp)
          :desc "Errors list"                         "X"   #'lsp-treemacs-errors-list
          :desc "Incoming call hierarchy"             "y"   #'lsp-treemacs-call-hierarchy
          :desc "Outgoing call hierarchy"             "Y"   (cmd!! #'lsp-treemacs-call-hierarchy t)
          :desc "References tree"                     "R"   (cmd!! #'lsp-treemacs-references t)
          :desc "Symbols"                             "S"   #'lsp-treemacs-symbols)
-        :desc "LSP"                                  "l"   #'+default/lsp-command-map
-        :desc "LSP Rename"                           "r"   #'lsp-rename)
+         :desc "LSP"                                 "l"   #'+default/lsp-command-map
+         :desc "LSP Rename"                          "r"   #'lsp-rename)
        (:when (featurep! :tools lsp +eglot)
         :desc "LSP Execute code action" "a" #'eglot-code-actions
         :desc "LSP Rename" "r" #'eglot-rename

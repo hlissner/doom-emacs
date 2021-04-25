@@ -12,6 +12,8 @@
 (package! consult :pin "846c715ee1df94292a9bb2467810bd7959ccf078")
 (when (featurep! :checkers syntax)
   (package! consult-flycheck :pin "846c715ee1df94292a9bb2467810bd7959ccf078"))
+(when (featurep! :tools lsp)
+  (package! consult-lsp :pin "ed3cfd2e67fc5117819c0c739814780bb4c2d716"))
 
 (package! embark :pin "5f3097824f8c3d17bcd70c4e4ce597bcfcf2196f")
 (package! embark-consult :pin "5f3097824f8c3d17bcd70c4e4ce597bcfcf2196f")
