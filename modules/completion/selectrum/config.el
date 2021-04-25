@@ -38,7 +38,7 @@
 
 (use-package! orderless
   :when (featurep! +orderless)
-  :defer t
+  :after selectrum
   :init
   (setq orderless-component-separator "[ &]"
         orderless-matching-styles '(orderless-prefixes
@@ -47,6 +47,7 @@
   :config
   (setq completion-styles '(orderless))
   (setq orderless-skip-highlighting (lambda () selectrum-active-p))
+  (setq selectrum-refine-candidates-function #'orderless-filter)
   (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
   (setq orderless-matching-styles '(orderless-regexp)
         orderless-style-dispatchers '(flex-if-twiddle

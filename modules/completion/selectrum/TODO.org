@@ -3,7 +3,6 @@
 ** TODO Add vanilla keybindings
 *** TODO Add keybinding for embark-act
 ** TODO Fix ivy references in README.
-** TODO ~+orderless~ doesn't work
 ** TODO Weird =SPC /= bug
 when first launching doom, =SPC /= bugs out with
 #+begin_src
