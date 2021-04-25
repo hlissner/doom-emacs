@@ -12,7 +12,7 @@
   - [[#jump-to-navigation][Jump-to navigation]]
   - [[#project-search--replace][Project search & replace]]
   - [[#in-buffer-searching][In-buffer searching]]
-  - [[#ivy-integration-for-various-completing-commands][Ivy integration for various completing commands]]
+  - [[#selectrum-integration-for-various-completing-commands][Selectrum integration for various completing commands]]
 - [[#configuration][Configuration]]
   - [[#enable-fuzzynon-fuzzy-search-for-specific-commands][Enable fuzzy/non-fuzzy search for specific commands]]
   - [[#change-the-position-of-the-ivy-childframe][Change the position of the ivy childframe]]
@@ -47,17 +47,15 @@ This module has no prerequisites.
 
 * PROJ Features
 
-NOTE: this section is currently copypasted from ivy, and needs to be revisited.
-
-Ivy and its ilk are large plugins. Covering everything about them is outside of
-this documentation's scope, so only Doom-specific Ivy features are listed here:
+Selectrum and friends modify and use the built-in ~completing-read~ function, used by any function
+that requires completion. Due to this the full scope of these packages is too
+large to cover here, so we will detail Doom-specific additions:
 
 ** Jump-to navigation
-Inspired by Sublime Text's jump-to-anywhere, CtrlP/Unite in Vim, and Textmate's
-Command-T, this module provides similar functionality by bringing ~projectile~
-and ~ivy~ together.
+This module provides an interface to
+navigate within a project using =projectile=:
 
-https://assets.doomemacs.org/completion/ivy/projectile.png
+https://assets.doomemacs.org/completion/selectrum/projectile.png
 
 | Keybind              | Description                         |
 |----------------------+-------------------------------------|
@@ -65,7 +63,7 @@ https://assets.doomemacs.org/completion/ivy/projectile.png
 | =SPC f f=, =SPC .=   | Jump to file from current directory |
 | =SPC s i=            | Jump to symbol in file              |
 
-** TODO Project search & replace
+** Project search & replace
 This module provides interactive text search and replace using ripgrep.
 
 | Keybind   | Description              |
@@ -75,7 +73,7 @@ This module provides interactive text search and replace using ripgrep.
 | =SPC s d= | Search this directory    |
 | =SPC s D= | Search another directory |
 
-https://assets.doomemacs.org/completion/ivy/search.png
+https://assets.doomemacs.org/completion/selectrum/search.png
 
 Prefixing these keys with the universal argument (=SPC u= for evil users; =C-u=
 otherwise) changes the behavior of these commands, instructing the underlying
@@ -106,27 +104,27 @@ Changes to the resulting wgrep buffer (opened by =C-c C-e=) can be committed
 with =C-c C-c= and aborted with =C-c C-k= (alternatively =ZZ= and =ZQ=, for evil
 users).
 
-https://assets.doomemacs.org/completion/ivy/search-replace.png
+https://assets.doomemacs.org/completion/selectrum/search-replace.png
 
-** In-buffer searching
+** TODO In-buffer searching
 The =swiper= package provides an interactive buffer search powered by ivy. It
 can be invoked with:
 
 + =SPC s s= (~swiper-isearch~)
 + =SPC s S= (~swiper-isearch-thing-at-point~)
-+ =SPC s b= (~swiper~)
++ =SPC s b= (~consult-line~)
 + ~:sw[iper] [QUERY]~
 
-https://assets.doomemacs.org/completion/ivy/swiper.png
+https://assets.doomemacs.org/completion/selectrum/buffer-search.png
 
 A wgrep buffer can be opened from swiper with =C-c C-e=.
 
-** Ivy integration for various completing commands
+** Selectrum integration for various completing commands
 *** General
-| Keybind        | Description               |
-|----------------+---------------------------|
-| =M-x=, =SPC := | Smarter, smex-powered M-x |
-| =SPC '=        | Resume last ivy session   |
+| Keybind        | Description                    |
+|----------------+--------------------------------|
+| =M-x=, =SPC := | Enhanced M-x                   |
+| =SPC '=        | Resume last Selectrum  session |
 
 *** Jump to files, buffers or projects
 | Keybind              | Description                           |

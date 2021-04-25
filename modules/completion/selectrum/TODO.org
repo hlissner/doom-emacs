@@ -5,7 +5,9 @@
 Probably due to live preview, but gets much faster on subsequent calls.
 ** TODO Add vanilla keybindings
 *** TODO Add keybinding for embark-act
-** TODO Fix ivy references in README.
+** TODO =SPC s s= and =SPC s S= ~:sw~
+There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
+does something else (give you previously used isearch search terms).
 * PROJ List of things needed for Ivy parity
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
@@ -13,5 +15,6 @@ https://github.com/minad/marginalia/issues/59
 In ivy, backspace on =/foo/bar/!= (where =!= is the cursor) leads to =/foo/!=
 In selectrum, it leads to =/foo/bar!=
 ** TODO =SPC s B=
+** TODO ~:pg~ support
 * PROJ Other
 ** TODO bind =consult-lsp-diagnostics= to something?
