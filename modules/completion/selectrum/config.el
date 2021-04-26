@@ -96,7 +96,10 @@
   :defer t
   :init
   (setq embark-action-indicator #'+embark-which-key-action-indicator
-        embark-become-indicator embark-action-indicator))
+        embark-become-indicator embark-action-indicator)
+  :config
+  (let ((embark-quit-after-action nil))
+    (map! :map minibuffer-local-map "C-SPC" #'embark-default-action)))
 
 (use-package! marginalia
   :hook (doom-first-input . marginalia-mode)

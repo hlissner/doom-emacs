@@ -8,6 +8,10 @@ preview deactivated for now (see consult use-package)
 ** TODO =SPC s s= and =SPC s S= ~:sw~
 There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
 does something else (give you previously used isearch search terms).
+** TODO fix C-SPC
+currently after executing the action it:
+- moves the cursor to the new window if created, might not be desired in all cases
+- for some reason opens buffers in a new window (might be upstream bug?)
 * PROJ List of things needed for Ivy parity
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
