@@ -76,6 +76,8 @@
   (setq consult-project-root-function #'doom-project-root)
   (setq completion-in-region-function #'consult-completion-in-region)
   (setq consult-narrow-key "<")
+  (setf (alist-get #'consult-bookmark consult-config) (list :preview-key nil))
+  (setf (alist-get #'consult-recent-file consult-config) (list :preview-key nil))
   (setq consult-line-numbers-widen t)
   (setq consult-async-input-debounce 0.5)
   (setq consult-async-input-throttle 0.8))
