@@ -75,6 +75,8 @@ If prefix ARG is set, prompt for a known project to search from."
            (+ivy/project-search nil symbol))
           ((featurep! :completion helm)
            (+helm/project-search nil symbol))
+          ((featurep! :completion selectrum)
+           (+selectrum/project-search nil symbol))
           ((rgrep (regexp-quote symbol))))))
 
 ;;;###autoload
