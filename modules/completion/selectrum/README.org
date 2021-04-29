@@ -8,7 +8,7 @@
   - [[#module-flags][Module Flags]]
   - [[#plugins][Plugins]]
 - [[#prerequisites][Prerequisites]]
-- [[#proj-features][PROJ Features]]
+- [[#features][Features]]
   - [[#jump-to-navigation][Jump-to navigation]]
   - [[#project-search--replace][Project search & replace]]
   - [[#in-buffer-searching][In-buffer searching]]
@@ -29,7 +29,7 @@ TODO
 
 ** Module Flags
 + ~+prescient~ Enables prescient filtering and sorting for Selectrum searches.
-+ ~+orderless~ Enables prescient filtering Selectrum searches.
++ ~+orderless~ Enables orderless filtering for Selectrum searches.
 
 
 ** Plugins
@@ -45,7 +45,7 @@ TODO
 * Prerequisites
 This module has no prerequisites.
 
-* PROJ Features
+* Features
 
 Selectrum and friends modify and use the built-in ~completing-read~ function, used by any function
 that requires completion. Due to this the full scope of these packages is too
@@ -93,12 +93,13 @@ commands.
 
 These keybindings are available while a search is active:
 
-| Keybind   | Description                                   |
-|-----------+-----------------------------------------------|
-| =C-c C-o= | Open a buffer with your search results        |
-| =C-c C-e= | Open a writable buffer of your search results |
-| =C-SPC=   | Preview the current candidate                 |
-| =C-RET=   | Open the selected candidate in other-window   |
+| Keybind   | Description                                        |
+|-----------+----------------------------------------------------|
+| =C-o=     | Open an ~embark-act~ menu to chose a useful action |
+| =C-c C-o= | Open a buffer with your search results             |
+| =C-c C-e= | Open a writable buffer of your search results      |
+| =C-SPC=   | Preview the current candidate                      |
+| =C-RET=   | Open the selected candidate in other-window        |
 
 Changes to the resulting wgrep buffer (opened by =C-c C-e=) can be committed
 with =C-c C-c= and aborted with =C-c C-k= (alternatively =ZZ= and =ZQ=, for evil
@@ -121,10 +122,10 @@ A wgrep buffer can be opened from swiper with =C-c C-e=.
 
 ** Selectrum integration for various completing commands
 *** General
-| Keybind        | Description                    |
-|----------------+--------------------------------|
-| =M-x=, =SPC := | Enhanced M-x                   |
-| =SPC '=        | Resume last Selectrum  session |
+| Keybind        | Description                   |
+|----------------+-------------------------------|
+| =M-x=, =SPC := | Enhanced M-x                  |
+| =SPC '=        | Resume last Selectrum session |
 
 *** Jump to files, buffers or projects
 | Keybind              | Description                           |
