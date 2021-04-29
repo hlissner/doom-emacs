@@ -19,7 +19,15 @@ https://github.com/minad/marginalia/issues/59
 In ivy, backspace on =/foo/bar/!= (where =!= is the cursor) leads to =/foo/!=
 In selectrum, it leads to =/foo/bar!=
 ** TODO =SPC s B=
-** TODO ~:pg~ support
+** TODO modules to look over
+- lookup
+- taskrunner (doesn't seem to be an interface yet)
+- pass (creating embark-pass can't be that hard)
+- irc
+- org (check, might be fine)
+- counsel-minibuffer-history analogue
+- counsel-company analogue
+- bibtex
 * PROJ Other
 ** TODO bind =consult-lsp-diagnostics= to something?
 ** TODO test out bibtex-actions, check if more configuration should be added

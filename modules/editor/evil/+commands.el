@@ -68,7 +68,10 @@
 
       ((featurep! :completion helm)
        (evil-ex-define-cmd "pg[rep]"   #'+helm:project-search)
-       (evil-ex-define-cmd "pg[grep]d" #'+helm:project-search-from-cwd)))
+       (evil-ex-define-cmd "pg[grep]d" #'+helm:project-search-from-cwd))
+      ((featurep! :completion selectrum)
+       (evil-ex-define-cmd "pg[rep]"   #'+selectrum:project-search)
+       (evil-ex-define-cmd "pg[grep]d" #'+selectrum:project-search-from-cwd)))
 
 ;;; Project tools
 (evil-ex-define-cmd "com[pile]"   #'+evil:compile)

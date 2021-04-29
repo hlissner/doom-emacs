@@ -103,3 +103,9 @@ OR a shell command string such as
   :when (featurep! :completion helm)
   :commands helm-notmuch
   :after notmuch)
+
+
+(use-package! consult-notmuch
+  :when (featurep! :completion selectrum)
+  :commands consult-notmuch
+  :after notmuch)

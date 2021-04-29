@@ -16,7 +16,9 @@
                 ((featurep! :completion helm)
                  '(helm-map
                    helm-rg-map
-                   helm-read-file-map))))
+                   helm-read-file-map))
+                ((featurep! :completion selectrum)
+                 '(selectrum-minibuffer-map))))
   "A list of all the keymaps used for the minibuffer.")
 
 
