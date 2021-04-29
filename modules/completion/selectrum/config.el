@@ -13,7 +13,10 @@
         selectrum-max-window-height 17)
   (defadvice! +selectrum-refresh-on-cycle (&rest _)
     :after 'marginalia-cycle
-    (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+    (when (bound-and-true-p selectrum-mode) (selectrum-exhibit)))
+  (map! :map selectrum-minibuffer-map
+        "C-o" #'embark-act
+        "C-c C-o" #'embark-export))
 
 (use-package! selectrum-prescient
   :when (featurep! +prescient)
@@ -70,7 +73,8 @@
     [remap switch-to-buffer]              #'consult-buffer
     [remap switch-to-buffer-other-window] #'consult-buffer-other-window
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
-    [remap yank-pop]                      #'consult-yank-pop)
+    [remap yank-pop]                      #'consult-yank-pop
+    [remap describe-bindings]             #'embark-bindings)
   :config
   (recentf-mode)
   (setq consult-project-root-function #'doom-project-root)
@@ -98,6 +102,13 @@
   (setq embark-action-indicator #'+embark-which-key-action-indicator
         embark-become-indicator embark-action-indicator)
   :config
+  (map!
+   :map embark-file-map
+   :desc "Open Dired on target" "j" #'ffap-dired
+   :desc "Open target with sudo" "s" #'sudo-edit
+   :desc "Open target with vlf" "l" #'vlf
+   :map embark-file-map
+   :desc "Cycle marginalia views" "A" #'marginalia-cycle )
   (let ((embark-quit-after-action nil))
     (map! :map minibuffer-local-map "C-SPC" #'embark-default-action)))
 

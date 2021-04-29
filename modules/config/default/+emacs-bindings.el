@@ -453,6 +453,8 @@
       (:when (featurep! :completion helm)
         "C-S-s"        #'swiper-helm
         "C-S-r"        #'helm-resume)
+      (:when (featurep! :completion selectrum)
+        "C-S-r"        #'selectrum-repeat)
 
       ;;; objed
       (:when (featurep! :editor objed +manual)

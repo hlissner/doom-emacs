@@ -204,7 +204,6 @@
 
       (:when (featurep! :completion selectrum)
        (:after selectrum
-        "C-s-r" #'selectrum-repeat
         :map selectrum-minibuffer-map
         "M-RET" #'selectrum-submit-exact-input
         "C-j"   #'selectrum-next-candidate
@@ -212,18 +211,7 @@
         "C-s-j" #'selectrum-goto-end
         "C-k"   #'selectrum-previous-candidate
         "C-S-k" #'selectrum-previous-page
-        "C-s-k" #'selectrum-goto-beginning)
-       (:after embark
-        "C-o" #'embark-act
-        :map minibuffer-local-completion-map
-        "C-c C-o" #'embark-export
-        "C-c C-c" #'embark-act-noexit
-        :map embark-file-map
-        :desc "Open Dired on target" "j" #'ffap-dired
-        :desc "Open target with sudo" "s" #'sudo-edit
-        :desc "Open target with vlf" "l" #'vlf
-        :map embark-file-map
-        :desc "Cycle marginalia views" "A" #'marginalia-cycle)))
+        "C-s-k" #'selectrum-goto-beginning)))
 
 ;;; :ui
 (map! (:when (featurep! :ui popup)
