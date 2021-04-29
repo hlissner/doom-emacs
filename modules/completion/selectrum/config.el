@@ -80,8 +80,9 @@
   (setq consult-project-root-function #'doom-project-root)
   (setq completion-in-region-function #'consult-completion-in-region)
   (setq consult-narrow-key "<")
-  (setf (alist-get #'consult-bookmark consult-config) (list :preview-key nil))
-  (setf (alist-get #'consult-recent-file consult-config) (list :preview-key nil))
+  (setf (alist-get #'consult-bookmark consult-config) (list :preview-key (kbd "C-SPC")))
+  (setf (alist-get #'consult-recent-file consult-config) (list :preview-key (kbd "C-SPC")))
+  (setf (alist-get #'consult--grep consult-config) (list :preview-key (kbd "C-SPC")))
   (setq consult-line-numbers-widen t)
   (setq consult-async-input-debounce 0.5)
   (setq consult-async-input-throttle 0.8))
@@ -108,9 +109,7 @@
    :desc "Open target with sudo" "s" #'sudo-edit
    :desc "Open target with vlf" "l" #'vlf
    :map embark-file-map
-   :desc "Cycle marginalia views" "A" #'marginalia-cycle )
-  (let ((embark-quit-after-action nil))
-    (map! :map minibuffer-local-map "C-SPC" #'embark-default-action)))
+   :desc "Cycle marginalia views" "A" #'marginalia-cycle))
 
 (use-package! marginalia
   :hook (doom-first-input . marginalia-mode)
