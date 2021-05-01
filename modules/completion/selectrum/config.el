@@ -42,18 +42,6 @@
   (add-hook 'selectrum-candidate-selected-hook #'selectrum-prescient--remember)
   (add-hook 'selectrum-candidate-inserted-hook #'selectrum-prescient--remember))
 
-(defun flex-if-twiddle (pattern _index _total)
-  (when (string-suffix-p "~" pattern)
-    `(orderless-flex . ,(substring pattern 0 -1))))
-
-(defun first-initialism (pattern index _total)
-  (if (= index 0) 'orderless-initialism))
-
-(defun without-if-bang (pattern _index _total)
-  "Define a '!not' exclusion prefix for literal strings."
-  (when (string-prefix-p "!" pattern)
-    `(orderless-without-literal . ,(substring pattern 1))))
-
 (use-package! orderless
   :when (not (featurep! +prescient))
   :after selectrum
@@ -63,13 +51,26 @@
                                     orderless-initialism
                                     orderless-regexp))
   :config
-  (setq completion-styles '(orderless))
-  (setq orderless-skip-highlighting (lambda () selectrum-is-active))
-  (setq selectrum-refine-candidates-function #'orderless-filter)
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
-  (setq orderless-matching-styles '(orderless-regexp)
-        orderless-style-dispatchers '(flex-if-twiddle
-                                      without-if-bang)))
+  (defun +selectrum--orderless-flex-if-twiddle (pattern _index _total)
+    (when (string-suffix-p "~" pattern)
+      `(orderless-flex . ,(substring pattern 0 -1))))
+
+  (defun +selectrum--orderless-first-initialism (pattern index _total)
+    (if (= index 0) 'orderless-initialism))
+
+  (defun +selectrum--orderless-without-if-bang (pattern _index _total)
+    "Define a '!not' exclusion prefix for literal strings."
+    (when (string-prefix-p "!" pattern)
+      `(orderless-without-literal . ,(substring pattern 1))))
+
+  (setq completion-styles '(orderless)
+        orderless-skip-highlighting (lambda () selectrum-is-active)
+        selectrum-refine-candidates-function #'orderless-filter
+        selectrum-highlight-candidates-function #'orderless-highlight-matches
+        orderless-matching-styles '(orderless-regexp)
+        orderless-style-dispatchers '(+selectrum--orderless-flex-if-twiddle
+                                      +selectrum--orderless-first-initialism
+                                      +selectrum--orderless-without-if-bang)))
 
 (use-package! consult
   :defer t
