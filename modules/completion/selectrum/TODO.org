@@ -17,9 +17,6 @@ gets us close but moves the cursor to the new screen which is undesirable.
 * PROJ List of things needed for Ivy parity
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
-** TODO make backspace work in filepath searching
-In ivy, backspace on =/foo/bar/!= (where =!= is the cursor) leads to =/foo/!=
-In selectrum, it leads to =/foo/bar!=
 ** TODO =SPC s B=
 ** TODO modules to look over
 - lookup
