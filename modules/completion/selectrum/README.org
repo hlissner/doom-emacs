@@ -26,11 +26,8 @@ well as a unified interface for project search and replace, powered by ripgrep.
 TODO
 #+end_quote
 
-
 ** Module Flags
-+ ~+prescient~ Enables prescient filtering and sorting for Selectrum searches.
-+ ~+orderless~ Enables orderless filtering for Selectrum searches.
-
++ ~+prescient~ Enables prescient filtering and sorting for Selectrum searches instead of orderless.
 
 ** Plugins
 [[https://github.com/raxod502/selectrum][selectrum]]
@@ -38,8 +35,8 @@ TODO
 [[https://github.com/oantolin/embark/][embark]]
 [[https://github.com/oantolin/embark/][embark-consult]]
 [[https://github.com/minad/marginalia][marginalia]]
-[[https://github.com/raxod502/prescient.el][prescient]]* (~+prescient~)
-[[https://github.com/oantolin/orderless][orderless]]* (~+orderless~)
+[[https://github.com/oantolin/orderless][orderless]]
+[[https://github.com/raxod502/prescient.el][prescient]] (~+prescient~)
 [[https://github.com/minad/consult/][consult-flycheck]] (~:checkers syntax~)
 
 * Prerequisites

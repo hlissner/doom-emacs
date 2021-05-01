@@ -6,7 +6,7 @@
   (setq selectrum-display-action nil
         selectrum-num-candidates-displayed 15
         selectrum-extend-current-candidate-highlight t)
-  (unless (featurep! +orderless)
+  (when (featurep! +prescient)
     (setq completion-styles '(substring partial-completion)))
   :config
   (setq selectrum-fix-vertical-window-height 17
@@ -55,7 +55,7 @@
     `(orderless-without-literal . ,(substring pattern 1))))
 
 (use-package! orderless
-  :when (featurep! +orderless)
+  :when (not (featurep! +prescient))
   :after selectrum
   :init
   (setq orderless-component-separator "[ &]"
