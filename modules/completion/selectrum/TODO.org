@@ -26,9 +26,10 @@ https://github.com/minad/marginalia/issues/59
 - org (check, might be fine)
 - counsel-minibuffer-history analogue
 - counsel-company analogue
-- bibtex
 * PROJ Other
 ** TODO bind =consult-lsp-diagnostics= to something?
-** TODO test out bibtex-actions, check if more configuration should be added
-https://github.com/bdarcus/bibtex-actions
- .
+** TODO bibtex-actions improvements?
+currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
+main dispatch function like =ivy-bibtex=, rather it has a bunch of different
+ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
+are nontrivial loading order shinanigans happening that make that not straightforward.

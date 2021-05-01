@@ -6,7 +6,6 @@
   (setq bibtex-completion-additional-search-fields '(keywords)
         bibtex-completion-pdf-field "file"));; This tell bibtex-completion to look at the File field of the bibtex to figure out which pdf to open
 
-
 (use-package! ivy-bibtex
   :when (featurep! :completion ivy)
   :defer t
@@ -15,6 +14,7 @@
 
 (use-package! bibtex-actions
   :when (featurep! :completion selectrum)
+  :after embark
   :defer t
   :config
   (add-to-list 'embark-keymap-alist '(bibtex . bibtex-actions-map)))
