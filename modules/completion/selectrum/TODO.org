@@ -14,6 +14,8 @@ Need to get it to work for other selectrum commands such =SPC h f=.
 #+end_src
 gets us close but moves the cursor to the new screen which is undesirable.
 ** TODO =C-C C-e= wgrep fun
+** TODO ~consult-theme~ is buggy
+something to do with doom theme loading modifications
 * PROJ List of things needed for Ivy parity
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
