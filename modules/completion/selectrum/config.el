@@ -75,6 +75,7 @@
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
     [remap yank-pop]                      #'consult-yank-pop
     [remap describe-bindings]             #'embark-bindings)
+  (setq completion-in-region-function #'consult-completion-in-region)
   :config
   (recentf-mode)
   (setq consult-project-root-function #'doom-project-root)
