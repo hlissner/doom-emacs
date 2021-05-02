@@ -1,37 +1,49 @@
-* PROJ List of things not working
-** TODO Add vanilla keybindings
-*** TODO Add keybinding for embark-act
-** TODO =SPC s s= and =SPC s S= ~:sw~
+* PROJ Design Decisions
+** TODO bind =consult-lsp-diagnostics= to something?
+** TODO Make sure we have all vanilla keybindings
+** TODO Add keybinding for embark-act outside of the minibuffer
+** TODO consider dropping prescient flag
+** TODO =SPC s s= and =SPC s S= ~:sw~ ?
 There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
 does something else (give you previously used isearch search terms).
+
+* PROJ Bugs
 ** TODO =C-SPC= and live previews
-Automatic live previews have been globally disabled for speed purposes.
-=C-SPC= is partially implemented with the preview key for ~consult-*~ commands.
+Automatic live previews have been disabled on slow ~consult~ commands.
+=C-SPC= is partially implemented as the preview key for ~consult-*~ commands.
 Need to get it to work for other selectrum commands such =SPC h f=.
 #+begin_src emacs-lisp
   (let ((embark-quit-after-action nil))
     (map! :map minibuffer-local-map "C-SPC" #'embark-default-action)))
 #+end_src
 gets us close but moves the cursor to the new screen which is undesirable.
-** TODO =C-C C-e= wgrep fun
+
+probable best strategy: create an ~embark-preview~ that does this, upstream it.
 ** TODO ~consult-theme~ is buggy
 something to do with doom theme loading modifications
-* PROJ List of things needed for Ivy parity
+** TODO ripgrep height logic bad
+selectrum bug caused by file descriptors
+https://github.com/raxod502/selectrum/issues/491
+** TODO ~(defadvice! +orderless-match-with-one-face..~ causes lexical error
+probably caused by some doomism
+https://github.com/oantolin/orderless/issues/41
+
+* PROJ Missing Features
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
 ** TODO =SPC s B=
-** TODO modules to look over
-- lookup
-- taskrunner (doesn't seem to be an interface yet)
-- pass (creating embark-pass can't be that hard)
-- irc
-- org (check, might be fine)
-- counsel-minibuffer-history analogue
-- counsel-company analogue
-* PROJ Other
-** TODO bind =consult-lsp-diagnostics= to something?
+** TODO =C-C C-e= wgrep fun
 ** TODO bibtex-actions improvements?
 currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different
 ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
-are nontrivial loading order shinanigans happening that make that not straightforward.
+are nontrivial loading order shenanigans happening that make that not straightforward.
+** TODO Ivy Parity
+*** TODO lookup module
+*** TODO taskrunner module (doesn't seem to be an interface yet)
+*** TODO pass module (creating embark-pass can't be that hard)
+*** TODO irc module
+*** TODO org module (check, might be fine)
+*** TODO counsel-minibuffer-history analogue
+*** TODO counsel-company analogue
+
