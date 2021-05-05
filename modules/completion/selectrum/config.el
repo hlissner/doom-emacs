@@ -114,7 +114,6 @@
   :after (consult flycheck))
 
 (use-package! embark
-  :defer t
   :init
   (setq embark-action-indicator #'+embark-which-key-action-indicator
         embark-become-indicator embark-action-indicator)
