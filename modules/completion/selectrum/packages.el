@@ -15,3 +15,5 @@
 (package! embark-consult :pin "05aa11bca37db1751c86fe78f784741be5b1a066")
 
 (package! marginalia :pin "ac4ab987126c0366b876e7fdcfa797822dd3580b")
+
+(package! wgrep :pin "f9687c28bbc2e84f87a479b6ce04407bb97cfb23")

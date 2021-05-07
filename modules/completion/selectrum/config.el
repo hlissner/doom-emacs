@@ -137,3 +137,7 @@
   :after (embark consult)
   :hook
   (embark-collect-mode . embark-consult-preview-minor-mode))
+
+(use-package! wgrep
+  :commands wgrep-change-to-wgrep-mode
+  :config (setq wgrep-auto-save-buffer t))
