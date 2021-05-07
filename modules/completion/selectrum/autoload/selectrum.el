@@ -80,3 +80,27 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
 (defun +consult-line-symbol-at-point ()
   (interactive)
   (consult-line (thing-at-point 'symbol)))
+
+;;;###autoload
+(defun +selectrum/embark-wgrep ()
+  "Invoke a wgrep buffer on the current selectrum results, if supported."
+  (interactive)
+  (require 'wgrep)
+  (pcase-let ((`(,type . ,candidates)
+               (run-hook-with-args-until-success 'embark-candidate-collectors)))
+    (if (null candidates)
+        (user-error "No candidates for export")
+      (if (eq type 'consult-grep)
+          (embark--quit-and-run
+           (lambda ()
+             (let ((buf (generate-new-buffer "*Embark Export Wgrep*")))
+               (with-current-buffer buf
+                 (insert (propertize "Exported grep results:\n\n" 'wgrep-header t))
+                 (dolist (line candidates) (insert line "\n"))
+                 (goto-char (point-min))
+                 (grep-mode)
+                 (setq-local wgrep-header/footer-parser #'ignore)
+                 (wgrep-setup))
+               (pop-to-buffer buf)
+               (wgrep-change-to-wgrep-mode))))
+        (user-error "embark category %S doesn't support wgrep" type)))))

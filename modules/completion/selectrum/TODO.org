@@ -33,6 +33,7 @@ https://github.com/oantolin/orderless/issues/41
 https://github.com/minad/marginalia/issues/59
 ** TODO =SPC s B=
 ** TODO =C-C C-e= wgrep fun
+check if we can add this to ~consult-line~ too
 ** TODO bibtex-actions improvements?
 currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different

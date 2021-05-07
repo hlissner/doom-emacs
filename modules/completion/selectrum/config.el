@@ -31,6 +31,7 @@
   (map! :map selectrum-minibuffer-map
         "C-o"       #'embark-act
         "C-c C-o"   #'embark-export
+        "C-c C-e"   #'+selectrum/embark-wgrep
         [backspace] #'+selectrum/backward-updir))
 
 (use-package! selectrum-prescient
@@ -124,7 +125,8 @@
    :desc "Open target with sudo" "s" #'sudo-edit
    :desc "Open target with vlf" "l" #'vlf
    :map embark-file-map
-   :desc "Cycle marginalia views" "A" #'marginalia-cycle))
+   :desc "Cycle marginalia views" "A" #'marginalia-cycle)
+  (set-popup-rule! "^\\*Embark Export" :size 0.35 :ttl 0 :quit nil))
 
 (use-package! marginalia
   :hook (doom-first-input . marginalia-mode)
@@ -135,6 +137,7 @@
 
 (use-package! embark-consult
   :after (embark consult)
+  :demand t
   :hook
   (embark-collect-mode . embark-consult-preview-minor-mode))
 
