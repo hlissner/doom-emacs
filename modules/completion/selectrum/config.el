@@ -47,11 +47,6 @@
   :when (not (featurep! +prescient))
   :demand t
   :config
-  ;; Recognizes the following patterns:
-  ;; * end$ (regexp matching at end)
-  ;; * !without-literal
-  ;; * literal=
-  ;; * flex~
   (defun +selectrum-orderless-dispatch (pattern _index _total)
     (cond
      ;; Support $ as regexp end-of-line
@@ -66,6 +61,7 @@
      ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1)))))
   (setq completion-styles '(orderless)
         completion-category-defaults nil
+        ;; note that despite override in the name orderless can still be used in find-file etc.
         completion-category-overrides '((file (styles . (partial-completion))))
         orderless-style-dispatchers '(+selectrum-orderless-dispatch)
         orderless-component-separator "[ &]"
