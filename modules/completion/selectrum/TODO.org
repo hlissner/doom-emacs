@@ -42,5 +42,4 @@ are nontrivial loading order shenanigans happening that make that not straightfo
 *** TODO lookup module
 *** TODO taskrunner module (doesn't seem to be an interface yet)
 *** TODO pass module (creating embark-pass can't be that hard)
-*** TODO ~+irc/ivy-jump-to-channel~ analogue
 *** TODO =SPC s B= (~swiper-all~ analogue)
