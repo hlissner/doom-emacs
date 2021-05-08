@@ -31,7 +31,6 @@ https://github.com/oantolin/orderless/issues/41
 * PROJ Missing Features
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
-** TODO =SPC s B=
 ** TODO =C-C C-e= wgrep fun
 check if we can add this to ~consult-line~ too
 ** TODO bibtex-actions improvements?
@@ -43,8 +42,5 @@ are nontrivial loading order shenanigans happening that make that not straightfo
 *** TODO lookup module
 *** TODO taskrunner module (doesn't seem to be an interface yet)
 *** TODO pass module (creating embark-pass can't be that hard)
-*** TODO irc module
-*** TODO org module (check, might be fine)
-*** TODO counsel-minibuffer-history analogue
-*** TODO counsel-company analogue
-
+*** TODO ~+irc/ivy-jump-to-channel~ analogue
+*** TODO =SPC s B= (~swiper-all~ analogue)

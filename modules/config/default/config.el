@@ -407,11 +407,13 @@ Continues comments if executed from a commented line. Consults
     "A-x" #'execute-extended-command)
 
   ;; A Doom convention where C-s on popups and interactive searches will invoke
-  ;; ivy/helm for their superior filtering.
+  ;; ivy/helm/selectrum for their superior filtering.
   (when-let (command (cond ((featurep! :completion ivy)
                             #'counsel-minibuffer-history)
                            ((featurep! :completion helm)
-                            #'helm-minibuffer-history)))
+                            #'helm-minibuffer-history)
+                           ((featurep! :completion selectrum)
+                            #'consult-history)))
     (define-key!
       :keymaps (append +default-minibuffer-maps
                        (when (featurep! :editor evil +everywhere)
