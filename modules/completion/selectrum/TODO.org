@@ -6,6 +6,8 @@
 ** TODO =SPC s s= and =SPC s S= ~:sw~ ?
 There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
 does something else (give you previously used isearch search terms).
+** TODO =SPC s B=
+Selectrum/Consult don't have a ~swiper-all~ analogue either.
 
 * PROJ Bugs
 ** TODO =C-SPC= and live previews
@@ -39,7 +41,9 @@ main dispatch function like =ivy-bibtex=, rather it has a bunch of different
 ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
 are nontrivial loading order shenanigans happening that make that not straightforward.
 ** TODO Ivy Parity
-*** TODO lookup module
-*** TODO taskrunner module (doesn't seem to be an interface yet)
-*** TODO pass module (creating embark-pass can't be that hard)
-*** TODO =SPC s B= (~swiper-all~ analogue)
+*** TODO pass module
+*** WAIT lookup module
+- ~dash-docs~ backend (needs to be created)
+- ~+lookup--online..~ functionality (needs a consult analogue of ~counsel-search~)
+*** WAIT taskrunner module
+in all likelihood requires writing ~consult-taskrunner~.

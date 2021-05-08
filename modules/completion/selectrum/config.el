@@ -100,12 +100,6 @@
   (setq consult-async-input-debounce 0.5)
   (setq consult-async-input-throttle 0.8))
 
-(use-package! consult-xref
-  :defer t
-  :init
-  (setq xref-show-xrefs-function       #'consult-xref
-        xref-show-definitions-function #'consult-xref))
-
 (use-package! consult-flycheck
   :when (featurep! :checkers syntax)
   :after (consult flycheck))

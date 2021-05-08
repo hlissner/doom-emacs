@@ -234,8 +234,8 @@ This backend prefers \"just working\" over accuracy."
 (defun +lookup-project-search-backend-fn (identifier)
   "Conducts a simple project text search for IDENTIFIER.
 
-Uses and requires `+ivy-file-search' or `+helm-file-search'. Will return nil if
-neither is available. These require ripgrep to be installed."
+Uses and requires `+ivy-file-search', `+helm-file-search', or `+selectrum-file-search'.
+Will return nil if neither is available. These require ripgrep to be installed."
   (unless identifier
     (let ((query (rxt-quote-pcre identifier)))
       (ignore-errors
@@ -244,6 +244,9 @@ neither is available. These require ripgrep to be installed."
                t)
               ((featurep! :completion helm)
                (+helm-file-search :query query)
+               t)
+              ((featurep! :completion selectrum)
+               (+selectrum-file-search :query query)
                t))))))
 
 (defun +lookup-evil-goto-definition-backend-fn (_identifier)
