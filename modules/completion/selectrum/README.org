@@ -13,6 +13,7 @@
   - [[#project-search--replace][Project search & replace]]
   - [[#in-buffer-searching][In-buffer searching]]
   - [[#selectrum-integration-for-various-completing-commands][Selectrum integration for various completing commands]]
+  - [[#orderless-filtering][Orderless filtering]]
 - [[#configuration][Configuration]]
   - [[#enable-fuzzynon-fuzzy-search-for-specific-commands][Enable fuzzy/non-fuzzy search for specific commands]]
   - [[#change-the-position-of-the-ivy-childframe][Change the position of the ivy childframe]]
@@ -35,7 +36,7 @@ TODO
 [[https://github.com/oantolin/embark/][embark]]
 [[https://github.com/oantolin/embark/][embark-consult]]
 [[https://github.com/minad/marginalia][marginalia]]
-[[https://github.com/oantolin/orderless][orderless]]
+[[https://github.com/oantolin/orderless][orderless]] (unless ~+prescient~)
 [[https://github.com/raxod502/prescient.el][prescient]] (~+prescient~)
 [[https://github.com/minad/consult/][consult-flycheck]] (~:checkers syntax~)
 
@@ -146,6 +147,16 @@ A wgrep buffer can be opened from swiper with =C-c C-e=.
 | =SPC s p= | Search project                            |
 | =SPC s P= | Search another project                    |
 | =SPC s s= | Search the current buffer (incrementally) |
+
+** Orderless filtering
+When using orderless to filter through candidates, the default behaviour is for
+each space separated inputs to match the candidate as a regular expression or literally.
+You can further specify each space separated input in the following ways:
+| Input  | Description                                |
+|--------+--------------------------------------------|
+| =!foo= | match without literal input =foo=          |
+| =bar== | match only with literal input =foo=        |
+| =baz~= | match input =foo= with fuzzy/flex matching |
 
 * Configuration
 ** TODO Enable fuzzy/non-fuzzy search for specific commands
