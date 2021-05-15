@@ -96,9 +96,11 @@
         consult-line-numbers-widen t
         consult-async-input-debounce 0.5
         consult-async-input-throttle 0.8)
-  (setf (alist-get #'consult-bookmark consult-config) (list :preview-key (kbd "C-SPC")))
-  (setf (alist-get #'consult-recent-file consult-config) (list :preview-key (kbd "C-SPC")))
-  (setf (alist-get #'consult--grep consult-config) (list :preview-key (kbd "C-SPC"))))
+  (mapc
+   (lambda (x) (setf
+                (alist-get x consult-config)
+                (list :preview-key (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k")))))
+   '(consult-bookmark consult-recent-file consult--grep consult-theme)))
 
 (use-package! consult-flycheck
   :when (featurep! :checkers syntax)

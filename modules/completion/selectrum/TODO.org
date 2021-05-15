@@ -21,8 +21,6 @@ Need to get it to work for other selectrum commands such =SPC h f=.
 gets us close but moves the cursor to the new screen which is undesirable.
 
 probable best strategy: create an ~embark-preview~ that does this, upstream it.
-** TODO ~consult-theme~ is buggy
-something to do with doom theme loading modifications
 ** TODO ripgrep height logic bad
 selectrum bug caused by file descriptors
 https://github.com/raxod502/selectrum/issues/491

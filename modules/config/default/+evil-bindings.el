@@ -208,9 +208,11 @@
         :map selectrum-minibuffer-map
         "M-RET" #'selectrum-submit-exact-input
         "C-j"   #'selectrum-next-candidate
+        "C-M-j" #'selectrum-next-candidate ;; with preview, see modules/completion/selectrum/config.el
         "C-S-j" #'selectrum-next-page
         "C-s-j" #'selectrum-goto-end
         "C-k"   #'selectrum-previous-candidate
+        "C-M-k" #'selectrum-previous-candidate ;; with preview, see modules/completion/selectrum/config.el
         "C-S-k" #'selectrum-previous-page
         "C-s-k" #'selectrum-goto-beginning)))
 
