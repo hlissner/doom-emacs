@@ -90,15 +90,15 @@
   (setq completion-in-region-function #'consult-completion-in-region)
   :config
   (recentf-mode)
-  (setq consult-project-root-function #'doom-project-root)
-  (setq completion-in-region-function #'consult-completion-in-region)
-  (setq consult-narrow-key "<")
+  (setq consult-project-root-function #'doom-project-root
+        completion-in-region-function #'consult-completion-in-region
+        consult-narrow-key "<"
+        consult-line-numbers-widen t
+        consult-async-input-debounce 0.5
+        consult-async-input-throttle 0.8)
   (setf (alist-get #'consult-bookmark consult-config) (list :preview-key (kbd "C-SPC")))
   (setf (alist-get #'consult-recent-file consult-config) (list :preview-key (kbd "C-SPC")))
-  (setf (alist-get #'consult--grep consult-config) (list :preview-key (kbd "C-SPC")))
-  (setq consult-line-numbers-widen t)
-  (setq consult-async-input-debounce 0.5)
-  (setq consult-async-input-throttle 0.8))
+  (setf (alist-get #'consult--grep consult-config) (list :preview-key (kbd "C-SPC"))))
 
 (use-package! consult-flycheck
   :when (featurep! :checkers syntax)
