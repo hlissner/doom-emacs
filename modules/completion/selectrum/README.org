@@ -150,13 +150,17 @@ A wgrep buffer can be opened from swiper with =C-c C-e=.
 
 ** Orderless filtering
 When using orderless to filter through candidates, the default behaviour is for
-each space separated inputs to match the candidate as a regular expression or literally.
+each space separated inputs to match the candidate as a regular expression or
+literally.
+In ~command~ and ~symbol~ category searches such as =SPC h f= and =SPC h v=,
+matching by initialism is also on by default.
 You can further specify each space separated input in the following ways:
-| Input  | Description                                |
-|--------+--------------------------------------------|
-| =!foo= | match without literal input =foo=          |
-| =bar== | match only with literal input =foo=        |
-| =baz~= | match input =foo= with fuzzy/flex matching |
+| Input            | Description                                |
+|------------------+--------------------------------------------|
+| =!foo= or =foo!= | match without literal input =foo=          |
+| =`bar= or =bar`= | match input =bar= as an initialism         |
+| ==baz= or =baz== | match only with literal input =baz=        |
+| =~qux= or =qux~= | match input =qux= with fuzzy/flex matching |
 
 * Configuration
 ** TODO Enable fuzzy/non-fuzzy search for specific commands

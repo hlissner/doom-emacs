@@ -49,20 +49,32 @@
   :config
   (defun +selectrum-orderless-dispatch (pattern _index _total)
     (cond
-     ;; Support $ as regexp end-of-line
+     ;; Ensure that $ works with Consult commands, which add disambiguation suffixes
      ((string-suffix-p "$" pattern) `(orderless-regexp . ,(concat (substring pattern 0 -1) "[\x100000-\x10FFFD]*$")))
      ;; Ignore single !
      ((string= "!" pattern) `(orderless-literal . ""))
      ;; Without literal
      ((string-prefix-p "!" pattern) `(orderless-without-literal . ,(substring pattern 1)))
-     ;; Literal
+     ((string-suffix-p "!" pattern) `(orderless-without-literal . ,(substring pattern 0 -1)))
+     ;; Initialism matching
+     ((string-prefix-p "`" pattern) `(orderless-initialism . ,(substring pattern 1)))
+     ((string-suffix-p "`" pattern) `(orderless-initialism . ,(substring pattern 0 -1)))
+     ;; Literal matching
+     ((string-prefix-p "=" pattern) `(orderless-literal . ,(substring pattern 1)))
      ((string-suffix-p "=" pattern) `(orderless-literal . ,(substring pattern 0 -1)))
      ;; Flex matching
+     ((string-prefix-p "~" pattern) `(orderless-flex . ,(substring pattern 1)))
      ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1)))))
+  (orderless-define-completion-style orderless+initialism
+    (orderless-matching-styles '(orderless-initialism
+                                 orderless-literal
+                                 orderless-regexp)))
   (setq completion-styles '(orderless)
         completion-category-defaults nil
         ;; note that despite override in the name orderless can still be used in find-file etc.
-        completion-category-overrides '((file (styles . (partial-completion))))
+        completion-category-overrides '((file (styles . (partial-completion)))
+                                        (command (styles orderless+initialism))
+                                        (symbol (styles orderless+initialism)))
         orderless-style-dispatchers '(+selectrum-orderless-dispatch)
         orderless-component-separator "[ &]"
         selectrum-refine-candidates-function #'orderless-filter
