@@ -27,6 +27,15 @@ https://github.com/raxod502/selectrum/issues/491
 ** TODO ~(defadvice! +orderless-match-with-one-face..~ causes lexical error
 probably caused by some doomism
 https://github.com/oantolin/orderless/issues/41
+** TODO =SPC '= doesn't work on =SPC /=
+Something in the ~selectrum-last-command~ logic breaks down. Maybe the fact that
+~+selectrum-file-search~ is defined with ~cl-defun~?
+** TODO ~orderless+initialism~ doesn't work for some reason
+See https://github.com/oantolin/orderless/issues/54.
+Narrowed it down to the fact that it works if ~selectrum-mode~ is off, but
+doesn't if it's on (even without the ~use-package~ configuration).
+However, it has no problem working with selectrum with a MWE using ~emacs -Q~,
+so it might be caused by some nontrivial doomism in the area.
 
 * PROJ Missing Features
 ** TODO Icons
