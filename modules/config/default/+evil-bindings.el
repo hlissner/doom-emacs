@@ -701,7 +701,7 @@
        :desc "Search buffer"                "s" #'+default/search-buffer
        :desc "Search buffer for thing at point" "S"
        (cond ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
-             ((featurep! :completion selectrum) #'+consult-line-symbol-at-point))
+             ((featurep! :completion selectrum) #'+selectrum/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 

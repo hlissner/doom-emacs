@@ -120,7 +120,10 @@
 
 (use-package! embark
   :init
-  (setq embark-action-indicator #'+embark-which-key-action-indicator
+  (setq embark-action-indicator
+        (lambda (map _target)
+          (which-key--show-keymap "Embark" map nil nil 'no-paging)
+          #'which-key--hide-popup-ignore-command)
         embark-become-indicator embark-action-indicator)
   :config
   (map!

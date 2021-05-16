@@ -1,18 +1,12 @@
 ;;; completion/selectrum/autoload/selectrum.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defadvice! +orderless-match-with-one-face (fn &rest args)
+(defadvice! +selectrum-orderless-match-with-one-face (fn &rest args)
     "Function to help company to highlight all candidates with just
 one face."
     :around 'company-capf--candidates
     (let ((orderless-match-faces [completions-common-part]))
         (apply fn args)))
-
-;;;###autoload
-(defun +embark-which-key-action-indicator (map)
-  "Helper function to display the `whichey' help buffer for embark."
-  (which-key--show-keymap "Embark" map nil nil 'no-paging)
-  #'which-key--hide-popup-ignore-command)
 
 ;;;###autoload
 (cl-defun +selectrum-file-search (&key query in all-files (recursive t) prompt args)
@@ -77,7 +71,7 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
   (+selectrum/project-search arg initial-query default-directory))
 
 ;;;###autoload
-(defun +consult-line-symbol-at-point ()
+(defun +selectrum/search-symbol-at-point ()
   (interactive)
   (consult-line (thing-at-point 'symbol)))
 
