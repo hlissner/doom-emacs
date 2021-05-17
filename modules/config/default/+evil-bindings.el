@@ -680,9 +680,12 @@
       ;;; <leader> s --- search
       (:prefix-map ("s" . "search")
        :desc "Search buffer"                "b"
-       (cond ((featurep! :completion ivy)       #'swiper)
+       (cond ((featurep! :completion helm)      #'swiper)
+             ((featurep! :completion ivy)       #'swiper)
              ((featurep! :completion selectrum) #'consult-line))
-       :desc "Search all open buffers"      "B" #'swiper-all
+       :desc "Search all open buffers"      "B"
+       (cond ((featurep! :completion helm)      #'swiper-all)
+             ((featurep! :completion ivy)       #'swiper-all))
        :desc "Search current directory"     "d" #'+default/search-cwd
        :desc "Search other directory"       "D" #'+default/search-other-cwd
        :desc "Locate file"                  "f" #'locate
@@ -700,7 +703,8 @@
        :desc "Jump to mark"                 "r" #'evil-show-marks
        :desc "Search buffer"                "s" #'+default/search-buffer
        :desc "Search buffer for thing at point" "S"
-       (cond ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
+       (cond ((featurep! :completion helm)      #'swiper-isearch-thing-at-point)
+             ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
              ((featurep! :completion selectrum) #'+selectrum/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)

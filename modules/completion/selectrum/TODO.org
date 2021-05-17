@@ -5,9 +5,10 @@
 ** TODO consider dropping prescient flag
 ** TODO =SPC s s= and =SPC s S= ~:sw~ ?
 There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
-does something else (give you previously used isearch search terms).
+does something else (give you previously used isearch search terms). Bound to
+regular isearch for now.
 ** TODO =SPC s B=
-Selectrum/Consult don't have a ~swiper-all~ analogue either.
+Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
 
 * PROJ Bugs
 ** TODO =C-SPC= and live previews

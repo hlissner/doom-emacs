@@ -106,17 +106,15 @@ users).
 https://assets.doomemacs.org/completion/selectrum/search-replace.png
 
 ** TODO In-buffer searching
-The =swiper= package provides an interactive buffer search powered by ivy. It
-can be invoked with:
+This module provides some in buffer searching bindings:
 
-+ =SPC s s= (~swiper-isearch~)
-+ =SPC s S= (~swiper-isearch-thing-at-point~)
++ =SPC s s= (~isearch~)
++ =SPC s S= (~+selectrum/search-symbol-at-point~ via ~consult-line~)
 + =SPC s b= (~consult-line~)
-+ ~:sw[iper] [QUERY]~
 
 https://assets.doomemacs.org/completion/selectrum/buffer-search.png
 
-A wgrep buffer can be opened from swiper with =C-c C-e=.
+A wgrep buffer can be opened from ~consult-line~ with =C-c C-e= (not yet).
 
 ** Selectrum integration for various completing commands
 *** General
