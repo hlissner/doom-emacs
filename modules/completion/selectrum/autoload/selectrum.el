@@ -23,8 +23,7 @@ one face."
     (user-error "Couldn't find ripgrep in your PATH"))
   (require 'consult)
   (setq deactivate-mark t)
-  (let* ((this-command 'consult--grep)
-         (project-root (or (doom-project-root) default-directory))
+  (let* ((project-root (or (doom-project-root) default-directory))
          (directory (or in project-root))
          (args (split-string
                 (string-trim
