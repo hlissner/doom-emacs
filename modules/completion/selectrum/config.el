@@ -65,16 +65,10 @@
      ;; Flex matching
      ((string-prefix-p "~" pattern) `(orderless-flex . ,(substring pattern 1)))
      ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1)))))
-  (orderless-define-completion-style orderless+initialism
-    (orderless-matching-styles '(orderless-initialism
-                                 orderless-literal
-                                 orderless-regexp)))
   (setq completion-styles '(orderless)
         completion-category-defaults nil
         ;; note that despite override in the name orderless can still be used in find-file etc.
-        completion-category-overrides '((file (styles . (partial-completion)))
-                                        (command (styles orderless+initialism))
-                                        (symbol (styles orderless+initialism)))
+        completion-category-overrides '((file (styles . (partial-completion))))
         orderless-style-dispatchers '(+selectrum-orderless-dispatch)
         orderless-component-separator "[ &]"
         selectrum-refine-candidates-function #'orderless-filter

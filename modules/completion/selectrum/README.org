@@ -152,8 +152,6 @@ A wgrep buffer can be opened from swiper with =C-c C-e=.
 When using orderless to filter through candidates, the default behaviour is for
 each space separated inputs to match the candidate as a regular expression or
 literally.
-In ~command~ and ~symbol~ category searches such as =SPC h f= and =SPC h v=,
-matching by initialism is also on by default.
 You can further specify each space separated input in the following ways:
 | Input            | Description                                |
 |------------------+--------------------------------------------|

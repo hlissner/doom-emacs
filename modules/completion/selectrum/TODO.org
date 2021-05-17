@@ -39,13 +39,9 @@ enter, it opens the new buffer in another window rather than the main one, even
 though at least the bookmark function ostensibly uses
 ~pop-to-buffer-same-window~. Ivy gets the window switched in the bookmarks and
 grep case due to a custom ivy occur window switching function.
-** TODO ~orderless+initialism~ doesn't work for some reason
-See https://github.com/oantolin/orderless/issues/54.
-Narrowed it down to the fact that it works if ~selectrum-mode~ is off, but
-doesn't if it's on (even without the ~use-package~ configuration).
-However, it has no problem working with selectrum with a MWE using ~emacs -Q~,
-so it might be caused by some nontrivial doomism in the area.
-
+** TODO selectrum =SPC /= is much slower than ivy =SPC /=
+requires further investigation. is ~consult-ripgrep~ slower than ~counsel-rg~?
+is it something the custom search function is doing? does ivy cache stuff?
 * PROJ Missing Features
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
