@@ -138,7 +138,7 @@
   :after (embark consult)
   :demand t
   :hook
-  (embark-collect-mode . embark-consult-preview-minor-mode))
+  (embark-collect-mode . consult-preview-minor-mode))
 
 (use-package! wgrep
   :commands wgrep-change-to-wgrep-mode
