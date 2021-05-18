@@ -106,7 +106,8 @@
    (lambda (x) (setf
                 (alist-get x consult-config)
                 (list :preview-key (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k")))))
-   '(consult-bookmark consult-recent-file consult--grep consult-theme)))
+   '(consult-bookmark consult-recent-file consult-theme
+     consult--grep consult-grep consult-ripgrep consult-git-grep +default/search-project)))
 
 (use-package! consult-flycheck
   :when (featurep! :checkers syntax)
