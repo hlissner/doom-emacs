@@ -10,6 +10,16 @@ regular isearch for now.
 ** TODO =SPC s B=
 Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
 
+* PROJ HACKs to be addressed
+** ~fboundp~ issues
+Even if the =ivy= module isn't loaded, it's packages can still get loaded by
+other means, such as =lispy= requiring =counsel=. This means that the ~fboundp~
+logic such [[file:~/.emacs.d/modules/config/default/autoload/text.el::(cond ((fboundp 'consult-yank-pop) #'consult-yank-pop) ;;HACK see @ymarco's comment on #5013 and TODO.org][here]] and [[file:~/.emacs.d/core/autoload/projects.el::((fboundp 'selectrum-mode) ;HACK see @ymarco's comment on #5013 and TODO.org][here]] won't work unless the selectrum option is checked
+first, which is what we do for now.
+** ~projectile-switch-project-action~ definition
+Without [[file:~/.emacs.d/modules/ui/workspaces/config.el::;; HACK?? needs review][this]] change new projects don't get opened in a new tab, but the exact
+working of this whole set up are a bit opaque to me.
+
 * PROJ Bugs
 ** TODO =C-SPC= and live previews
 Automatic live previews have been disabled on slow ~consult~ commands.

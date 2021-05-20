@@ -27,8 +27,8 @@
   "Interactively select what text to insert from the kill ring."
   (interactive)
   (call-interactively
-   (cond ((fboundp 'counsel-yank-pop)    #'counsel-yank-pop)
-         ((fboundp 'consult-yank-pop)    #'consult-yank-pop)
+   (cond ((fboundp 'consult-yank-pop)    #'consult-yank-pop) ;HACK see @ymarco's comment on #5013 and TODO.org in the selecturm module.
+         ((fboundp 'counsel-yank-pop)    #'counsel-yank-pop)
          ((fboundp 'helm-show-kill-ring) #'helm-show-kill-ring)
          ((error "No kill-ring search backend available. Enable ivy, helm or selectrum!")))))
 

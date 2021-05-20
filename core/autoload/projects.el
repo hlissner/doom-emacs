@@ -128,6 +128,8 @@ If DIR is not a project, it will be indexed (but not cached)."
             (if (doom-module-p :completion 'ivy)
                 #'counsel-projectile-find-file
               #'projectile-find-file)))
+          ((fboundp 'selectrum-mode) ;HACK see @ymarco's comment on #5013 and TODO.org in the selecturm module.
+           (call-interactively #'find-file))
           ((fboundp 'counsel-file-jump) ; ivy only
            (call-interactively #'counsel-file-jump))
           ((project-current nil dir)
