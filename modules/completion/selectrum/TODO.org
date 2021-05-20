@@ -1,7 +1,9 @@
 * PROJ Design Decisions
 ** TODO bind =consult-lsp-diagnostics= to something?
-** TODO Make sure we have all vanilla keybindings
-** TODO Add keybinding for embark-act outside of the minibuffer
+** WAIT Add keybinding for embark-act outside of the minibuffer
+Idealy would replace =C-o= as the default binding. Current suggestion is both
+=:leader a= and =C-,=. Note that =C-,= is bound to ~org-cycle-agenda-files~ but
+so is =C-'=.
 ** TODO consider dropping prescient flag
 ** TODO =SPC s s= and =SPC s S= ~:sw~ ?
 There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
@@ -9,6 +11,13 @@ does something else (give you previously used isearch search terms). Bound to
 regular isearch for now.
 ** TODO =SPC s B=
 Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
+** TODO orderless style dispatchers
+currently we just copy the ones of the consult wiki (sans file extentions), but
+these lead to an unexpected issue: typing e.g. =setq!= will not match ~setq!~
+due to the postfix without literal match (you need to type =setq!==). This is
+undesireable since doom uses a lot of macros that end with =!=. Having the
+dispatching work in both post and prefix is useful (since it lets you do
+post-hoc changes to your typing), but having a one-off extention is inconsistant
 
 * PROJ HACKs to be addressed
 ** ~fboundp~ issues
@@ -42,8 +51,6 @@ https://github.com/oantolin/orderless/issues/41
 Unlike Ivy, ~selectrum-repeat~ doesn't restore the position of the selection in
 the completion buffer. Seems to be reproduced in ~emacs -Q~. If so, create
 upstream selectrum issue.
-** TODO go over definition of ~+selectrum-file-search~
-check if anything else there needs to be cleaned up.
 ** TODO Embark export window buffer switching logic
 If we export bookmarks, grep session, or ~find-file~ session, when pressing
 enter, it opens the new buffer in another window rather than the main one, even
@@ -53,11 +60,13 @@ grep case due to a custom ivy occur window switching function.
 ** TODO selectrum =SPC /= is much slower than ivy =SPC /=
 requires further investigation. is ~consult-ripgrep~ slower than ~counsel-rg~?
 is it something the custom search function is doing? does ivy cache stuff?
+
 * PROJ Missing Features
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
-** TODO =C-C C-e= wgrep fun
-check if we can add this to ~consult-line~ too
+** WAIT =C-C C-e= wgrep fun
+- rework into using ~embark-export~ directly, after [[https://github.com/oantolin/embark/issues/226][this issue]] gets resolved
+- check if we can add this to ~consult-line~ too
 ** TODO bibtex-actions improvements?
 currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different
@@ -65,6 +74,16 @@ ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
 are nontrivial loading order shenanigans happening that make that not straightforward.
 ** TODO Ivy Parity
 *** TODO pass module
+*** TODO remaps
+refactor these to use consult so previews can work, also maybe have narrowed number keys for workspaces?
+#+begin_src elisp
+    [remap switch-to-buffer]              #'+ivy/switch-buffer
+    [remap switch-to-buffer-other-window] #'+ivy/switch-buffer-other-window
+    [remap persp-switch-to-buffer]        #'+ivy/switch-workspace-buffer
+    [remap evil-show-jumps]               #'+ivy/jump-list
+#+end_src
+*** TODO ~+irc/selectrum-jump-to-channel~
+rework to use ~consult~ buffer narrowing, for some reason the current attempt breaks marginalia annotating
 *** WAIT lookup module
 - ~dash-docs~ backend (needs to be created)
 - ~+lookup--online..~ functionality (needs a consult analogue of ~counsel-search~)
