@@ -5,6 +5,10 @@ Idealy would replace =C-o= as the default binding. Current suggestion is both
 =:leader a= and =C-,=. Note that =C-,= is bound to ~org-cycle-agenda-files~ but
 so is =C-'=.
 ** TODO consider dropping prescient flag
+The only advantage over orderless is frecency over recency, without the better
+integration orderless has with built in emacs completion. A compromise might be
+to have ~+prescient~ just add prescient sorting, but it's probably not worth the
+maintenance burden.
 ** TODO =SPC s s= and =SPC s S= ~:sw~ ?
 There isn't really a selectrum analogue to ~swiper-isearch~, ~consult-isearch~
 does something else (give you previously used isearch search terms). Bound to
@@ -12,13 +16,8 @@ regular isearch for now.
 ** TODO =SPC s B=
 Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
 ** TODO orderless style dispatchers
-currently we just copy the ones of the consult wiki (sans file extentions), but
-these lead to an unexpected issue: typing e.g. =setq!= will not match ~setq!~
-due to the postfix without literal match (you need to type =setq!==). This is
-undesireable since doom uses a lot of macros that end with =!=. Having the
-dispatching work in both post and prefix is useful (since it lets you do
-post-hoc changes to your typing), but having a one-off extention is inconsistant
-
+Currently the =!= style dispatcher is only as a prefix, due to the abundance of
+=!= final macros. In my opinion this is useful enough to break consistency.
 * PROJ HACKs to be addressed
 ** ~fboundp~ issues
 Even if the =ivy= module isn't loaded, it's packages can still get loaded by

@@ -55,7 +55,6 @@
      ((string= "!" pattern) `(orderless-literal . ""))
      ;; Without literal
      ((string-prefix-p "!" pattern) `(orderless-without-literal . ,(substring pattern 1)))
-     ((string-suffix-p "!" pattern) `(orderless-without-literal . ,(substring pattern 0 -1)))
      ;; Initialism matching
      ((string-prefix-p "`" pattern) `(orderless-initialism . ,(substring pattern 1)))
      ((string-suffix-p "`" pattern) `(orderless-initialism . ,(substring pattern 0 -1)))
