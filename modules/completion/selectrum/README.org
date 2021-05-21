@@ -134,7 +134,11 @@ An ~occur-edit~ buffer can be opened from ~consult-line~ with =C-c C-e=.
 | =SPC b b=, =SPC ,=   | Switch to buffer in current workspace |
 | =SPC b B=, =SPC <=   | Switch to buffer                      |
 
-~find-file~ commands support exported to a =wdired= buffer using =C-c C-e=.
+=SPC b b=/=SPC ,= support changing the workspace you're selecting a buffer from
+via [[https://github.com/minad/consult#narrowing-and-grouping][Consult narrowing]], e.g. if you're on the first workspace, you can switch to
+selecting a buffer from the third workspace by typing =3 SPC= into the prompt,
+or the last workspace by typing =0 SPC=.
+=SPC f f=/=SPC .= support exported to a =wdired= buffer using =C-c C-e=.
 
 *** Search
 | Keybind   | Description                               |

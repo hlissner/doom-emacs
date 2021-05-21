@@ -71,16 +71,12 @@ currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different
 ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
 are nontrivial loading order shenanigans happening that make that not straightforward.
+** TODO buffer switching
+- =SPC b b= should switch workspace after choosing a buffer from a different one
+- universal argument for opening buffer in another window?
 ** TODO Ivy Parity
 *** TODO pass module
-*** TODO remaps
-refactor these to use consult so previews can work, also maybe have narrowed number keys for workspaces?
-#+begin_src elisp
-    [remap switch-to-buffer]              #'+ivy/switch-buffer
-    [remap switch-to-buffer-other-window] #'+ivy/switch-buffer-other-window
-    [remap persp-switch-to-buffer]        #'+ivy/switch-workspace-buffer
-    [remap evil-show-jumps]               #'+ivy/jump-list
-#+end_src
+*** TODO ~+ivy/jump-list~ analogue
 *** TODO ~+irc/selectrum-jump-to-channel~
 rework to use ~consult~ buffer narrowing, for some reason the current attempt breaks marginalia annotating
 *** WAIT lookup module

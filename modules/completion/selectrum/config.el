@@ -91,7 +91,8 @@
     [remap switch-to-buffer-other-window] #'consult-buffer-other-window
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
     [remap yank-pop]                      #'consult-yank-pop
-    [remap describe-bindings]             #'embark-bindings)
+    [remap describe-bindings]             #'embark-bindings
+    [remap persp-switch-to-buffer]        #'+selectrum/switch-workspace-buffer)
   (setq completion-in-region-function #'consult-completion-in-region)
   :config
   (recentf-mode)
