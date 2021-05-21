@@ -18,6 +18,9 @@ Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
 ** TODO orderless style dispatchers
 Currently the =!= style dispatcher is only as a prefix, due to the abundance of
 =!= final macros. In my opinion this is useful enough to break consistency.
+** TODO =C-c C-e=
+on ~consult-line~ this opens a ~occur-edit~ buffer, which is a more natural fit but breaks slightly from the =C-c C-e= = =wgrep= convention.
+
 * PROJ HACKs to be addressed
 ** ~fboundp~ issues
 Even if the =ivy= module isn't loaded, it's packages can still get loaded by
@@ -63,8 +66,6 @@ is it something the custom search function is doing? does ivy cache stuff?
 * PROJ Missing Features
 ** TODO Icons
 https://github.com/minad/marginalia/issues/59
-** TODO =C-C C-e= wgrep fun
-- check if we can add this to ~consult-line~ too
 ** TODO bibtex-actions improvements?
 currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different

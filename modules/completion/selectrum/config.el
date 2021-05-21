@@ -31,7 +31,7 @@
   (map! :map selectrum-minibuffer-map
         "C-o"       #'embark-act
         "C-c C-o"   #'embark-export
-        "C-c C-e"   #'+selectrum/embark-wgrep
+        "C-c C-e"   #'+selectrum/embark-export-write
         [backspace] #'+selectrum/backward-updir))
 
 (use-package! selectrum-prescient

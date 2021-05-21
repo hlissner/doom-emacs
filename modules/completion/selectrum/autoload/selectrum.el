@@ -75,13 +75,19 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
   (consult-line (thing-at-point 'symbol)))
 
 ;;;###autoload
-(defun +selectrum/embark-wgrep ()
-  "Invoke a wgrep buffer on the current selectrum results, if supported."
+(defun +selectrum/embark-export-write ()
+  "Export the current selectrum results to a writable buffer if possible.
+
+Supports exporting consult-grep to wgrep, file to wdeired, and consult-location to occur-edit"
   (interactive)
   (require 'wgrep)
   (pcase-let ((`(,type . ,candidates)
                (run-hook-with-args-until-success 'embark-candidate-collectors)))
-      (if (not (eq type 'consult-grep))
-          (user-error "embark category %S doesn't support wgrep" type)
-        (let ((embark-after-export-hook #'wgrep-change-to-wgrep-mode))
-          (embark-export)))))
+    (pcase type
+      ('consult-grep (let ((embark-after-export-hook #'wgrep-change-to-wgrep-mode))
+          (embark-export)))
+      ('file (let ((embark-after-export-hook #'wdired-change-to-wdired-mode))
+          (embark-export)))
+      ('consult-location (let ((embark-after-export-hook #'occur-edit-mode))
+          (embark-export)))
+      (x (user-error "embark category %S doesn't support writable export" x)))))

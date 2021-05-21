@@ -114,7 +114,7 @@ This module provides some in buffer searching bindings:
 
 https://assets.doomemacs.org/completion/selectrum/buffer-search.png
 
-A wgrep buffer can be opened from ~consult-line~ with =C-c C-e= (not yet).
+An ~occur-edit~ buffer can be opened from ~consult-line~ with =C-c C-e=.
 
 ** Selectrum integration for various completing commands
 *** General
@@ -133,6 +133,8 @@ A wgrep buffer can be opened from ~consult-line~ with =C-c C-e= (not yet).
 | =SPC p p=            | Open another project                  |
 | =SPC b b=, =SPC ,=   | Switch to buffer in current workspace |
 | =SPC b B=, =SPC <=   | Switch to buffer                      |
+
+~find-file~ commands support exported to a =wdired= buffer using =C-c C-e=.
 
 *** Search
 | Keybind   | Description                               |
