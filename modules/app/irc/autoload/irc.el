@@ -73,6 +73,16 @@ argument) is non-nil only show channels in current server."
          ((user-error "No jump-to-channel backend is enabled. Enable selectrum or ivy!")))))
 
 ;;;###autoload
+(defun +irc--circe-all-buffers ()
+  (cl-loop with servers = (circe-server-buffers)
+           for server in servers
+           collect server
+           nconc
+           (with-current-buffer server
+             (cl-loop for buf in (circe-server-chat-buffers)
+                      collect buf))))
+
+;;;###autoload
 (defun +irc/tracking-next-buffer ()
   "Disables switching to an unread buffer unless in the irc workspace."
   (interactive)

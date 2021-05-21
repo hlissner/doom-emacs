@@ -2,24 +2,22 @@
 ;;;###if (featurep! :completion selectrum)
 
 ;;;###autoload
-(defun +irc/selectrum-jump-to-channel (&optional this-server)
-  "Jump to an open channel or server buffer with selectrum. If THIS-SERVER (universal
-argument) is non-nil only show channels in current server."
-  (interactive "P")
-  (if (not (circe-server-buffers))
-      (message "No circe buffers available")
-    (when (and this-server (not circe-server-buffer))
-      (setq this-server nil))
-    (when-let
-        ((buffer (completing-read
-                  (format "Jump to%s: " (if this-server (format " (%s)" (buffer-name circe-server-buffer)) ""))
-                  (cl-loop with servers = (if this-server (list circe-server-buffer) (circe-server-buffers))
-                           with current-buffer = (current-buffer)
-                           for server in servers
-                           collect (buffer-name server)
-                           nconc
-                           (with-current-buffer server
-                             (cl-loop for buf in (circe-server-chat-buffers)
-                                      unless (eq buf current-buffer)
-                                      collect (buffer-name buf)))))))
-      (switch-to-buffer buffer))))
+(defun +irc/selectrum-jump-to-channel ()
+  "Jump to an open channel or server buffer with selectrum."
+  (interactive)
+  (require 'consult)
+  (consult--multi (list (plist-put +irc--consult-circe-source
+                                   :hidden nil))
+                  :narrow nil
+                  :require-match t
+                  :prompt "Jump to:"
+                  :sort nil))
+
+;;;###autoload
+(defvar +irc--consult-circe-source
+        `(:name     "circe"
+          :hidden   t
+          :narrow   ?c
+          :category buffer
+          :state    ,#'consult--buffer-state
+          :items    ,(lambda () (mapcar #'buffer-name (+irc--circe-all-buffers)))))
