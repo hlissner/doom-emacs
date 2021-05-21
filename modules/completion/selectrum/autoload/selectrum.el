@@ -91,3 +91,27 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
       ('consult-location (let ((embark-after-export-hook #'occur-edit-mode))
           (embark-export)))
       (x (user-error "embark category %S doesn't support writable export" x)))))
+
+;;;###autoload
+(defun +selectrum/embark-preview ()
+  "Previews candidate in selectrum buffer, unless it's a consult command"
+  (interactive)
+  (unless (string-match-p "^consult" (symbol-name selectrum--last-command))
+  (print selectrum--last-command)
+  (save-selected-window
+    (let ((embark-quit-after-action nil))
+    (embark-default-action)))))
+
+;;;###autoload
+(defun +selectrum/next-candidate-preview ()
+  "Move to next candidate and preivew it"
+  (interactive)
+  (selectrum-next-candidate)
+  (+selectrum/embark-preview))
+
+;;;###autoload
+(defun +selectrum/previous-candidate-preview ()
+  "Move to previous candidate and preview it"
+  (interactive)
+  (selectrum-previous-candidate)
+  (+selectrum/embark-preview))

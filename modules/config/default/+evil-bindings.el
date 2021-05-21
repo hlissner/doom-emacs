@@ -207,12 +207,13 @@
        (:after selectrum
         :map selectrum-minibuffer-map
         "M-RET" #'selectrum-submit-exact-input
+        "C-SPC" #'+selectrum/embark-preview
         "C-j"   #'selectrum-next-candidate
-        "C-M-j" #'selectrum-next-candidate ;; with preview, see modules/completion/selectrum/config.el
+        "C-M-j" #'+selectrum/next-candidate-preview
         "C-S-j" #'selectrum-next-page
         "C-s-j" #'selectrum-goto-end
         "C-k"   #'selectrum-previous-candidate
-        "C-M-k" #'selectrum-previous-candidate ;; with preview, see modules/completion/selectrum/config.el
+        "C-M-k" #'+selectrum/previous-candidate-preview
         "C-S-k" #'selectrum-previous-page
         "C-s-k" #'selectrum-goto-beginning)))
 

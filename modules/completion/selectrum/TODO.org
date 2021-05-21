@@ -20,6 +20,9 @@ Currently the =!= style dispatcher is only as a prefix, due to the abundance of
 =!= final macros. In my opinion this is useful enough to break consistency.
 ** TODO =C-c C-e=
 on ~consult-line~ this opens a ~occur-edit~ buffer, which is a more natural fit but breaks slightly from the =C-c C-e= = =wgrep= convention.
+** TODO keep or discard =C-M-j= and =C-M-k=
+Scroll up and down while previewing. Essentially shortcuts for =C-(j|k) C-SPC=.
+I like having them around but I can always just add them to my private config.
 
 * PROJ HACKs to be addressed
 ** ~fboundp~ issues
@@ -32,17 +35,6 @@ Without [[file:~/.emacs.d/modules/ui/workspaces/config.el::;; HACK?? needs revie
 working of this whole set up are a bit opaque to me.
 
 * PROJ Bugs
-** TODO =C-SPC= and live previews
-Automatic live previews have been disabled on slow ~consult~ commands.
-=C-SPC= is partially implemented as the preview key for ~consult-*~ commands.
-Need to get it to work for other selectrum commands such =SPC h f=.
-#+begin_src emacs-lisp
-  (let ((embark-quit-after-action nil))
-    (map! :map minibuffer-local-map "C-SPC" #'embark-default-action)))
-#+end_src
-gets us close but moves the cursor to the new screen which is undesirable.
-
-probable best strategy: create an ~embark-preview~ that does this, upstream it.
 ** TODO ripgrep height logic bad
 selectrum bug caused by file descriptors
 https://github.com/raxod502/selectrum/issues/491
@@ -75,10 +67,9 @@ are nontrivial loading order shenanigans happening that make that not straightfo
 - =SPC b b= should switch workspace after choosing a buffer from a different one
 - universal argument for opening buffer in another window?
 ** TODO Ivy Parity
+*** TODO =C-RET= on minibuffer?
 *** TODO pass module
 *** TODO ~+ivy/jump-list~ analogue
-*** TODO ~+irc/selectrum-jump-to-channel~
-rework to use ~consult~ buffer narrowing, for some reason the current attempt breaks marginalia annotating
 *** WAIT lookup module
 - ~dash-docs~ backend (needs to be created)
 - ~+lookup--online..~ functionality (needs a consult analogue of ~counsel-search~)

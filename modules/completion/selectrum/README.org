@@ -97,6 +97,8 @@ These keybindings are available while a search is active:
 | =C-c C-o= | Open a buffer with your search results             |
 | =C-c C-e= | Open a writable buffer of your search results      |
 | =C-SPC=   | Preview the current candidate                      |
+| =C-M-j=   | Scroll down and preview.                           |
+| =C-M-k=   | Scroll up and preview.                             |
 | =C-RET=   | Open the selected candidate in other-window        |
 
 Changes to the resulting wgrep buffer (opened by =C-c C-e=) can be committed
