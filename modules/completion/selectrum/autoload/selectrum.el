@@ -96,11 +96,10 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
 (defun +selectrum/embark-preview ()
   "Previews candidate in selectrum buffer, unless it's a consult command"
   (interactive)
-  (unless (string-match-p "^consult" (symbol-name selectrum--last-command))
-  (print selectrum--last-command)
-  (save-selected-window
-    (let ((embark-quit-after-action nil))
-    (embark-default-action)))))
+  (unless (bound-and-true-p consult--preview-function)
+    (save-selected-window
+      (let ((embark-quit-after-action nil))
+        (embark-default-action)))))
 
 ;;;###autoload
 (defun +selectrum/next-candidate-preview ()
