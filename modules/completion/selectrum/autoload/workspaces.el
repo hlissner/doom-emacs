@@ -5,12 +5,12 @@
 (defun +selectrum--workspace-nth-source (n)
   "Generate a consult buffer source for buffers in the NTH workspace"
   (cond ((numberp n)
-         `(:name     ,(nth (1- n) (+workspace-list-names))
-           :hidden   ,(not (string= (+workspace-current-name) (nth (1- n) (+workspace-list-names))))
-           :narrow   ,(string-to-char (number-to-string n))
+         `(:name     ,(nth n (+workspace-list-names))
+           :hidden   ,(not (string= (+workspace-current-name) (nth n (+workspace-list-names))))
+           :narrow   ,(string-to-char (number-to-string (1+ n)))
            :category buffer
            :state    ,#'consult--buffer-state
-           :items    ,(lambda () (mapcar #'buffer-name (+workspace-buffer-list (nth (1- n) (+workspace-list)))))))
+           :items    ,(lambda () (mapcar #'buffer-name (+workspace-buffer-list (nth n (+workspace-list)))))))
         ((eq n 'final)
          `(:name     ,(car (last (+workspace-list-names)))
            :hidden   t
@@ -24,7 +24,7 @@
 ;;;###autoload
 (defun +selectrum--workspace-generate-sources ()
   "Generate list of consult buffer sources for all workspaces"
-        (mapcar #'+selectrum--workspace-nth-source '(1 2 3 4 5 6 7 8 9 final)))
+        (mapcar #'+selectrum--workspace-nth-source '(0 1 2 3 4 5 6 7 8 final)))
 
 (autoload 'consult--multi "consult")
 ;;;###autoload
