@@ -1,9 +1,39 @@
 * PROJ Design Decisions
 ** TODO bind =consult-lsp-diagnostics= to something?
-** WAIT Add keybinding for embark-act outside of the minibuffer
-Idealy would replace =C-o= as the default binding. Current suggestion is both
-=:leader a= and =C-,=. Note that =C-,= is bound to ~org-cycle-agenda-files~ but
-so is =C-'=.
+** TODO finalize =embark-act= keybindings
+They are currently set to =C-;= and =<leader> a=. The motivation for this is as follows:
+*** =C-;=
+Least intrusive key-chord type binding I could find. Doesn't interfere with
+other keybindings for the most part (unlike =C-o= which clashes for in
+minibuffer =evil-want-minibuffer= users and regular buffer evil users), with the
+exception of:
+- =C-;= is bound to ~flyspell-auto-correct-previous-word~. via the built in
+  flyspell map.
+- =C-;= is bound to ~+company/complete~ in the vanilla emacs bindings.
+We could also just bind it in the minibuffer if we do end up going with the
+leader key.
+*** Alternative chord: =C-,=
+still has some overlaps, but perhaps less important:
+- ~flyspell-goto-next-error~
+- ~org-cycle-agenda-files~ has redundancy in =C-'= anway.
+It is however less convenient than =C-;=
+*** =<leader> a=
+Even though top level module dependant bindings are frowned upon, here is my
+case for why this should be an exception:
+- It provide a useful shortcut for a bunch of commands relevant to the symbol at
+  point, and seems to be better at this than built in stuff, e.g. doing =<leader> f
+  D= to delete a file in =eshell= doesn't work, but embark recognies that it's a
+  file, so =<leader> a d= does.
+- other than helping with discoverability for stuff this also allows for
+  commands for things that are too niche for top level bindings, such as actions
+  on ~package!~ statements and recipes or url's.
+- selectrum is slated to become the default completion module, which makes this
+  less of an inconsistency, but I'm not sure about the performance slowdown in
+  ~map!~ since that seems to be one of the main concerns.
+- ~embark~ like most packages in the selectrum cinematic universe can be
+  installed independently, so if you find it sufficiently useful you could also
+  have a stripped down version of the config in doom core that is just used for
+  on-buffer actions.
 ** TODO consider dropping prescient flag
 The only advantage over orderless is frecency over recency, without the better
 integration orderless has with built in emacs completion. A compromise might be
@@ -19,7 +49,8 @@ Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
 Currently the =!= style dispatcher is only as a prefix, due to the abundance of
 =!= final macros. In my opinion this is useful enough to break consistency.
 ** TODO =C-c C-e=
-on ~consult-line~ this opens a ~occur-edit~ buffer, which is a more natural fit but breaks slightly from the =C-c C-e= = =wgrep= convention.
+on ~consult-line~ this opens a ~occur-edit~ buffer, which is a more natural fit
+but breaks slightly from the =C-c C-e= = =wgrep= convention.
 ** TODO keep or discard =C-M-j= and =C-M-k=
 Scroll up and down while previewing. Essentially shortcuts for =C-(j|k) C-SPC=.
 I like having them around but I can always just add them to my private config.
@@ -62,7 +93,8 @@ https://github.com/minad/marginalia/issues/59
 currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different
 ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
-are nontrivial loading order shenanigans happening that make that not straightforward.
+are nontrivial loading order shenanigans happening that make that not
+straightforward.
 ** TODO buffer switching
 - =SPC b b= should switch workspace after choosing a buffer from a different one
 - universal argument for opening buffer in another window?
@@ -72,6 +104,7 @@ are nontrivial loading order shenanigans happening that make that not straightfo
 *** TODO ~+ivy/jump-list~ analogue
 *** WAIT lookup module
 - ~dash-docs~ backend (needs to be created)
-- ~+lookup--online..~ functionality (needs a consult analogue of ~counsel-search~)
+- ~+lookup--online..~ functionality
+  (needs a consult analogue of ~counsel-search~)
 *** WAIT taskrunner module
 in all likelihood requires writing ~consult-taskrunner~.

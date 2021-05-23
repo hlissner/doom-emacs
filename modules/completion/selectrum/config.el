@@ -8,6 +8,9 @@
         selectrum-extend-current-candidate-highlight t)
   (when (featurep! +prescient)
     (setq completion-styles '(substring partial-completion)))
+  (map! "C-;"               #'embark-act  ; to be moved to :config default if accepted
+        :leader
+        :desc "Actions" "a" #'embark-act) ; to be moved to :config default if accepted
   :config
   (setq selectrum-fix-vertical-window-height 17
         selectrum-max-window-height 17)
@@ -29,10 +32,10 @@
       (call-interactively 'backward-delete-char)))
 
   (map! :map selectrum-minibuffer-map
-        "C-o"       #'embark-act
-        "C-c C-o"   #'embark-export
-        "C-c C-e"   #'+selectrum/embark-export-write
-        [backspace] #'+selectrum/backward-updir))
+        "C-;"               #'embark-act
+        "C-c C-;"           #'embark-export
+        "C-c C-e"           #'+selectrum/embark-export-write
+        [backspace]         #'+selectrum/backward-updir))
 
 (use-package! selectrum-prescient
   :when (featurep! +prescient)
