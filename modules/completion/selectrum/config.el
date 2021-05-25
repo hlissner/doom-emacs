@@ -130,7 +130,7 @@
   (map!
    :map embark-file-map
    :desc "Open Dired on target" "j" #'ffap-dired
-   :desc "Open target with sudo" "s" #'sudo-edit
+   :desc "Open target with sudo" "s" #'doom/sudo-find-file
    :desc "Open target with vlf" "l" #'vlf)
   (set-popup-rule! "^\\*Embark Export" :size 0.35 :ttl 0 :quit nil)
   (set-popup-rule! "^\\*Embark Collect" :size 0.35 :ttl 0 :quit nil))

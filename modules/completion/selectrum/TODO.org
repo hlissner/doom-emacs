@@ -102,6 +102,11 @@ straightforward.
 *** TODO =C-RET= on minibuffer?
 *** TODO pass module
 *** TODO ~+ivy/jump-list~ analogue
+*** TODO marginalia stuff
+**** TODO (buffer) clearly mark files opened with ~doom/sudo-find-file~ (remote?) with a different color
+- including remote path in parens maybe
+**** TODO (buffer) have a project column and use relative paths from that
+**** TODO better colors?
 *** WAIT lookup module
 - ~dash-docs~ backend (needs to be created)
 - ~+lookup--online..~ functionality
