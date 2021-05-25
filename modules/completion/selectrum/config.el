@@ -108,12 +108,15 @@
         consult-line-numbers-widen t
         consult-async-input-debounce 0.5
         consult-async-input-throttle 0.8)
-  (mapc
-   (lambda (x) (setf
-                (alist-get x consult-config)
-                (list :preview-key (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k")))))
-   '(consult-bookmark consult-recent-file consult-theme
-     consult--grep consult-grep consult-ripgrep consult-git-grep +default/search-project)))
+  (consult-customize
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file
+   +default/search-project +default/search-project-for-symbol-at-point
+   +default/search-other-project +selectrum/search-symbol-at-point
+   +default/search-cwd +default/search-other-cwd
+   +default/search-notes-for-symbol-at-point
+   consult--source-file consult--source-project-file consult--source-bookmark
+   :preview-key (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k"))))
 
 (use-package! consult-flycheck
   :when (featurep! :checkers syntax)
