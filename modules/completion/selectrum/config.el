@@ -4,17 +4,15 @@
   :hook (doom-first-input . selectrum-mode)
   :init
   (setq selectrum-display-action nil
-        selectrum-num-candidates-displayed 15
-        selectrum-extend-current-candidate-highlight t)
+        selectrum-extend-current-candidate-highlight t
+        selectrum-fix-vertical-window-height 17
+        selectrum-max-window-height 17)
   (when (featurep! +prescient)
     (setq completion-styles '(substring partial-completion)))
   :config
-  (setq selectrum-fix-vertical-window-height 17
-        selectrum-max-window-height 17)
   (defadvice! +selectrum-refresh-on-cycle (&rest _)
     :after 'marginalia-cycle
     (when (bound-and-true-p selectrum-mode) (selectrum-exhibit)))
-
   (defun +selectrum/backward-updir ()
     "Delete char before or go up directory for file cagetory selectrum buffers."
     (interactive)
@@ -27,7 +25,6 @@
                     (directory-file-name
                      (expand-file-name new-path))))))
       (call-interactively 'backward-delete-char)))
-
   (map! :map selectrum-minibuffer-map
         [backspace]         #'+selectrum/backward-updir))
 
