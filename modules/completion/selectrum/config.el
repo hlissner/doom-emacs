@@ -126,6 +126,25 @@
         "C-c C-e"           #'+selectrum/embark-export-write)
   (define-key!
     [remap describe-bindings]             #'embark-bindings)
+  (defun +selectrum--embark-target-package! ()
+    "Targets Doom's package! statements and returns the package name"
+    (when (or (derived-mode-p 'emacs-lisp-mode) (derived-mode-p 'org-mode))
+      (save-excursion
+        (search-backward "(")
+        (when (looking-at "(\\s-*package!\\s-*\\(\\(\\sw\\|\\s_\\)+\\)\\s-*")
+          (let ((pkg (match-string 1)))
+            (set-text-properties 0 (length pkg) nil pkg)
+            `(package . ,pkg))))))
+  (setq embark-target-finders
+        '(embark-target-top-minibuffer-completion
+          embark-target-active-region
+          embark-target-collect-candidate
+          embark-target-completion-at-point
+          embark-target-url-at-point
+          +selectrum--embark-target-package!
+          embark-target-file-at-point
+          embark-target-custom-variable-at-point
+          embark-target-identifier-at-point))
   :config
   (map!
    :map embark-file-map
