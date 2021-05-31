@@ -151,6 +151,12 @@
    :desc "Open Dired on target" "j" #'ffap-dired
    :desc "Open target with sudo" "s" #'doom/sudo-find-file
    :desc "Open target with vlf" "l" #'vlf)
+  (setq embark-package-map (make-sparse-keymap))
+  (map! :map embark-package-map
+        "h" #'doom/help-packages
+        "b" #'doom/bump-package
+        "c" #'doom/help-package-config
+        "u" #'doom/help-package-homepage)
   (set-popup-rule! "^\\*Embark Export" :size 0.35 :ttl 0 :quit nil)
   (set-popup-rule! "^\\*Embark Collect" :size 0.35 :ttl 0 :quit nil))
 
