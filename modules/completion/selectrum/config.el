@@ -135,17 +135,17 @@
           (let ((pkg (match-string 1)))
             (set-text-properties 0 (length pkg) nil pkg)
             `(package . ,pkg))))))
-  (setq embark-target-finders
-        '(embark-target-top-minibuffer-completion
-          embark-target-active-region
-          embark-target-collect-candidate
-          embark-target-completion-at-point
-          embark-target-url-at-point
-          +selectrum--embark-target-package!
-          embark-target-file-at-point
-          embark-target-custom-variable-at-point
-          embark-target-identifier-at-point))
   :config
+  ;; add the package! target finder before the file target finder,
+  ;; so we don't get a false positive match.
+  (let ((pos (or (cl-position
+                  'embark-target-file-at-point
+                   embark-target-finders)
+                 (length embark-target-finders))))
+    (cl-callf2
+        cons
+        '+selectrum--embark-target-package!
+        (nthcdr pos embark-target-finders)))
   (map!
    :map embark-file-map
    :desc "Open Dired on target" "j" #'ffap-dired
