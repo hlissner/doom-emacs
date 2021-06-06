@@ -148,9 +148,7 @@
         (nthcdr pos embark-target-finders)))
   (map!
    :map embark-file-map
-   :desc "Open Dired on target" "j" #'ffap-dired
-   :desc "Open target with sudo" "s" #'doom/sudo-find-file
-   :desc "Open target with vlf" "l" #'vlf)
+   :desc "Open target with sudo" "s" #'doom/sudo-find-file)
   (setq embark-package-map (make-sparse-keymap))
   (map! :map embark-package-map
         "h" #'doom/help-packages

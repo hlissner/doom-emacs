@@ -211,11 +211,9 @@
         "C-j"   #'selectrum-next-candidate
         "C-M-j" #'+selectrum/next-candidate-preview
         "C-S-j" #'selectrum-next-page
-        "C-s-j" #'selectrum-goto-end
         "C-k"   #'selectrum-previous-candidate
         "C-M-k" #'+selectrum/previous-candidate-preview
-        "C-S-k" #'selectrum-previous-page
-        "C-s-k" #'selectrum-goto-beginning)))
+        "C-S-k" #'selectrum-previous-page)))
 
 ;;; :ui
 (map! (:when (featurep! :ui popup)
