@@ -148,7 +148,8 @@
         (nthcdr pos embark-target-finders)))
   (map!
    :map embark-file-map
-   :desc "Open target with sudo" "s" #'doom/sudo-find-file)
+   :desc "Open target with sudo" "s" #'doom/sudo-find-file
+   :desc "Open in new workspace" "TAB" #'+selectrum-embark-open-in-new-workspace)
   (setq embark-package-map (make-sparse-keymap))
   (map! :map embark-package-map
         "h" #'doom/help-packages

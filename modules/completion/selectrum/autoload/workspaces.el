@@ -45,3 +45,9 @@ Use consult narrowing with another workspace number to open a buffer from that w
     ;; create a new buffer with the name.
     (unless (cdr buffer)
       (funcall consult--buffer-display (car buffer)))))
+
+;;;###autoload
+(defun +selectrum-embark-open-in-new-workspace (x)
+    "Open X (a file) in a new workspace."
+    (+workspace/new)
+    (find-file x))
