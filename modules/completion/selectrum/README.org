@@ -14,9 +14,6 @@
   - [[#in-buffer-searching][In-buffer searching]]
   - [[#selectrum-integration-for-various-completing-commands][Selectrum integration for various completing commands]]
   - [[#orderless-filtering][Orderless filtering]]
-- [[#configuration][Configuration]]
-  - [[#enable-fuzzynon-fuzzy-search-for-specific-commands][Enable fuzzy/non-fuzzy search for specific commands]]
-  - [[#change-the-position-of-the-ivy-childframe][Change the position of the ivy childframe]]
 - [[#troubleshooting][Troubleshooting]]
 
 * Description
@@ -28,7 +25,8 @@ TODO
 #+end_quote
 
 ** Module Flags
-+ ~+prescient~ Enables prescient filtering and sorting for Selectrum searches instead of orderless.
++ ~+prescient~ Enables prescient filtering and sorting for Selectrum searches
+  instead of orderless.
 
 ** Plugins
 [[https://github.com/raxod502/selectrum][selectrum]]
@@ -45,13 +43,15 @@ This module has no prerequisites.
 
 * Features
 
-Selectrum and friends modify and use the built-in ~completing-read~ function, used by any function
-that requires completion. Due to this the full scope of these packages is too
-large to cover here, so we will detail Doom-specific additions:
+The packages in this module modify and use the built-in ~completing-read~
+function, which is used by any function that requires completion. Due to this
+the full scope of these packages is too large to cover here and you are
+encouraged to go and read their excellent documentation. We will detail
+Doom-specific additions:
 
 ** Jump-to navigation
-This module provides an interface to
-navigate within a project using =projectile=:
+This module provides an interface to navigate within a project using
+=projectile=:
 
 https://assets.doomemacs.org/completion/selectrum/projectile.png
 
@@ -107,7 +107,7 @@ users).
 
 https://assets.doomemacs.org/completion/selectrum/search-replace.png
 
-** TODO In-buffer searching
+** In-buffer searching
 This module provides some in buffer searching bindings:
 
 + =SPC s s= (~isearch~)
@@ -139,8 +139,8 @@ An ~occur-edit~ buffer can be opened from ~consult-line~ with =C-c C-e=.
 =SPC b b=/=SPC ,= support changing the workspace you're selecting a buffer from
 via [[https://github.com/minad/consult#narrowing-and-grouping][Consult narrowing]], e.g. if you're on the first workspace, you can switch to
 selecting a buffer from the third workspace by typing =3 SPC= into the prompt,
-or the last workspace by typing =0 SPC=.
-=SPC f f=/=SPC .= support exported to a =wdired= buffer using =C-c C-e=.
+or the last workspace by typing =0 SPC=. =SPC f f=/=SPC .= support exported to a
+=wdired= buffer using =C-c C-e=.
 
 *** Search
 | Keybind   | Description                               |
@@ -158,17 +158,23 @@ or the last workspace by typing =0 SPC=.
 When using orderless to filter through candidates, the default behaviour is for
 each space separated input to match the candidate as a regular expression or
 literally.
-Doom has some builtin [[https://github.com/oantolin/orderless#style-dispatchers][style dispatchers]] for more finegrained filtering.
-You can further specify each space separated input in the following ways:
+
+Note that due to this style of matching, pressing tab does not expand the input
+to the longest matching prefix (like shell completion), but rather uses the
+first matched candidate as input. Filtering further is instead achieved by
+pressing space and entering another input. In essence, when trying to match
+=foobar.org=, instead of option 1., use option 2.:
+
+1. (BAD) Enter =foo TAB=, completes to =foobar.=, enter =org RET=
+2. (GOOD) Enter =foo SPC org RET=
+
+Doom has some builtin [[https://github.com/oantolin/orderless#style-dispatchers][style dispatchers]] for more finegrained filtering. You can
+further specify each space separated input in the following ways:
 | Input            | Description                                |
 |------------------+--------------------------------------------|
 | =!foo=           | match without literal input =foo=          |
 | =`bar= or =bar`= | match input =bar= as an initialism         |
 | ==baz= or =baz== | match only with literal input =baz=        |
 | =~qux= or =qux~= | match input =qux= with fuzzy/flex matching |
-
-* Configuration
-** TODO Enable fuzzy/non-fuzzy search for specific commands
-** TODO Change the position of the ivy childframe
 
 * TODO Troubleshooting

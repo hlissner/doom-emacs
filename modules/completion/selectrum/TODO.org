@@ -54,41 +54,45 @@ but breaks slightly from the =C-c C-e= = =wgrep= convention.
 ** TODO keep or discard =C-M-j= and =C-M-k=
 Scroll up and down while previewing. Essentially shortcuts for =C-(j|k) C-SPC=.
 I like having them around but I can always just add them to my private config.
+** TODO Annotation Customization
+Do we want to have the annotations be more like ivy? e.g.
+- have a project column in the buffer annotations and a relative path? This has some overlap with project narrowing =SPC b B p SPC.
+- Mark the modified/remote status of the buffer with color, on top of the modification column?
+- Change colors in general?
 
 * PROJ HACKs to be addressed
-** ~fboundp~ issues
+** TODO ~fboundp~ issues
 Even if the =ivy= module isn't loaded, it's packages can still get loaded by
 other means, such as =lispy= requiring =counsel=. This means that the ~fboundp~
 logic such [[file:~/.emacs.d/modules/config/default/autoload/text.el::(cond ((fboundp 'consult-yank-pop) #'consult-yank-pop) ;;HACK see @ymarco's comment on #5013 and TODO.org][here]] and [[file:~/.emacs.d/core/autoload/projects.el::((fboundp 'selectrum-mode) ;HACK see @ymarco's comment on #5013 and TODO.org][here]] won't work unless the selectrum option is checked
 first, which is what we do for now.
-** ~projectile-switch-project-action~ definition
+** TODO ~projectile-switch-project-action~ definition
 Without [[file:~/.emacs.d/modules/ui/workspaces/config.el::;; HACK?? needs review][this]] change new projects don't get opened in a new tab, but the exact
 working of this whole set up are a bit opaque to me.
 
-* PROJ Bugs
-** TODO ripgrep height logic bad
-selectrum bug caused by file descriptors
-https://github.com/raxod502/selectrum/issues/491
-** TODO ~(defadvice! +orderless-match-with-one-face..~ causes lexical error
-probably caused by some doomism
-https://github.com/oantolin/orderless/issues/41
-** TODO ~selectrum-repeat~ Issues
-Unlike Ivy, ~selectrum-repeat~ doesn't restore the position of the selection in
-the completion buffer. Seems to be reproduced in ~emacs -Q~. If so, create
-upstream selectrum issue.
+* PROJ Review blocking Issues
 ** TODO Embark export window buffer switching logic
 If we export bookmarks, grep session, or ~find-file~ session, when pressing
 enter, it opens the new buffer in another window rather than the main one, even
 though at least the bookmark function ostensibly uses
 ~pop-to-buffer-same-window~. Ivy gets the window switched in the bookmarks and
 grep case due to a custom ivy occur window switching function.
-** TODO selectrum =SPC /= is much slower than ivy =SPC /=
-requires further investigation. is ~consult-ripgrep~ slower than ~counsel-rg~?
-is it something the custom search function is doing? does ivy cache stuff?
-
-* PROJ Missing Features
 ** TODO Icons
-https://github.com/minad/marginalia/issues/59
+Partially solved, seems to have interaction with selectrum height issue, so not yet implemented.
+** TODO Profile selectrum =SPC /= vs ivy =SPC /=
+** TODO ~(defadvice! +orderless-match-with-one-face..~ causes lexical error
+probably caused by some doomism
+https://github.com/oantolin/orderless/issues/41
+
+* PROJ Upstream Issues
+** TODO Selectrum separators cause size calculation bug
+https://github.com/raxod502/selectrum/issues/491
+** TODO ~selectrum-repeat~ doesn't scroll to previously selected candidate
+Unlike Ivy, ~selectrum-repeat~ doesn't restore the position of the selection in
+the completion buffer. Seems to be reproduced in ~emacs -Q~. If so, create
+upstream selectrum issue.
+
+* PROJ Extra credit
 ** TODO bibtex-actions improvements?
 currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different
@@ -102,11 +106,6 @@ straightforward.
 *** TODO =C-RET= on minibuffer?
 *** TODO pass module
 *** TODO ~+ivy/jump-list~ analogue
-*** TODO marginalia stuff
-**** TODO (buffer) clearly mark files opened with ~doom/sudo-find-file~ (remote?) with a different color
-- including remote path in parens maybe
-**** TODO (buffer) have a project column and use relative paths from that
-**** TODO better colors?
 *** WAIT lookup module
 - ~dash-docs~ backend (needs to be created)
 - ~+lookup--online..~ functionality

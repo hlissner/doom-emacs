@@ -18,13 +18,13 @@
            :category buffer
            :state    ,#'consult--buffer-state
            :items    ,(lambda () (mapcar #'buffer-name (+workspace-buffer-list (car (last (+workspace-list))))))))
-         (t
-          (user-error "invalid workspace source %s" n))))
+        (t
+         (user-error "invalid workspace source %s" n))))
 
 ;;;###autoload
 (defun +selectrum--workspace-generate-sources ()
   "Generate list of consult buffer sources for all workspaces"
-        (mapcar #'+selectrum--workspace-nth-source '(0 1 2 3 4 5 6 7 8 final)))
+  (mapcar #'+selectrum--workspace-nth-source '(0 1 2 3 4 5 6 7 8 final)))
 
 (autoload 'consult--multi "consult")
 ;;;###autoload
@@ -39,8 +39,8 @@ Use consult narrowing with another workspace number to open a buffer from that w
                                     (confirm-nonexistent-file-or-buffer)
                                     :prompt (format "Switch to buffer (%s): "
                                                     (+workspace-current-name)
-                                    :history 'consult--buffer-history
-                                    :sort nil)))
+                                                    :history 'consult--buffer-history
+                                                    :sort nil)))
     ;; When the buffer does not belong to a source,
     ;; create a new buffer with the name.
     (unless (cdr buffer)
@@ -48,6 +48,6 @@ Use consult narrowing with another workspace number to open a buffer from that w
 
 ;;;###autoload
 (defun +selectrum-embark-open-in-new-workspace (x)
-    "Open X (a file) in a new workspace."
-    (+workspace/new)
-    (find-file x))
+  "Open X (a file) in a new workspace."
+  (+workspace/new)
+  (find-file x))

@@ -26,7 +26,7 @@
                      (expand-file-name new-path))))))
       (call-interactively 'backward-delete-char)))
   (map! :map selectrum-minibuffer-map
-        [backspace]         #'+selectrum/backward-updir))
+        [backspace] #'+selectrum/backward-updir))
 
 (use-package! selectrum-prescient
   :when (featurep! +prescient)
@@ -164,7 +164,7 @@
   :init
   (map! :map minibuffer-local-map
         :desc "Cycle marginalia views"
-        "M-A"               #'marginalia-cycle)
+        "M-A" #'marginalia-cycle)
   :config
   (nconc marginalia-command-categories
          '((persp-switch-to-buffer . buffer)

@@ -2,11 +2,11 @@
 
 ;;;###autoload
 (defadvice! +selectrum-orderless-match-with-one-face (fn &rest args)
-    "Function to help company to highlight all candidates with just
+  "Function to help company to highlight all candidates with just
 one face."
-    :around 'company-capf--candidates
-    (let ((orderless-match-faces [completions-common-part]))
-        (apply fn args)))
+  :around 'company-capf--candidates
+  (let ((orderless-match-faces [completions-common-part]))
+    (apply fn args)))
 
 ;;;###autoload
 (cl-defun +selectrum-file-search (&key query in all-files (recursive t) prompt args)
@@ -85,11 +85,11 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
                (run-hook-with-args-until-success 'embark-candidate-collectors)))
     (pcase type
       ('consult-grep (let ((embark-after-export-hook #'wgrep-change-to-wgrep-mode))
-          (embark-export)))
+                       (embark-export)))
       ('file (let ((embark-after-export-hook #'wdired-change-to-wdired-mode))
-          (embark-export)))
+               (embark-export)))
       ('consult-location (let ((embark-after-export-hook #'occur-edit-mode))
-          (embark-export)))
+                           (embark-export)))
       (x (user-error "embark category %S doesn't support writable export" x)))))
 
 ;;;###autoload
