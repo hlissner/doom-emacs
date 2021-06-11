@@ -556,6 +556,9 @@
        :desc "REPL"               "r"  #'+eval/open-repl-other-window
        :desc "REPL (same window)" "R"  #'+eval/open-repl-same-window
        :desc "Dired"              "-"  #'dired-jump
+       (:when (and (featurep! :ui dired-sidebar)
+                   (not (featurep! :emacs dired +ranger)))
+        :desc "Project sidebar"              "p" #'dired-sidebar-toggle-sidebar)
        (:when (featurep! :ui neotree)
         :desc "Project sidebar"              "p" #'+neotree/open
         :desc "Find file in project sidebar" "P" #'+neotree/find-this-file)

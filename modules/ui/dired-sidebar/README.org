@@ -1,0 +1,95 @@
+#+TITLE:   ui/dired-sidebar
+#+DATE:    August 26, 2020
+#+SINCE:   v2.0.9
+#+STARTUP: inlineimages nofold
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+  - [[#maintainers][Maintainers]]
+  - [[#module-flags][Module Flags]]
+  - [[#plugins][Plugins]]
+- [[#prerequisites][Prerequisites]]
+- [[#features][Features]]
+- [[#configuration][Configuration]]
+  - [[#subtree-line-prefix][Subtree Line Prefix]]
+  - [[#sidebar-theme][Sidebar Theme]]
+  - [[#custom-font][Custom Font]]
+  - [[#sidebar-position][Sidebar position]]
+- [[#troubleshooting][Troubleshooting]]
+
+* Description
+This module enables =dired-sidebar=, which is a lighter alternative to treemacs
+and neotree. It is rather like having a sidebar with =dired-hide-details-mode=.
+This also integrates with and enables =dired-subtree= for =dired= (and consequently,
+for itself)
+
+It respects root directories set by =projectile= and =magit=.
+
+** Maintainers
+This module has no dedicated maintainers.
+
+** Module Flags
+This module provides no flags.
+
+** Plugins
++ [[https://github.com/jojojames/dired-sidebar][dired-sidebar]]
++ [[https://github.com/Fuco1/dired-hacks][dired-subtree]]
+
+* Prerequisites
+This module requires =dired=.
+
+* Features
+Since this is a mode derived from =dired-mode=, it supports exciting features like =wdired-mode=
+and marking files, and all the functionality that entails!
+
+=dired-subtree-cycle=, unlike =org-cycle=, works only under point.
+
+* Configuration
+
+This module will be disabled if =+ranger= is present.
+
+** Subtree Line Prefix
+
+=dired-subtree-line-prefix= is set to ~>~ in this module.
+=dired-sidebar-subtree-line-prefix= can be independently modified.
+
+** Sidebar Theme
+
+=dired-sidebar-theme= is set to =ascii=. =nerd= is another simple theme, although not
+as spartan..
+
+#+begin_src emacs-lisp
+(setq dired-sidebar-theme 'nerd)
+#+end_src
+
+For icons, set to =icons=. This requires flag =+icons= under =:ui dired=. Setting
+=vscode= does not currently work with DOOM Emacs.
+
+#+begin_src emacs-lisp
+(setq dired-sidebar-theme 'icons)
+#+end_src
+
+** Custom Font
+
+#+begin_src emacs-lisp
+(setq dired-sidebar-use-custom-font t
+      dired-sidebar-face '(:family "Helvetica Neue"))
+#+end_src
+
+Consult function =font-spec= for details.
+
+If you wish to use =doom-variable-pitch-font=, add the following to =$DOOMDIR/config.el=.
+
+#+begin_src emacs-lisp
+(add-hook! 'dired-sidebar-mode-hook #'mixed-pitch-mode)
+#+end_src
+
+** Sidebar position
+
+To move it to the right, add the following to =$DOOMDIR/config.el=.
+
+#+begin_src emacs-lisp
+(setq dired-sidebar-display-alist '((side . right) (slot . -1))
+#+end_src
+
+* TODO Troubleshooting
