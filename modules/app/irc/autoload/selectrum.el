@@ -6,7 +6,7 @@
   "Jump to an open channel or server buffer with selectrum."
   (interactive)
   (require 'consult)
-  (consult--multi (list (plist-put +irc--consult-circe-source
+  (consult--multi (list (plist-put (copy-sequence +irc--consult-circe-source)
                                    :hidden nil))
                   :narrow nil
                   :require-match t
