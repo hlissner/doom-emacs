@@ -208,4 +208,4 @@ instead is more sensible."
 
 (use-package! consult-lsp
   :when (featurep! :completion consult)
-  :commands consult-lsp-symbols)
+  :defer t)
