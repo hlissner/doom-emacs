@@ -1,7 +1,8 @@
 * PROJ Design Decisions
-** TODO bind =consult-lsp-diagnostics= to something?
-** TODO finalize =embark-act= keybindings
-They are currently set to =C-;= and =<leader> a=. The motivation for this is as follows:
+** TODO Bind =consult-lsp-diagnostics= to something?
+** TODO Finalize =embark-act= keybindings
+They are currently set to =C-;= and =<leader> a=. The motivation for this is as
+follows:
 *** =C-;=
 Least intrusive key-chord type binding I could find. Doesn't interfere with
 other keybindings for the most part (unlike =C-o= which clashes for in
@@ -13,20 +14,20 @@ exception of:
 We could also just bind it in the minibuffer if we do end up going with the
 leader key.
 *** Alternative chord: =C-,=
-still has some overlaps, but perhaps less important:
+Still has some overlaps, but perhaps less important:
 - ~flyspell-goto-next-error~
-- ~org-cycle-agenda-files~ has redundancy in =C-'= anway.
+- ~org-cycle-agenda-files~ has redundancy in =C-'= anyway.
 It is however less convenient than =C-;=
 *** =<leader> a=
 Even though top level module dependant bindings are frowned upon, here is my
 case for why this should be an exception:
 - It provide a useful shortcut for a bunch of commands relevant to the symbol at
-  point, and seems to be better at this than built in stuff, e.g. doing =<leader> f
-  D= to delete a file in =eshell= doesn't work, but embark recognies that it's a
-  file, so =<leader> a d= does.
+  point, and seems to be better at this than built in stuff, e.g. doing
+  =<leader> f D= to delete a file in =eshell= doesn't work, but embark
+  recognises that it's a file, so =<leader> a d= does.
 - other than helping with discoverability for stuff this also allows for
   commands for things that are too niche for top level bindings, such as actions
-  on ~package!~ statements and recipes or url's.
+  on ~package!~ statements and recipes or urls.
 - selectrum is slated to become the default completion module, which makes this
   less of an inconsistency, but I'm not sure about the performance slowdown in
   ~map!~ since that seems to be one of the main concerns.
@@ -34,7 +35,7 @@ case for why this should be an exception:
   installed independently, so if you find it sufficiently useful you could also
   have a stripped down version of the config in doom core that is just used for
   on-buffer actions.
-** TODO consider dropping prescient flag
+** TODO Consider dropping prescient flag
 The only advantage over orderless is frecency over recency, without the better
 integration orderless has with built in emacs completion. A compromise might be
 to have ~+prescient~ just add prescient sorting, but it's probably not worth the
@@ -45,20 +46,27 @@ does something else (give you previously used isearch search terms). Bound to
 regular isearch for now.
 ** TODO =SPC s B=
 Selectrum/Consult don't have a ~swiper-all~ analogue either. Unbound for now.
-** TODO orderless style dispatchers
+** TODO Orderless style dispatchers
 Currently the =!= style dispatcher is only as a prefix, due to the abundance of
 =!= final macros. In my opinion this is useful enough to break consistency.
 ** TODO =C-c C-e=
-on ~consult-line~ this opens a ~occur-edit~ buffer, which is a more natural fit
+On ~consult-line~ this opens a ~occur-edit~ buffer, which is a more natural fit
 but breaks slightly from the =C-c C-e= = =wgrep= convention.
-** TODO keep or discard =C-M-j= and =C-M-k=
+** TODO Keep or discard =C-M-j= and =C-M-k=
 Scroll up and down while previewing. Essentially shortcuts for =C-(j|k) C-SPC=.
 I like having them around but I can always just add them to my private config.
 ** TODO Annotation Customization
 Do we want to have the annotations be more like ivy? e.g.
-- have a project column in the buffer annotations and a relative path? This has some overlap with project narrowing =SPC b B p SPC.
-- Mark the modified/remote status of the buffer with color, on top of the modification column?
+- Have a project column in the buffer annotations and a relative path? This has
+  some overlap with project narrowing =SPC b B p SPC.
+- Mark the modified/remote status of the buffer with color, on top of the
+  modification column?
 - Change colors in general?
+** TODO Consider renaming the module
+=:completion selectrum= is a bit of a misnomer. Selectrum is probably the
+most easily replaceable part of the module as it can replaced with Vertico
+fairly easily, other than losing the ~selectrum-repeat~ command. However,
+naming is hard™. Best alternative I can think of is =:completion modular=.
 
 * PROJ HACKs to be addressed
 ** TODO ~fboundp~ issues
@@ -78,10 +86,18 @@ though at least the bookmark function ostensibly uses
 ~pop-to-buffer-same-window~. Ivy gets the window switched in the bookmarks and
 grep case due to a custom ivy occur window switching function.
 ** TODO Icons
-Partially solved, seems to have interaction with selectrum height issue, so not yet implemented.
+Partially solved, seems to have interaction with selectrum height issue, so not
+yet implemented.
+** TODO ~company~ completions get ordered really weirdly
+This is due to orderless adding a bunch of other matches.
+
+* PROJ Review non-blocking Issues
 ** TODO Profile selectrum =SPC /= vs ivy =SPC /=
+Check if there are other places where optimisations can be made. Perhaps the
+~command-input-async~ variables can tolorate lower values.
 ** TODO ~(defadvice! +orderless-match-with-one-face..~ causes lexical error
-probably caused by some doomism
+Probably caused by some doomism
+
 https://github.com/oantolin/orderless/issues/41
 
 * PROJ Upstream Issues
@@ -91,24 +107,26 @@ https://github.com/raxod502/selectrum/issues/491
 Unlike Ivy, ~selectrum-repeat~ doesn't restore the position of the selection in
 the completion buffer. Seems to be reproduced in ~emacs -Q~. If so, create
 upstream selectrum issue.
+** TODO Marginalia annotations sometimes disappear on ~find-file~
+https://github.com/raxod502/selectrum/issues/561
 
 * PROJ Extra credit
-** TODO bibtex-actions improvements?
-currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
+** TODO =bibtex-actions= improvements?
+Currently =SPC n b= is bound to a function, but =bibtex-actions= doesn't have a
 main dispatch function like =ivy-bibtex=, rather it has a bunch of different
 ones. Binding the ~bibtex-actions-map~ there would probably be better, but there
 are nontrivial loading order shenanigans happening that make that not
 straightforward.
-** TODO buffer switching
+** TODO Buffer switching
 - =SPC b b= should switch workspace after choosing a buffer from a different one
-- universal argument for opening buffer in another window?
+- Universal argument for opening buffer in another window?
 ** TODO Ivy Parity
 *** TODO =C-RET= on minibuffer?
 *** TODO pass module
 *** TODO ~+ivy/jump-list~ analogue
 *** WAIT lookup module
 - ~dash-docs~ backend (needs to be created)
-- ~+lookup--online..~ functionality
-  (needs a consult analogue of ~counsel-search~)
+- ~+lookup--online..~ functionality (needs a consult analogue of
+  ~counsel-search~)
 *** WAIT taskrunner module
 in all likelihood requires writing ~consult-taskrunner~.
