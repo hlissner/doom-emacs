@@ -10,4 +10,4 @@
   (when (featurep! :completion helm)
     (package! helm-lsp :pin "c2c6974dadfac459b1a69a1217441283874cea92"))
   (when (featurep! :completion selectrum)
-    (package! consult-lsp :pin "ed3cfd2e67fc5117819c0c739814780bb4c2d716")))
+    (package! consult-lsp :pin "c882749e91e4de3bae17d825ac9950cc074b1595")))
