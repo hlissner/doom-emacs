@@ -92,9 +92,7 @@
   (setq consult-project-root-function #'doom-project-root
         completion-in-region-function #'consult-completion-in-region
         consult-narrow-key "<"
-        consult-line-numbers-widen t
-        consult-async-input-debounce 0.5
-        consult-async-input-throttle 0.8)
+        consult-line-numbers-widen t)
   (consult-customize
    consult-ripgrep consult-git-grep consult-grep
    consult-bookmark consult-recent-file
