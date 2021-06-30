@@ -9,18 +9,6 @@
   (when (featurep! +prescient)
     (setq completion-styles '(substring partial-completion)))
   :config
-  (defun +selectrum/backward-updir ()
-    "Delete char before or go up directory for file cagetory selectrum buffers."
-    (interactive)
-    (if (and (eq (char-before) ?/)
-             (eq (selectrum--get-meta 'category) 'file))
-        (let ((new-path (minibuffer-contents)))
-          (delete-region (minibuffer-prompt-end) (point-max))
-          (insert (abbreviate-file-name
-                   (file-name-directory
-                    (directory-file-name
-                     (expand-file-name new-path))))))
-      (call-interactively 'backward-delete-char)))
   (map! :map selectrum-minibuffer-map
         [backspace] #'+selectrum/backward-updir))
 

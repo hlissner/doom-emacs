@@ -75,6 +75,24 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
   (consult-line (thing-at-point 'symbol)))
 
 ;;;###autoload
+(defun +selectrum/backward-updir ()
+  "Delete char before or go up directory for file cagetory selectrum buffers."
+  (interactive)
+  (let ((metadata (completion-metadata (minibuffer-contents)
+                                       minibuffer-completion-table
+                                       minibuffer-completion-predicate)))
+    (if (and (eq (char-before) ?/)
+             (eq (completion-metadata-get metadata 'category) 'file))
+        (let ((new-path (minibuffer-contents)))
+          (delete-region (minibuffer-prompt-end) (point-max))
+          (insert (abbreviate-file-name
+                   (file-name-directory
+                    (directory-file-name
+                     (expand-file-name new-path))))))
+      (call-interactively 'backward-delete-char))))
+
+
+;;;###autoload
 (defun +selectrum/embark-export-write ()
   "Export the current selectrum results to a writable buffer if possible.
 
