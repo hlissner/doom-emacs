@@ -133,9 +133,7 @@
         "h" #'doom/help-packages
         "b" #'doom/bump-package
         "c" #'doom/help-package-config
-        "u" #'doom/help-package-homepage)
-  (set-popup-rule! "^\\*Embark Export" :size 0.35 :ttl 0 :quit nil)
-  (set-popup-rule! "^\\*Embark Collect" :size 0.35 :ttl 0 :quit nil))
+        "u" #'doom/help-package-homepage))
 
 (use-package! marginalia
   :hook (doom-first-input . marginalia-mode)

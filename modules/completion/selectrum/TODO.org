@@ -80,11 +80,14 @@ working of this whole set up are a bit opaque to me.
 
 * PROJ Review blocking Issues
 ** TODO Embark export window buffer switching logic
-If we export bookmarks, grep session, or ~find-file~ session, when pressing
-enter, it opens the new buffer in another window rather than the main one, even
-though at least the bookmark function ostensibly uses
-~pop-to-buffer-same-window~. Ivy gets the window switched in the bookmarks and
-grep case due to a custom ivy occur window switching function.
+*** DONE ~grep~
+The clicking links exported grep buffers used to open in a new window, but now
+  open in another window. Caused by the ~set-popup-rule!~ entries for the embark
+  export/collect buffers. These don't seem to serve much of a purpose at this
+  point so they have been removed.
+*** TODO Open upstream Embark issue for ~bookmark~ and ~file~
+~bookmark~ or ~file~ export buffers open the links in the same window rather than
+the other one. This can be reproduces on emacs -Q.
 ** TODO Icons
 Partially solved, seems to have interaction with selectrum height issue, so not
 yet implemented.
