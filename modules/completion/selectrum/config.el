@@ -3,16 +3,12 @@
 (use-package! selectrum
   :hook (doom-first-input . selectrum-mode)
   :init
-  (setq selectrum-display-action nil
-        selectrum-extend-current-candidate-highlight t
-        selectrum-fix-vertical-window-height 17
+  (setq selectrum-extend-current-candidate-highlight t
+        selectrum-fix-vertical-window-height t
         selectrum-max-window-height 17)
   (when (featurep! +prescient)
     (setq completion-styles '(substring partial-completion)))
   :config
-  (defadvice! +selectrum-refresh-on-cycle (&rest _)
-    :after 'marginalia-cycle
-    (when (bound-and-true-p selectrum-mode) (selectrum-exhibit)))
   (defun +selectrum/backward-updir ()
     "Delete char before or go up directory for file cagetory selectrum buffers."
     (interactive)
@@ -31,11 +27,7 @@
 (use-package! selectrum-prescient
   :when (featurep! +prescient)
   :hook (selectrum-mode . selectrum-prescient-mode)
-  :hook (selectrum-mode . prescient-persist-mode)
-  :config
-  (setq selectrum-preprocess-candidates-function #'selectrum-prescient--preprocess)
-  (add-hook 'selectrum-candidate-selected-hook #'selectrum-prescient--remember)
-  (add-hook 'selectrum-candidate-inserted-hook #'selectrum-prescient--remember))
+  :hook (selectrum-mode . prescient-persist-mode))
 
 (use-package! orderless
   :when (not (featurep! +prescient))
