@@ -123,12 +123,24 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
 (defun +selectrum/next-candidate-preview ()
   "Move to next candidate and preivew it"
   (interactive)
-  (selectrum-next-candidate)
+  (if (featurep! :completion selectrum +vertico)
+      (vertico-next)
+    (selectrum-next-candidate))
   (+selectrum/embark-preview))
 
 ;;;###autoload
 (defun +selectrum/previous-candidate-preview ()
   "Move to previous candidate and preview it"
   (interactive)
-  (selectrum-previous-candidate)
+  (if (featurep! :completion selectrum +vertico)
+      (vertico-previous)
+    (selectrum-previous-candidate))
   (+selectrum/embark-preview))
+
+;;;###autoload
+(defun +selectrum/repeat ()
+  "Repeat the last selectrum/vertico command."
+  (interactive)
+  (if (featurep! :completion selectrum +vertico)
+      (user-error "The vertico flag doesn't support repeating commands (yet)")
+    (selectrum-repeat)))

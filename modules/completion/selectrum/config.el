@@ -1,6 +1,7 @@
 ;;; completion/selectrum/config.el -*- lexical-binding: t; -*-
 
 (use-package! selectrum
+  :when (not (featurep! +vertico))
   :hook (doom-first-input . selectrum-mode)
   :init
   (setq selectrum-extend-current-candidate-highlight t
@@ -10,6 +11,17 @@
     (setq completion-styles '(substring partial-completion)))
   :config
   (map! :map selectrum-minibuffer-map
+        [backspace] #'+selectrum/backward-updir))
+
+(use-package! vertico
+  :when (featurep! +vertico)
+  :hook (doom-first-input . vertico-mode)
+  :init
+  (setq vertico-resize nil
+        vertico-count 17
+        vertico-cycle t)
+  :config
+  (map! :map vertico-map
         [backspace] #'+selectrum/backward-updir))
 
 (use-package! selectrum-prescient
@@ -41,11 +53,14 @@
   (setq completion-styles '(orderless)
         completion-category-defaults nil
         ;; note that despite override in the name orderless can still be used in find-file etc.
-        completion-category-overrides '((file (styles . (partial-completion))))
+        completion-category-overrides '((file (styles . (orderless partial-completion))))
         orderless-style-dispatchers '(+selectrum-orderless-dispatch)
-        orderless-component-separator "[ &]"
-        selectrum-refine-candidates-function #'orderless-filter
-        selectrum-highlight-candidates-function #'orderless-highlight-matches))
+        orderless-component-separator "[ &]")
+  ;; otherwise find-file gets different highlighting than other commands
+  (set-face-bold 'completions-first-difference nil)
+  (unless (featurep! +vertico)
+    (setq selectrum-refine-candidates-function #'orderless-filter
+          selectrum-highlight-candidates-function #'orderless-highlight-matches)))
 
 (use-package! consult
   :defer t

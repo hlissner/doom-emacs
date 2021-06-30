@@ -1,7 +1,11 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/selectrum/packages.el
 
-(package! selectrum :pin "a19bbe94de492bf504399c093cfc5695eb630fa8")
+(if (featurep! +vertico)
+    (package! vertico
+      :recipe (:host github :repo "minad/vertico")
+      :pin "c9157759a015ac32cb299c18c84c6d5fb34e0aa1")
+  (package! selectrum :pin "a19bbe94de492bf504399c093cfc5695eb630fa8"))
 
 (if (featurep! +prescient)
     (package! selectrum-prescient :pin "4a0f5405798cfcb98ea005078ef2e2d490e922c4")

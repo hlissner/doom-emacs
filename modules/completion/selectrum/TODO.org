@@ -66,7 +66,32 @@ Do we want to have the annotations be more like ivy? e.g.
 =:completion selectrum= is a bit of a misnomer. Selectrum is probably the
 most easily replaceable part of the module as it can replaced with Vertico
 fairly easily, other than losing the ~selectrum-repeat~ command. However,
-naming is hard™. Best alternative I can think of is =:completion modular=.
+naming is hard™. Best alternative I can think of is this:
+#+begin_src emacs-lisp
+:completion
+;...
+;ivy           ;; a search engine for love and life
+compleseus     ;; a search engine with all the planks replaced
+#+end_src
+** TODO Consider dropping Selectrum in favor of Vertico:
+To this end there is currently a ~+vertico~ flag to try it out, weird naming
+aside. I want to do this for a few reasons:
+*** Selectrum is more buggy
+Selectrum has a few longstanding bugs that don't exist in Vertico, namely: [[https://github.com/raxod502/selectrum/issues/491][491]]
+and [[https://github.com/raxod502/selectrum/issues/561][561]], as well as having worse handling when having lines of varying height
+(important for good icon support).
+*** Feature Comparison
+- Minad, Vertico's author, provides a detailed comparison [[https://github.com/hlissner/doom-emacs/pull/4664#issuecomment-871524782][here]]. I will note
+  however that I was seriously considering the switch before he wrote this
+  comparison due to the frustration of dealing with the rough edges.
+- Vertico doesn't support prescient, but I want to drop it anyway.
+- The [[https://github.com/raxod502/selectrum#vertico][feature comparison]] in the selectrum readme has been updated to better
+  reflect the current state of affairs. Both Vertico and Selectrum have some
+  features that the other package lacks. In my mind Vertico's features are more
+  useful, but the feature difference is small enough for it to be less important
+  than the bugginess imo.
+*** Vertico is more actively maintained
+This might be a temporary concern, but still.
 
 * PROJ HACKs to be addressed
 ** TODO ~fboundp~ issues

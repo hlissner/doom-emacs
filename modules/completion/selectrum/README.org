@@ -29,6 +29,7 @@ TODO
   instead of orderless.
 
 ** Plugins
+[[https://github.com/minad/vertico][vertico]] (~+vertico~, experimental for the moment)
 [[https://github.com/raxod502/selectrum][selectrum]]
 [[https://github.com/minad/consult][consult]]
 [[https://github.com/oantolin/embark/][embark]]
