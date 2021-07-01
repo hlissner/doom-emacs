@@ -81,7 +81,12 @@
    +default/search-cwd +default/search-other-cwd
    +default/search-notes-for-symbol-at-point
    consult--source-file consult--source-project-file consult--source-bookmark
-   :preview-key (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k"))))
+   :preview-key (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k")))
+  (consult-customize
+   consult-theme
+   :preview-key
+   (list (kbd "C-SPC") (kbd "C-M-j") (kbd "C-M-k")
+         :debounce 0.5 'any)))
 
 (use-package! consult-flycheck
   :when (featurep! :checkers syntax)
