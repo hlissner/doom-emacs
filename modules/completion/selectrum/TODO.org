@@ -92,6 +92,12 @@ and [[https://github.com/raxod502/selectrum/issues/561][561]], as well as having
   than the bugginess imo.
 *** Vertico is more actively maintained
 This might be a temporary concern, but still.
+** TODO Icon support
+The icon support works well enough when using Vertico, but is a bit dodgy on
+Selectrum due to it not handling lines of varying height that well, which ends
+up causing the selection to slide off the screen when moving it the to the
+bottom in some cases. Hopefully we just use Vertico and this becomes a nonissue,
+but it should still be taken into account.
 
 * PROJ HACKs to be addressed
 ** TODO ~fboundp~ issues
@@ -113,9 +119,6 @@ The clicking links exported grep buffers used to open in a new window, but now
 *** TODO Open upstream Embark issue for ~bookmark~ and ~file~
 ~bookmark~ or ~file~ export buffers open the links in the same window rather than
 the other one. This can be reproduces on emacs -Q.
-** TODO Icons
-Partially solved, seems to have interaction with selectrum height issue, so not
-yet implemented.
 ** TODO ~company~ completions get ordered really weirdly
 This is due to orderless adding a bunch of other matches.
 

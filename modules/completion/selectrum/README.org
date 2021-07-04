@@ -27,6 +27,7 @@ TODO
 ** Module Flags
 + ~+prescient~ Enables prescient filtering and sorting for Selectrum searches
   instead of orderless.
++ ~+icons~ Adds icons to ~file~ and ~buffer~ category completion selections.
 
 ** Plugins
 [[https://github.com/minad/vertico][vertico]] (~+vertico~, experimental for the moment)
@@ -38,6 +39,7 @@ TODO
 [[https://github.com/oantolin/orderless][orderless]] (unless ~+prescient~)
 [[https://github.com/raxod502/prescient.el][prescient]] (~+prescient~)
 [[https://github.com/minad/consult/][consult-flycheck]] (~:checkers syntax~)
+[[https://github.com/iyefrat/all-the-icons-completion][all-the-icons-completion]] (~+icons~)
 
 * Prerequisites
 This module has no prerequisites.

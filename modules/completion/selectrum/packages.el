@@ -21,3 +21,8 @@
 (package! marginalia :pin "e31e03c5857bf7aada333f693caedfc3087d6297")
 
 (package! wgrep :pin "f9687c28bbc2e84f87a479b6ce04407bb97cfb23")
+
+(when (featurep! +icons)
+  (package! all-the-icons-completion
+    :recipe (:host github :repo "iyefrat/all-the-icons-completion")
+    :pin "975345f1b618fd316729c3cae6d11b96db530fd4"))
