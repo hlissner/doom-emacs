@@ -1,11 +1,11 @@
 ;;; completion/selectrum/autoload/selectrum.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defadvice! +selectrum-orderless-match-with-one-face (fn &rest args)
-  "Function to help company to highlight all candidates with just
-one face."
+(defadvice! +selectrum--company-capf--candidates-a (fn &rest args)
+  "Highlight company matches correctly, and try basic completion before orderless."
   :around 'company-capf--candidates
-  (let ((orderless-match-faces [completions-common-part]))
+  (let ((orderless-match-faces [completions-common-part])
+        (completion-styles '(basic orderless)))
     (apply fn args)))
 
 ;;;###autoload

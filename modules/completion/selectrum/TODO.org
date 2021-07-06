@@ -119,7 +119,6 @@ The clicking links exported grep buffers used to open in a new window, but now
 *** TODO Open upstream Embark issue for ~bookmark~ and ~file~
 ~bookmark~ or ~file~ export buffers open the links in the same window rather than
 the other one. This can be reproduces on emacs -Q.
-** TODO ~company~ completions get ordered really weirdly
 This is due to orderless adding a bunch of other matches.
 
 * PROJ Review non-blocking Issues
