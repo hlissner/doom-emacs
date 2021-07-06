@@ -9,6 +9,11 @@
         selectrum-max-window-height 17)
   (when (featurep! +prescient)
     (setq completion-styles '(substring partial-completion)))
+  (add-hook 'selectrum-mode-hook (lambda ()
+                                   (setq completion-in-region-function
+                                         (if selectrum-mode
+                                             #'consult-completion-in-region
+                                           #'completion--in-region))))
   :config
   (map! :map selectrum-minibuffer-map
         [backspace] #'+selectrum/backward-updir))
@@ -20,6 +25,11 @@
   (setq vertico-resize nil
         vertico-count 17
         vertico-cycle t)
+  (add-hook 'vertico-mode-hook (lambda ()
+                                 (setq completion-in-region-function
+                                       (if vertico-mode
+                                           #'consult-completion-in-region
+                                         #'completion--in-region))))
   :config
   (map! :map vertico-map
         [backspace] #'+selectrum/backward-updir))
@@ -81,11 +91,9 @@
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
     [remap yank-pop]                      #'consult-yank-pop
     [remap persp-switch-to-buffer]        #'+selectrum/switch-workspace-buffer)
-  (setq completion-in-region-function #'consult-completion-in-region)
   :config
   (recentf-mode)
   (setq consult-project-root-function #'doom-project-root
-        completion-in-region-function #'consult-completion-in-region
         consult-narrow-key "<"
         consult-line-numbers-widen t)
   (consult-customize
