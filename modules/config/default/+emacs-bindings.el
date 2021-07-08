@@ -480,6 +480,7 @@
         [tab]        #'company-complete-common-or-cycle
         [backtab]    #'company-select-previous
         "C-RET"      #'counsel-company
+        "C-<return>" #'counsel-company
         :map company-search-map
         "C-n"        #'company-search-repeat-forward
         "C-p"        #'company-search-repeat-backward
