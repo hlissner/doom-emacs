@@ -181,7 +181,8 @@
   (nconc marginalia-command-categories
          '((persp-switch-to-buffer . buffer)
            (projectile-find-file . project-file)
-           (doom/describe-active-minor-mode . minor-mode))))
+           (doom/describe-active-minor-mode . minor-mode)
+           (flycheck-error-list-set-filter . builtin))))
 
 (use-package! embark-consult
   :after (embark consult)
