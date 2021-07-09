@@ -142,5 +142,5 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
   "Repeat the last selectrum/vertico command."
   (interactive)
   (if (featurep! :completion selectrum +vertico)
-      (user-error "The vertico flag doesn't support repeating commands (yet)")
+      (vertico-repeat)
     (selectrum-repeat)))

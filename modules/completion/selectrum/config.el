@@ -34,6 +34,10 @@
   (map! :map vertico-map
         [backspace] #'+selectrum/backward-updir))
 
+(use-package! vertico-repeat
+  :when (featurep! +vertico)
+  :after vertico)
+
 (use-package! selectrum-prescient
   :when (featurep! +prescient)
   :hook (selectrum-mode . selectrum-prescient-mode)

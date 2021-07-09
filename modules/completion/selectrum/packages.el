@@ -3,7 +3,8 @@
 
 (if (featurep! +vertico)
     (package! vertico
-      :recipe (:host github :repo "minad/vertico")
+      :recipe (:host github :repo "minad/vertico"
+               :files ("*.el" "extensions/*.el"))
       :pin "9f6cd5d431ec6d288676af80e932d928346a1b36")
   (package! selectrum :pin "48ea51aa5b6959ea2a134e36cd21f727047b0677"))
 
