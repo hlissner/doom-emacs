@@ -106,6 +106,6 @@ OR a shell command string such as
 
 
 (use-package! consult-notmuch
-  :when (featurep! :completion selectrum)
+  :when (featurep! :completion vertico)
   :commands consult-notmuch
   :after notmuch)

@@ -28,7 +28,7 @@ case for why this should be an exception:
 - other than helping with discoverability for stuff this also allows for
   commands for things that are too niche for top level bindings, such as actions
   on ~package!~ statements and recipes or urls.
-- selectrum is slated to become the default completion module, which makes this
+- vertico is slated to become the default completion module, which makes this
   less of an inconsistency, but I'm not sure about the performance slowdown in
   ~map!~ since that seems to be one of the main concerns.
 - ~embark~ like most packages in the vertico cinematic universe can be
@@ -57,17 +57,6 @@ Do we want to have the annotations be more like ivy? e.g.
 - Mark the modified/remote status of the buffer with color, on top of the
   modification column?
 - Change colors in general?
-** TODO Consider renaming the module
-=:completion selectrum= is a bit of a misnomer. Selectrum is probably the
-most easily replaceable part of the module as it can replaced with Vertico
-fairly easily, other than losing the ~selectrum-repeat~ command. However,
-naming is hard™. Best alternative I can think of is this:
-#+begin_src emacs-lisp
-:completion
-;...
-;ivy           ;; a search engine for love and life
-compleseus     ;; a search engine with all the planks replaced
-#+end_src
 
 * PROJ HACKs to be addressed
 ** TODO ~fboundp~ issues

@@ -234,7 +234,7 @@ e.g. proselint and langtool."
                 (require 'flyspell-correct-helm nil t)))
           ((and (featurep! :completion ivy)
                 (require 'flyspell-correct-ivy nil t)))
-          ((featurep! :completion selectrum))
+          ((featurep! :completion vertico))
           ((require 'flyspell-correct-popup nil t)
            (setq flyspell-popup-correct-delay 0.8)
            (define-key popup-menu-keymap [escape] #'keyboard-quit))))

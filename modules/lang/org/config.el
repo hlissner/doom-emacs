@@ -719,7 +719,7 @@ between the two."
         (:when (featurep! :completion helm)
          "." #'helm-org-in-buffer-headings
          "/" #'helm-org-agenda-files-headings)
-        (:when (featurep! :completion selectrum)
+        (:when (featurep! :completion vertico)
          "." #'consult-org-heading
          "/" #'consult-org-agenda)
         "A" #'org-archive-subtree
@@ -805,7 +805,7 @@ between the two."
          (:when (featurep! :completion helm)
           "g" #'helm-org-in-buffer-headings
           "G" #'helm-org-agenda-files-headings)
-        (:when (featurep! :completion selectrum)
+        (:when (featurep! :completion vertico)
          "g" #'consult-org-heading
          "G" #'consult-org-agenda)
          "c" #'org-clock-goto

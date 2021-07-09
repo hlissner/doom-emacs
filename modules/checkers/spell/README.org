@@ -46,7 +46,7 @@ This module has no dedicated maintainers.
   + [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]]
   + [[https://github.com/d12frosted/flyspell-correct#flyspell-correct-ivy-interface][flyspell-correct-ivy]] (=completion/ivy=)
   + [[https://github.com/d12frosted/flyspell-correct#flyspell-correct-helm-interface][flyspell-correct-helm]] (=completion/helm=)
-  + [[https://github.com/d12frosted/flyspell-correct#flyspell-correct-popup-interface][flyspell-correct-popup]] (if *neither* =completion/ivy=, =completion/helm= or =completion/selectrum=)
+  + [[https://github.com/d12frosted/flyspell-correct#flyspell-correct-popup-interface][flyspell-correct-popup]] (if *neither* =completion/ivy=, =completion/helm= or =completion/vertico=)
   + [[https://github.com/rolandwalker/flyspell-lazy][flyspell-lazy]]
 + else
   + [[https://gitlab.com/ideasman42/emacs-spell-fu][spell-fu]]

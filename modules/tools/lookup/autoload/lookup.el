@@ -245,7 +245,7 @@ Will return nil if neither is available. These require ripgrep to be installed."
               ((featurep! :completion helm)
                (+helm-file-search :query query)
                t)
-              ((featurep! :completion selectrum)
+              ((featurep! :completion vertico)
                (+selectrum-file-search :query query)
                t))))))
 

@@ -1,5 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
-;;; completion/selectrum/packages.el
+;;; completion/vertico/packages.el
 
 (package! vertico
   :recipe (:host github :repo "minad/vertico"

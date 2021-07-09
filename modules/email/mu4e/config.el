@@ -42,11 +42,11 @@
         mu4e-context-policy 'pick-first
         ;; compose with the current context, or ask
         mu4e-compose-context-policy 'ask-if-none
-        ;; use helm/ivy/selectrum
+        ;; use helm/ivy/vertico
         mu4e-completing-read-function
         (cond ((featurep! :completion ivy)       #'ivy-completing-read)
               ((featurep! :completion helm)      #'completing-read)
-              ((featurep! :completion selectrum) #'completing-read)
+              ((featurep! :completion vertico)   #'completing-read)
               (t #'ido-completing-read))
         ;; no need to ask
         mu4e-confirm-quit nil

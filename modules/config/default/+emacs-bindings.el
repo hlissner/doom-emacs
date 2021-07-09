@@ -54,7 +54,7 @@
         (:when (featurep! :completion helm)
          :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
          :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol)
-        (:when (featurep! :completion selectrum)
+        (:when (featurep! :completion vertico)
          :desc "Jump to symbol in current workspace" "j"   #'consult-lsp-symbols
          :desc "Jump to symbol in any workspace"     "J"   (lambda () (interactive)
                                                              (universal-argument)
@@ -118,7 +118,7 @@
        :desc "Search buffer"                "b"
        (cond ((featurep! :completion helm)      #'swiper)
              ((featurep! :completion ivy)       #'swiper)
-             ((featurep! :completion selectrum) #'consult-line))
+             ((featurep! :completion vertico) #'consult-line))
        :desc "Search all open buffers"      "B"
        (cond ((featurep! :completion helm)      #'swiper-all)
              ((featurep! :completion ivy)       #'swiper-all))
@@ -139,7 +139,7 @@
        :desc "Search buffer for thing at point" "S"
        (cond ((featurep! :completion helm)      #'swiper-isearch-thing-at-point)
              ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
-             ((featurep! :completion selectrum) #'+selectrum/search-symbol-at-point))
+             ((featurep! :completion vertico) #'+selectrum/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 
@@ -160,7 +160,7 @@
         :desc "Bibliographic entries"        "b"
         (cond ((featurep! :completion ivy)       #'ivy-bibtex)
               ((featurep! :completion helm)      #'helm-bibtex)
-              ((featurep! :completion selectrum) #'bibtex-actions-open-entry)))
+              ((featurep! :completion vertico)   #'bibtex-actions-open-entry)))
 
        :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
        :desc "Cancel current org-clock"       "C" #'org-clock-cancel
@@ -435,7 +435,7 @@
         :desc "Send message"       "s" #'+irc/send-message
         (:when (featurep! :completion ivy)
          :desc "Jump to channel"  "j" #'+irc/ivy-jump-to-channel)
-        (:when (featurep! :completion selectrum)
+        (:when (featurep! :completion vertico)
          :desc "Jump to channel"  "j" #'+irc/selectrum-jump-to-channel)))
 
       ;;; <leader> T --- twitter
@@ -464,7 +464,7 @@
       (:when (featurep! :completion helm)
         "C-S-s"        #'swiper-helm
         "C-S-r"        #'helm-resume)
-      (:when (featurep! :completion selectrum)
+      (:when (featurep! :completion vertico)
         "C-S-r"        #'vertico-repeat)
 
       ;;; objed
@@ -497,9 +497,9 @@
         [C-tab]      #'company-complete-common-or-cycle
         [tab]        #'company-complete-common-or-cycle
         [backtab]    #'company-select-previous
-        "C-RET"      (cond ((featurep! :completion helm)       #'helm-company)
-                           ((featurep! :completion ivy)        #'counsel-company)
-                           ((featurep! :completion selectrum)  #'completion-at-point))
+        "C-RET"      (cond ((featurep! :completion helm)     #'helm-company)
+                           ((featurep! :completion ivy)      #'counsel-company)
+                           ((featurep! :completion vertico)  #'completion-at-point))
         :map company-search-map
         "C-n"        #'company-search-repeat-forward
         "C-p"        #'company-search-repeat-backward

@@ -63,7 +63,7 @@
     (ispell-accept-buffer-local-defs))
   (if (not (or (featurep! :completion ivy)
                (featurep! :completion helm)
-               (featurep! :completion selectrum)))
+               (featurep! :completion vertico)))
       (call-interactively #'ispell-word)
     (cl-destructuring-bind (start . end)
         (or (bounds-of-thing-at-point 'word)

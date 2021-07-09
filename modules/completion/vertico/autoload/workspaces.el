@@ -1,4 +1,4 @@
-;;; completion/selectrum/autoload/workspaces.el -*- lexical-binding: t; -*-
+;;; completion/vertico/autoload/workspaces.el -*- lexical-binding: t; -*-
 ;;;###if (featurep! :ui workspaces)
 
 ;;;###autoload

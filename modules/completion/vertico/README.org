@@ -1,4 +1,4 @@
-#+TITLE:   completion/selectrum
+#+TITLE:   completion/vertico
 #+DATE:    February 16, 2021
 #+SINCE:   v3.0.0
 #+STARTUP: inlineimages
@@ -52,7 +52,7 @@ Doom-specific additions:
 This module provides an interface to navigate within a project using
 =projectile=:
 
-https://assets.doomemacs.org/completion/selectrum/projectile.png
+https://assets.doomemacs.org/completion/vertico/projectile.png
 
 | Keybind              | Description                         |
 |----------------------+-------------------------------------|
@@ -70,7 +70,7 @@ This module provides interactive text search and replace using ripgrep.
 | =SPC s d= | Search this directory    |
 | =SPC s D= | Search another directory |
 
-https://assets.doomemacs.org/completion/selectrum/search.png
+https://assets.doomemacs.org/completion/vertico/search.png
 
 Prefixing these keys with the universal argument (=SPC u= for evil users; =C-u=
 otherwise) changes the behavior of these commands, instructing the underlying
@@ -104,7 +104,7 @@ Changes to the resulting wgrep buffer (opened by =C-c C-e=) can be committed
 with =C-c C-c= and aborted with =C-c C-k= (alternatively =ZZ= and =ZQ=, for evil
 users).
 
-https://assets.doomemacs.org/completion/selectrum/search-replace.png
+https://assets.doomemacs.org/completion/vertico/search-replace.png
 
 ** In-buffer searching
 This module provides some in buffer searching bindings:
@@ -113,7 +113,7 @@ This module provides some in buffer searching bindings:
 + =SPC s S= (~+selectrum/search-symbol-at-point~ via ~consult-line~)
 + =SPC s b= (~consult-line~)
 
-https://assets.doomemacs.org/completion/selectrum/buffer-search.png
+https://assets.doomemacs.org/completion/vertico/buffer-search.png
 
 An ~occur-edit~ buffer can be opened from ~consult-line~ with =C-c C-e=.
 

@@ -69,7 +69,7 @@
       ((featurep! :completion helm)
        (evil-ex-define-cmd "pg[rep]"   #'+helm:project-search)
        (evil-ex-define-cmd "pg[grep]d" #'+helm:project-search-from-cwd))
-      ((featurep! :completion selectrum)
+      ((featurep! :completion vertico)
        (evil-ex-define-cmd "pg[rep]"   #'+selectrum:project-search)
        (evil-ex-define-cmd "pg[grep]d" #'+selectrum:project-search-from-cwd)))
 

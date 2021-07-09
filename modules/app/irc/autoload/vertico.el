@@ -1,9 +1,9 @@
-;;; app/irc/autoload/selectrum.el -*- lexical-binding: t; -*-
-;;;###if (featurep! :completion selectrum)
+;;; app/irc/autoload/vertico.el -*- lexical-binding: t; -*-
+;;;###if (featurep! :completion vertico)
 
 ;;;###autoload
 (defun +irc/selectrum-jump-to-channel ()
-  "Jump to an open channel or server buffer with selectrum."
+  "Jump to an open channel or server buffer with vertico."
   (interactive)
   (require 'consult)
   (consult--multi (list (plist-put (copy-sequence +irc--consult-circe-source)

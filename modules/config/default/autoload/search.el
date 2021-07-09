@@ -12,7 +12,7 @@ If prefix ARG is set, prompt for a directory to search from."
     (call-interactively
      (cond ((featurep! :completion ivy)  #'+ivy/project-search-from-cwd)
            ((featurep! :completion helm) #'+helm/project-search-from-cwd)
-           ((featurep! :completion selectrum) #'+selectrum/project-search-from-cwd)
+           ((featurep! :completion vertico) #'+selectrum/project-search-from-cwd)
            (#'rgrep)))))
 
 ;;;###autoload
@@ -31,7 +31,7 @@ If a selection is active, pre-fill the prompt with it."
           (if (region-active-p)
               #'swiper-isearch-thing-at-point
             #'swiper-isearch))
-         ((featurep! :completion selectrum) #'isearch-forward))))
+         ((featurep! :completion vertico) #'isearch-forward))))
 
 ;;;###autoload
 (defun +default/search-project (&optional arg)
@@ -50,7 +50,7 @@ If prefix ARG is set, include ignored/hidden files."
     (call-interactively
      (cond ((featurep! :completion ivy)  #'+ivy/project-search)
            ((featurep! :completion helm) #'+helm/project-search)
-           ((featurep! :completion selectrum) #'+selectrum/project-search)
+           ((featurep! :completion vertico) #'+selectrum/project-search)
            (#'projectile-ripgrep)))))
 
 ;;;###autoload
@@ -77,7 +77,7 @@ If prefix ARG is set, prompt for a known project to search from."
            (+ivy/project-search nil symbol))
           ((featurep! :completion helm)
            (+helm/project-search nil symbol))
-          ((featurep! :completion selectrum)
+          ((featurep! :completion vertico)
            (+selectrum/project-search nil symbol))
           ((rgrep (regexp-quote symbol))))))
 

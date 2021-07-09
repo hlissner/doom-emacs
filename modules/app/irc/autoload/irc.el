@@ -69,8 +69,8 @@ argument) is non-nil only show channels in current server."
   (interactive "P")
   (call-interactively
    (cond ((featurep! :completion ivy)       #'+irc/ivy-jump-to-channel)
-         ((featurep! :completion selectrum) #'+irc/selectrum-jump-to-channel)
-         ((user-error "No jump-to-channel backend is enabled. Enable selectrum or ivy!")))))
+         ((featurep! :completion vertico) #'+irc/selectrum-jump-to-channel)
+         ((user-error "No jump-to-channel backend is enabled. Enable vertico or ivy!")))))
 
 ;;;###autoload
 (defun +irc--circe-all-buffers ()

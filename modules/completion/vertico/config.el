@@ -1,4 +1,4 @@
-;;; completion/selectrum/config.el -*- lexical-binding: t; -*-
+;;; completion/vertico/config.el -*- lexical-binding: t; -*-
 
 (use-package! vertico
   :hook (doom-first-input . vertico-mode)

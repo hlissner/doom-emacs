@@ -186,7 +186,7 @@ Dictionary.app behind the scenes to get definitions.")
     :when (featurep! :completion helm))
 
   (use-package! consult-xref
-    :when (featurep! :completion selectrum)
+    :when (featurep! :completion vertico)
     :init
     (setq xref-show-xrefs-function       #'consult-xref
           xref-show-definitions-function #'consult-xref)))
