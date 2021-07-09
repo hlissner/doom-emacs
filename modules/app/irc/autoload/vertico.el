@@ -2,7 +2,7 @@
 ;;;###if (featurep! :completion vertico)
 
 ;;;###autoload
-(defun +irc/selectrum-jump-to-channel ()
+(defun +irc/vertico-jump-to-channel ()
   "Jump to an open channel or server buffer with vertico."
   (interactive)
   (require 'consult)

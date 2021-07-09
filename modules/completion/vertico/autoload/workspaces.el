@@ -2,7 +2,7 @@
 ;;;###if (featurep! :ui workspaces)
 
 ;;;###autoload
-(defun +selectrum--workspace-nth-source (n)
+(defun +vertico--workspace-nth-source (n)
   "Generate a consult buffer source for buffers in the NTH workspace"
   (cond ((numberp n)
          `(:name     ,(nth n (+workspace-list-names))
@@ -22,19 +22,19 @@
          (user-error "invalid workspace source %s" n))))
 
 ;;;###autoload
-(defun +selectrum--workspace-generate-sources ()
+(defun +vertico--workspace-generate-sources ()
   "Generate list of consult buffer sources for all workspaces"
-  (mapcar #'+selectrum--workspace-nth-source '(0 1 2 3 4 5 6 7 8 final)))
+  (mapcar #'+vertico--workspace-nth-source '(0 1 2 3 4 5 6 7 8 final)))
 
 (autoload 'consult--multi "consult")
 ;;;###autoload
-(defun +selectrum/switch-workspace-buffer ()
+(defun +vertico/switch-workspace-buffer ()
   "Switch to another buffer in the same workspace.
 
 Use consult narrowing with another workspace number to open a buffer from that workspace
  BUG but it opens it in the current workspace (ivy also does this, but who cares)"
   (interactive)
-  (when-let (buffer (consult--multi (+selectrum--workspace-generate-sources)
+  (when-let (buffer (consult--multi (+vertico--workspace-generate-sources)
                                     :require-match
                                     (confirm-nonexistent-file-or-buffer)
                                     :prompt (format "Switch to buffer (%s): "
@@ -47,7 +47,7 @@ Use consult narrowing with another workspace number to open a buffer from that w
       (funcall consult--buffer-display (car buffer)))))
 
 ;;;###autoload
-(defun +selectrum-embark-open-in-new-workspace (x)
+(defun +vertico-embark-open-in-new-workspace (x)
   "Open X (a file) in a new workspace."
   (+workspace/new)
   (find-file x))

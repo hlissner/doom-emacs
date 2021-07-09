@@ -12,7 +12,7 @@ If prefix ARG is set, prompt for a directory to search from."
     (call-interactively
      (cond ((featurep! :completion ivy)  #'+ivy/project-search-from-cwd)
            ((featurep! :completion helm) #'+helm/project-search-from-cwd)
-           ((featurep! :completion vertico) #'+selectrum/project-search-from-cwd)
+           ((featurep! :completion vertico) #'+vertico/project-search-from-cwd)
            (#'rgrep)))))
 
 ;;;###autoload
@@ -50,7 +50,7 @@ If prefix ARG is set, include ignored/hidden files."
     (call-interactively
      (cond ((featurep! :completion ivy)  #'+ivy/project-search)
            ((featurep! :completion helm) #'+helm/project-search)
-           ((featurep! :completion vertico) #'+selectrum/project-search)
+           ((featurep! :completion vertico) #'+vertico/project-search)
            (#'projectile-ripgrep)))))
 
 ;;;###autoload
@@ -78,7 +78,7 @@ If prefix ARG is set, prompt for a known project to search from."
           ((featurep! :completion helm)
            (+helm/project-search nil symbol))
           ((featurep! :completion vertico)
-           (+selectrum/project-search nil symbol))
+           (+vertico/project-search nil symbol))
           ((rgrep (regexp-quote symbol))))))
 
 ;;;###autoload

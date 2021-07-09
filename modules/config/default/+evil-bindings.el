@@ -207,12 +207,12 @@
         (:after vertico
          :map vertico-map
          "M-RET" #'vertico-exit-input
-         "C-SPC" #'+selectrum/embark-preview
+         "C-SPC" #'+vertico/embark-preview
          "C-j"   #'vertico-next
-         "C-M-j" #'+selectrum/next-candidate-preview
+         "C-M-j" #'+vertico/next-candidate-preview
          "C-S-j" #'vertico-next-group
          "C-k"   #'vertico-previous
-         "C-M-k" #'+selectrum/previous-candidate-preview
+         "C-M-k" #'+vertico/previous-candidate-preview
          "C-S-k" #'vertico-previous-group)))
 
 
@@ -705,7 +705,7 @@
        :desc "Search buffer for thing at point" "S"
        (cond ((featurep! :completion helm)      #'swiper-isearch-thing-at-point)
              ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
-             ((featurep! :completion vertico)   #'+selectrum/search-symbol-at-point))
+             ((featurep! :completion vertico)   #'+vertico/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 

@@ -110,7 +110,7 @@ https://assets.doomemacs.org/completion/vertico/search-replace.png
 This module provides some in buffer searching bindings:
 
 + =SPC s s= (~isearch~)
-+ =SPC s S= (~+selectrum/search-symbol-at-point~ via ~consult-line~)
++ =SPC s S= (~+vertico/search-symbol-at-point~ via ~consult-line~)
 + =SPC s b= (~consult-line~)
 
 https://assets.doomemacs.org/completion/vertico/buffer-search.png

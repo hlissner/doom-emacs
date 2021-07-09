@@ -139,7 +139,7 @@
        :desc "Search buffer for thing at point" "S"
        (cond ((featurep! :completion helm)      #'swiper-isearch-thing-at-point)
              ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
-             ((featurep! :completion vertico) #'+selectrum/search-symbol-at-point))
+             ((featurep! :completion vertico) #'+vertico/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 
@@ -436,7 +436,7 @@
         (:when (featurep! :completion ivy)
          :desc "Jump to channel"  "j" #'+irc/ivy-jump-to-channel)
         (:when (featurep! :completion vertico)
-         :desc "Jump to channel"  "j" #'+irc/selectrum-jump-to-channel)))
+         :desc "Jump to channel"  "j" #'+irc/vertico-jump-to-channel)))
 
       ;;; <leader> T --- twitter
       (:when (featurep! :app twitter)

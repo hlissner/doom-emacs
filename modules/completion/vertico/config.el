@@ -13,7 +13,7 @@
                                          #'completion--in-region))))
   :config
   (map! :map vertico-map
-        [backspace] #'+selectrum/backward-updir))
+        [backspace] #'+vertico/backward-updir))
 
 (use-package! vertico-repeat
   :after vertico)
@@ -21,7 +21,7 @@
 (use-package! orderless
   :demand t
   :config
-  (defun +selectrum-orderless-dispatch (pattern _index _total)
+  (defun +vertico-orderless-dispatch (pattern _index _total)
     (cond
      ;; Ensure that $ works with Consult commands, which add disambiguation suffixes
      ((string-suffix-p "$" pattern) `(orderless-regexp . ,(concat (substring pattern 0 -1) "[\x100000-\x10FFFD]*$")))
@@ -42,7 +42,7 @@
         completion-category-defaults nil
         ;; note that despite override in the name orderless can still be used in find-file etc.
         completion-category-overrides '((file (styles . (orderless partial-completion))))
-        orderless-style-dispatchers '(+selectrum-orderless-dispatch)
+        orderless-style-dispatchers '(+vertico-orderless-dispatch)
         orderless-component-separator "[ &]")
   ;; otherwise find-file gets different highlighting than other commands
   (set-face-bold 'completions-first-difference nil))
@@ -65,7 +65,7 @@
     [remap switch-to-buffer-other-window] #'consult-buffer-other-window
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
     [remap yank-pop]                      #'consult-yank-pop
-    [remap persp-switch-to-buffer]        #'+selectrum/switch-workspace-buffer)
+    [remap persp-switch-to-buffer]        #'+vertico/switch-workspace-buffer)
   (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
   :config
   (recentf-mode)
@@ -76,7 +76,7 @@
    consult-ripgrep consult-git-grep consult-grep
    consult-bookmark consult-recent-file
    +default/search-project +default/search-project-for-symbol-at-point
-   +default/search-other-project +selectrum/search-symbol-at-point
+   +default/search-other-project +vertico/search-symbol-at-point
    +default/search-cwd +default/search-other-cwd
    +default/search-notes-for-symbol-at-point
    consult--source-file consult--source-project-file consult--source-bookmark
@@ -105,10 +105,10 @@
         "C-;"               #'embark-act
         "C-c C-;"           #'embark-export
         :desc "Export to writable buffer"
-        "C-c C-e"           #'+selectrum/embark-export-write)
+        "C-c C-e"           #'+vertico/embark-export-write)
   (define-key!
     [remap describe-bindings]             #'embark-bindings)
-  (defun +selectrum--embark-target-package! ()
+  (defun +vertico--embark-target-package! ()
     "Targets Doom's package! statements and returns the package name"
     (when (or (derived-mode-p 'emacs-lisp-mode) (derived-mode-p 'org-mode))
       (save-excursion
@@ -126,12 +126,12 @@
                  (length embark-target-finders))))
     (cl-callf2
         cons
-        '+selectrum--embark-target-package!
+        '+vertico--embark-target-package!
         (nthcdr pos embark-target-finders)))
   (map!
    :map embark-file-map
    :desc "Open target with sudo" "s" #'doom/sudo-find-file
-   :desc "Open in new workspace" "TAB" #'+selectrum-embark-open-in-new-workspace)
+   :desc "Open in new workspace" "TAB" #'+vertico-embark-open-in-new-workspace)
   (setq embark-package-map (make-sparse-keymap))
   (map! :map embark-package-map
         "h" #'doom/help-packages

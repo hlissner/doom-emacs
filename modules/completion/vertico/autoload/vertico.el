@@ -1,7 +1,7 @@
 ;;; completion/vertico/autoload/vertico.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defadvice! +selectrum--company-capf--candidates-a (fn &rest args)
+(defadvice! +vertico--company-capf--candidates-a (fn &rest args)
   "Highlight company matches correctly, and try basic completion before orderless."
   :around 'company-capf--candidates
   (let ((orderless-match-faces [completions-common-part])
@@ -9,7 +9,7 @@
     (apply fn args)))
 
 ;;;###autoload
-(cl-defun +selectrum-file-search (&key query in all-files (recursive t) prompt args)
+(cl-defun +vertico-file-search (&key query in all-files (recursive t) prompt args)
   "Conduct a file search using ripgrep.
 
 :query STRING
@@ -55,27 +55,27 @@
     (consult--grep prompt ripgrep-command directory query)))
 
 ;;;###autoload
-(defun +selectrum/project-search (&optional arg initial-query directory)
+(defun +vertico/project-search (&optional arg initial-query directory)
   "Peforms a live project search from the project root using ripgrep.
 If ARG (universal argument), include all files, even hidden or compressed ones,
 in the search."
   (interactive "P")
-  (+selectrum-file-search :query initial-query :in directory :all-files arg))
+  (+vertico-file-search :query initial-query :in directory :all-files arg))
 
 ;;;###autoload
-(defun +selectrum/project-search-from-cwd (&optional arg initial-query)
+(defun +vertico/project-search-from-cwd (&optional arg initial-query)
   "Performs a live project search from the current directory.
 If ARG (universal argument), include all files, even hidden or compressed ones."
   (interactive "P")
-  (+selectrum/project-search arg initial-query default-directory))
+  (+vertico/project-search arg initial-query default-directory))
 
 ;;;###autoload
-(defun +selectrum/search-symbol-at-point ()
+(defun +vertico/search-symbol-at-point ()
   (interactive)
   (consult-line (thing-at-point 'symbol)))
 
 ;;;###autoload
-(defun +selectrum/backward-updir ()
+(defun +vertico/backward-updir ()
   "Delete char before or go up directory for file cagetory vertico buffers."
   (interactive)
   (let ((metadata (completion-metadata (minibuffer-contents)
@@ -93,7 +93,7 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
 
 
 ;;;###autoload
-(defun +selectrum/embark-export-write ()
+(defun +vertico/embark-export-write ()
   "Export the current vertico results to a writable buffer if possible.
 
 Supports exporting consult-grep to wgrep, file to wdeired, and consult-location to occur-edit"
@@ -111,7 +111,7 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
       (x (user-error "embark category %S doesn't support writable export" x)))))
 
 ;;;###autoload
-(defun +selectrum/embark-preview ()
+(defun +vertico/embark-preview ()
   "Previews candidate in vertico buffer, unless it's a consult command"
   (interactive)
   (unless (bound-and-true-p consult--preview-function)
@@ -120,15 +120,15 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
         (embark-default-action)))))
 
 ;;;###autoload
-(defun +selectrum/next-candidate-preview ()
+(defun +vertico/next-candidate-preview ()
   "Move to next candidate and preivew it"
   (interactive)
   (vertico-next)
-  (+selectrum/embark-preview))
+  (+vertico/embark-preview))
 
 ;;;###autoload
-(defun +selectrum/previous-candidate-preview ()
+(defun +vertico/previous-candidate-preview ()
   "Move to previous candidate and preview it"
   (interactive)
   (vertico-previous)
-  (+selectrum/embark-preview))
+  (+vertico/embark-preview))
