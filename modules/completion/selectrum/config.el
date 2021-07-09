@@ -91,6 +91,7 @@
     [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
     [remap yank-pop]                      #'consult-yank-pop
     [remap persp-switch-to-buffer]        #'+selectrum/switch-workspace-buffer)
+  (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
   :config
   (recentf-mode)
   (setq consult-project-root-function #'doom-project-root
