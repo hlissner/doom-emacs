@@ -46,7 +46,7 @@ completion.
 + helm =+fuzzy +childframe= - *Another* search engine for love and life
 + ido - The /other/ *other* search engine for love and life
 + [[file:../modules/completion/ivy/README.org][ivy]] =+fuzzy +prescient +childframe +icons= - /The/ search engine for love and life
-+ [[file:../modules/completion/selectrum/README.org][selectrum]] =+prescient +icons= - The search engine of the future
++ [[file:../modules/completion/selectrum/README.org][selectrum]] =+icons= - The search engine of the future
 
 * :config
 Modules that configure Emacs one way or another, or focus on making it easier

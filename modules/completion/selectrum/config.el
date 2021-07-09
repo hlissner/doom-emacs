@@ -1,25 +1,6 @@
 ;;; completion/selectrum/config.el -*- lexical-binding: t; -*-
 
-(use-package! selectrum
-  :when (not (featurep! +vertico))
-  :hook (doom-first-input . selectrum-mode)
-  :init
-  (setq selectrum-extend-current-candidate-highlight t
-        selectrum-fix-vertical-window-height t
-        selectrum-max-window-height 17)
-  (when (featurep! +prescient)
-    (setq completion-styles '(substring partial-completion)))
-  (add-hook 'selectrum-mode-hook (lambda ()
-                                   (setq completion-in-region-function
-                                         (if selectrum-mode
-                                             #'consult-completion-in-region
-                                           #'completion--in-region))))
-  :config
-  (map! :map selectrum-minibuffer-map
-        [backspace] #'+selectrum/backward-updir))
-
 (use-package! vertico
-  :when (featurep! +vertico)
   :hook (doom-first-input . vertico-mode)
   :init
   (setq vertico-resize nil
@@ -35,16 +16,9 @@
         [backspace] #'+selectrum/backward-updir))
 
 (use-package! vertico-repeat
-  :when (featurep! +vertico)
   :after vertico)
 
-(use-package! selectrum-prescient
-  :when (featurep! +prescient)
-  :hook (selectrum-mode . selectrum-prescient-mode)
-  :hook (selectrum-mode . prescient-persist-mode))
-
 (use-package! orderless
-  :when (not (featurep! +prescient))
   :demand t
   :config
   (defun +selectrum-orderless-dispatch (pattern _index _total)
@@ -71,10 +45,7 @@
         orderless-style-dispatchers '(+selectrum-orderless-dispatch)
         orderless-component-separator "[ &]")
   ;; otherwise find-file gets different highlighting than other commands
-  (set-face-bold 'completions-first-difference nil)
-  (unless (featurep! +vertico)
-    (setq selectrum-refine-candidates-function #'orderless-filter
-          selectrum-highlight-candidates-function #'orderless-highlight-matches)))
+  (set-face-bold 'completions-first-difference nil))
 
 (use-package! consult
   :defer t

@@ -12,12 +12,12 @@
   - [[#jump-to-navigation][Jump-to navigation]]
   - [[#project-search--replace][Project search & replace]]
   - [[#in-buffer-searching][In-buffer searching]]
-  - [[#selectrum-integration-for-various-completing-commands][Selectrum integration for various completing commands]]
+  - [[#vertico-integration-for-various-completing-commands][Vertico integration for various completing commands]]
   - [[#orderless-filtering][Orderless filtering]]
 - [[#troubleshooting][Troubleshooting]]
 
 * Description
-This module provides Selectrum integration for a variety of Emacs commands, as
+This module provides Vertico integration for a variety of Emacs commands, as
 well as a unified interface for project search and replace, powered by ripgrep.
 
 #+begin_quote
@@ -25,19 +25,15 @@ TODO
 #+end_quote
 
 ** Module Flags
-+ ~+prescient~ Enables prescient filtering and sorting for Selectrum searches
-  instead of orderless.
 + ~+icons~ Adds icons to ~file~ and ~buffer~ category completion selections.
 
 ** Plugins
-[[https://github.com/minad/vertico][vertico]] (~+vertico~, experimental for the moment)
-[[https://github.com/raxod502/selectrum][selectrum]]
+[[https://github.com/minad/vertico][vertico]]
 [[https://github.com/minad/consult][consult]]
 [[https://github.com/oantolin/embark/][embark]]
 [[https://github.com/oantolin/embark/][embark-consult]]
 [[https://github.com/minad/marginalia][marginalia]]
-[[https://github.com/oantolin/orderless][orderless]] (unless ~+prescient~)
-[[https://github.com/raxod502/prescient.el][prescient]] (~+prescient~)
+[[https://github.com/oantolin/orderless][orderless]]
 [[https://github.com/minad/consult/][consult-flycheck]] (~:checkers syntax~)
 [[https://github.com/iyefrat/all-the-icons-completion][all-the-icons-completion]] (~+icons~)
 
@@ -121,12 +117,12 @@ https://assets.doomemacs.org/completion/selectrum/buffer-search.png
 
 An ~occur-edit~ buffer can be opened from ~consult-line~ with =C-c C-e=.
 
-** Selectrum integration for various completing commands
+** Vertico integration for various completing commands
 *** General
-| Keybind        | Description                   |
-|----------------+-------------------------------|
-| =M-x=, =SPC := | Enhanced M-x                  |
-| =SPC '=        | Resume last Selectrum session |
+| Keybind        | Description                 |
+|----------------+-----------------------------|
+| =M-x=, =SPC := | Enhanced M-x                |
+| =SPC '=        | Resume last Vertico session |
 
 *** Jump to files, buffers or projects
 | Keybind              | Description                           |

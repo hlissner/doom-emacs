@@ -123,24 +123,12 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
 (defun +selectrum/next-candidate-preview ()
   "Move to next candidate and preivew it"
   (interactive)
-  (if (featurep! :completion selectrum +vertico)
-      (vertico-next)
-    (selectrum-next-candidate))
+  (vertico-next)
   (+selectrum/embark-preview))
 
 ;;;###autoload
 (defun +selectrum/previous-candidate-preview ()
   "Move to previous candidate and preview it"
   (interactive)
-  (if (featurep! :completion selectrum +vertico)
-      (vertico-previous)
-    (selectrum-previous-candidate))
+  (vertico-previous)
   (+selectrum/embark-preview))
-
-;;;###autoload
-(defun +selectrum/repeat ()
-  "Repeat the last selectrum/vertico command."
-  (interactive)
-  (if (featurep! :completion selectrum +vertico)
-      (vertico-repeat)
-    (selectrum-repeat)))

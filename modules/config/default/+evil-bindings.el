@@ -204,7 +204,6 @@
         [C-return] #'helm-grep-run-other-window-action))
 
       (:when (featurep! :completion selectrum)
-       (:when (featurep! :completion selectrum +vertico)
         (:after vertico
          :map vertico-map
          "M-RET" #'vertico-exit-input
@@ -214,18 +213,7 @@
          "C-S-j" #'vertico-next-group
          "C-k"   #'vertico-previous
          "C-M-k" #'+selectrum/previous-candidate-preview
-         "C-S-k" #'vertico-previous-group))
-       (:when (not (featurep! :completion selectrum +vertico))
-        (:after selectrum
-         :map selectrum-minibuffer-map
-         "M-RET" #'selectrum-submit-exact-input
-         "C-SPC" #'+selectrum/embark-preview
-         "C-j"   #'selectrum-next-candidate
-         "C-M-j" #'+selectrum/next-candidate-preview
-         "C-S-j" #'selectrum-next-page
-         "C-k"   #'selectrum-previous-candidate
-         "C-M-k" #'+selectrum/previous-candidate-preview
-         "C-S-k" #'selectrum-previous-page))))
+         "C-S-k" #'vertico-previous-group)))
 
 
 ;;; :ui
@@ -318,7 +306,7 @@
       :desc "Resume last search"    "'"
       (cond ((featurep! :completion ivy)        #'ivy-resume)
             ((featurep! :completion helm)       #'helm-resume)
-            ((featurep! :completion selectrum)  #'+selectrum/repeat))
+            ((featurep! :completion selectrum)  #'vertico-repeat))
 
       :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
       :desc "Search project"               "/" #'+default/search-project

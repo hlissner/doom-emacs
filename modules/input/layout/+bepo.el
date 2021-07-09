@@ -135,9 +135,6 @@ In all cases, 'h' functions go to 'c' and 'l' ones go to 'r' so the navigation k
   (after! helm-files
     (+layout-bepo-rotate-bare-keymap '(helm-read-file-map) +layout-bepo-cr-rotation-style)
     (+layout-bepo-rotate-keymaps '(helm-read-file-map)))
-  (after! selectrum
-    (+layout-bepo-rotate-bare-keymap '(selectrum-minibuffer-map) +layout-bepo-cr-rotation-style)
-    (+layout-bepo-rotate-keymaps '(selectrum-minibuffer-map)))
   (after! company
     (+layout-bepo-rotate-bare-keymap '(company-active-map company-search-map) +layout-bepo-cr-rotation-style))
   (after! evil-snipe
