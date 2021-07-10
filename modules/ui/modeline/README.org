@@ -12,6 +12,7 @@
   - [[#hiding-the-modeline][Hiding the modeline]]
   - [[#switching-the-modeline-and-header-line][Switching the modeline and header line]]
 - [[#configuration][Configuration]]
+  - [[#enable-keycast-mode-on-startup][Enable ~keycast-mode~ on startup]]
   - [[#changing-the-default-modeline][Changing the default modeline]]
   - [[#activating-a-format][Activating a format]]
   - [[#defining-a-modeline-format][Defining a modeline format]]
@@ -33,11 +34,14 @@ powered by [[https://github.com/seagle0128/doom-modeline][the doom-modeline pack
 ** Module Flags
 + =+light= Enables a lighter, less featureful version of the modeline that does
   not depend on ~doom-modeline~, which has performances issues in some cases.
++ =+keycast= Enables ~keycast-mode~ that shows current command and its key. Works
+  best when used with =+light= flag.
 
 ** Plugins
 + [[https://github.com/seagle0128/doom-modeline][doom-modeline]]
 + [[https://github.com/syohex/emacs-anzu][anzu]]
 + [[https://github.com/syohex/emacs-evil-anzu][evil-anzu]]
++ [[https://github.com/tarsius/keycast][keycast]]
 
 * Prerequisites
 This module has no prerequisites.
@@ -48,6 +52,15 @@ This module has no prerequisites.
 ** TODO Switching the modeline and header line
 
 * Configuration
+** Enable ~keycast-mode~ on startup
+By default, ~keycast-mode~ is toggled off on startup. You can toggle it on/off /per
+session/ by pressing =SPC t k=. However, use the following to enable it on startup:
+
+#+BEGIN_SRC emacs-lisp
+;; in $DOOMDIR/config.el
+(keycast-mode +1)
+#+END_SRC
+
 ** TODO Changing the default modeline
 
 ** TODO Activating a format

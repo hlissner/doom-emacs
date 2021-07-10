@@ -289,6 +289,8 @@
         :desc "Flycheck"                   "f" #'flycheck-mode)
        (:when (featurep! :ui indent-guides)
         :desc "Indent guides"              "i" #'highlight-indent-guides-mode)
+       (:when (featurep! :ui modeline +keycast)
+        :desc "Keycast mode"               "k" #'keycast-mode)
        (:when (featurep! :ui minimap)
         :desc "Minimap mode"               "m" #'minimap-mode)
        (:when (featurep! :lang org +present)

@@ -3,6 +3,8 @@
 (when (featurep! +light)
   (load! "+light"))
 
+(when (featurep! +keycast)
+  (load! "+keycast"))
 
 (use-package! doom-modeline
   :unless (featurep! +light)
