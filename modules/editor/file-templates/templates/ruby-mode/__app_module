@@ -1,5 +1,5 @@
 `(progn
-   (setq-local pkgs (cdr (split-string (string-remove-prefix (concat (doom-project-root) "lib/") (file-name-sans-extension buffer-file-name)) "/" t)))
+   (setq-local pkgs (cdr (split-string (string-remove-prefix (concat (doom-project-root) "app/") (file-name-sans-extension buffer-file-name)) "/" t)))
    (setq-local pkgs-p (eq (length pkgs) 1))
    (setq-local pkgs-count 0)
    "# frozen_string: literal")`

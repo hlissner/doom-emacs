@@ -189,6 +189,11 @@
   (when (featurep! :lang web)
     (add-hook 'web-mode-hook #'projectile-rails-mode))
   :config
+  (when (featurep! :editor file-templates)
+    (defadvice! +projectile-rails-ignore-snippet-for-module-a (_last-part _name)
+      "Use ruby-mode's __app_module file template by returning no snippet."
+      :override 'projectile-rails--snippet-for-module
+      nil))
   (set-popup-rule! "^\\*\\(projectile-\\)?rails" :ttl nil)
   (when (featurep! :editor evil)
     (add-hook 'projectile-rails-mode-hook #'evil-normalize-keymaps))
