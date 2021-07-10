@@ -37,4 +37,8 @@
   ;; Remove text/html since it's not human readable
   (delq! :text/html jupyter-org-mime-types)
 
-  (require 'tramp))
+  (require 'tramp)
+
+  (when (featurep! :completion company +childframe)
+    (after! company-box
+      (push #'+org--company-box-icons-jupyter-fn company-box-icons-functions))))
