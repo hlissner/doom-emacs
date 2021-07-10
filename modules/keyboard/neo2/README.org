@@ -1,0 +1,48 @@
+#+TITLE:   keyboard/neo2
+#+DATE:    April 16, 2020
+
+* Description
+This module configures some keybindings to add support for the [[https://en.wikipedia.org/wiki/Neo_(keyboard_layout)][Neo2]] keyboard
+layout.
+
+Neo is a German keyboard layout that has been optimized for German, English,
+programming and vim. Moreover, it lets you insert a wide variety of unicode
+characters and offers the possibility to comfortably type control-characters.
+As a consequence there are certain keys under which
+are =j,k,h,l=, that can be remapped for better purpose and other keys, that
+aren't as comfortable to type as on the standard qwerty keyboard, e.g. =`=.
+
+** Module Flags
+This module provides no flags.
+
+* Prerequisites
+This module has no direct prerequisites.
+
+* Features
+** Supported modules
+Modules that have found support so far are:
+- avy
+- calendar
+- comint
+- evil
+- Info
+- latex
+- magit
+- mu4e
+- neotree
+- org
+- pass
+- pdf
+- treemacs
+** Latex support
+=LaTeX-mode-map= has been configured to insert a corresponding symbol for
+nearly every unicode character you type. A few exceptions are:
+- =‣= there is ~\item~ to serve this purpose
+- =ſ= no latex symbol available
+
+If the =snippets= module is activated:
+- =Σ, Π, ∫= insert a corresponding snippet
+
+Notice, that it's up to you to include the appropriate latex-package for each symbol.
+
+* Troubleshooting
