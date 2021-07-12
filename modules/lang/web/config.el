@@ -21,6 +21,27 @@
 ;;
 ;;; Framework-based minor-modes
 
+(when (featurep! :lang go)
+  (def-project-mode! +web-go-template-mode
+    :modes '(web-mode)
+    :files ("go.mod")
+    :on-enter
+    (when (eq major-mode 'web-mode)
+      (web-mode-set-engine "go"))))
+
+(def-project-mode! +web-hugo-mode
+  :modes '(web-mode)
+  :files (or (and (or "content/" "layouts/")
+                  (or "config.toml" "config.yaml" "config.json"))
+             (and "layouts/" "theme.toml"))
+  :on-enter
+  (when (eq major-mode 'web-mode)
+    (web-mode-set-engine "hugo")))
+
+(set-formatter! '+web-go-template #'+web--go-template-format-buffer
+  :modes '((web-mode (or (bound-and-true-p +web-go-template-mode)
+                         (bound-and-true-p +web-hugo-mode)))))
+
 (def-project-mode! +web-jekyll-mode
   :modes '(web-mode js-mode coffee-mode css-mode haml-mode pug-mode)
   :files (and (or "_config.yml" "_config.toml")

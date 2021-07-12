@@ -133,3 +133,11 @@ snippet, or `emmet-expand-yas'/`emmet-expand-line', depending on whether
               #'yas-expand
             #'emmet-expand-yas))
          (#'emmet-expand-line))))
+
+;;;###autoload
+(defun +web--go-template-format-buffer ()
+  (interactive)
+  (web-mode)
+  (web-mode-set-engine "go")
+  (indent-region (point-min) (point-max))
+  (delete-trailing-whitespace (point-min) (point-max)))
