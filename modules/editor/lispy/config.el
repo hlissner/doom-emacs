@@ -29,14 +29,17 @@
   :when (featurep! :editor evil)
   :hook (lispy-mode . lispyville-mode)
   :init
-  (setq lispyville-key-theme
-        '((operators normal)
-          c-w
-          (prettify insert)
-          (atom-movement t)
-          slurp/barf-lispy
-          additional
-          additional-insert))
+  ;; Use `defvar' instead of `setq' to avoid overriding user's preferences when
+  ;; reloading (re-evaluation) and `lispyville-set-key-theme' is executed
+  ;; immediately after
+  (defvar lispyville-key-theme
+    '((operators normal)
+      c-w
+      (prettify insert)
+      (atom-movement t)
+      slurp/barf-lispy
+      additional
+      additional-insert))
   :config
   (lispyville-set-key-theme)
 ;; REVIEW Delete this once https://github.com/noctuid/lispyville/pull/297 is merged
