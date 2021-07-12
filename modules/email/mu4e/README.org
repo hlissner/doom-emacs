@@ -17,6 +17,7 @@
 - [[#configuration][Configuration]]
   - [[#offlineimap][offlineimap]]
   - [[#mbsync][mbsync]]
+  - [[#other-backends][other backends]]
   - [[#mu-and-mu4e][mu and mu4e]]
 - [[#troubleshooting][Troubleshooting]]
   - [[#no-such-file-or-directory-mu4e][=No such file or directory, mu4e=]]
@@ -43,7 +44,8 @@ via IMAP) and ~mu~ (to index my mail into a format ~mu4e~ can understand).
 * Prerequisites
 This module requires:
 
-+ Either ~mbsync~ (default) or ~offlineimap~ (to sync mail with)
++ Either ~mbsync~ (default) or ~offlineimap~ (to sync IMAP mail with). In case
+  of a different backend, please read below.
 + ~mu~, to index your downloaded messages and to provide the ~mu4e~ package.
 
 ** MacOS
@@ -134,6 +136,18 @@ Next you can download your email with ~mbsync --all~. This may take a while, but
 should be quicker than =offlineimap= ;).
 
 You can now proceed with the [[#mu-and-mu4e][mu and mu4e]] section.
+
+** other backends
+In case you are neither using =offlinemap= nor =mbsync= (example you're syncing
+using POP3(s) protocol instead of IMAP(s)), you need to disable the mu4e backend
+and manually set your mail retrieval command accordingly:
+
+#+BEGIN_SRC elisp
+;; in ~/.doom.d/config.el
+;; Example: we are using `mpop` to query a configured `account1` on a POP3 mail server
+(after! mu4e
+  (setq mu4e-get-mail-command "mpop account1"))
+#+END_SRC
 
 ** mu and mu4e
 You should have your email downloaded already. If you have not, you need to set
