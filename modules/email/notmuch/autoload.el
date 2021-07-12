@@ -30,13 +30,13 @@
   (doom-kill-matching-buffers "^\\*notmuch")
   (+workspace/delete "*MAIL*"))
 
-(defun +notmuch-get-sync-command ()
+(defun +notmuch-get-sync-command (mail-folder)
   "Return a shell command string to synchronize your notmuch mmail with."
   (let* ((afew-cmd "afew -a -t")
          (sync-cmd
           (pcase +notmuch-sync-backend
             (`gmi
-             (concat "cd " +notmuch-mail-folder " && gmi sync && notmuch new"))
+             (concat "cd " mail-folder " && gmi sync && notmuch new"))
             ((or `mbsync
                  `mbsync-xdg) ; DEPRECATED `mbsync-xdg' is now just `mbsync'
              (format "mbsync %s -a && notmuch new"
@@ -48,18 +48,28 @@
                        "")))
             (`offlineimap
              "offlineimap && notmuch new")
-            ((and (pred stringp) it) it)
+            ((and (pred stringp) it)
+             (format it mail-folder))
             (_ (user-error "Invalid notmuch backend specified: %S"
                            +notmuch-sync-backend)))))
     (if (featurep! +afew)
         (format "%s && %s" sync-cmd afew-cmd)
       sync-cmd)))
 
+(defun +notmuch--choose-folder ()
+  "Choose a folder from the +notmuch-mail-folders list."
+  (if (and +notmuch-mail-folders current-prefix-arg)
+      (completing-read "Pick Folder: "
+                       +notmuch-mail-folders
+                       nil t nil nil
+                       +notmuch-mail-folder)
+    +notmuch-mail-folder))
+
 ;;;###autoload
-(defun +notmuch/update ()
+(defun +notmuch/update (active-mail-folder)
   "Sync notmuch emails with server."
-  (interactive)
-  (with-current-buffer (compile (+notmuch-get-sync-command))
+  (interactive (list (+notmuch--choose-folder)))
+  (with-current-buffer (compile (+notmuch-get-sync-command active-mail-folder))
     (let ((w (get-buffer-window (current-buffer))))
       (select-window w)
       (add-hook

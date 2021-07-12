@@ -22,8 +22,11 @@ OR a shell command string such as
   \"offlineimap && notmuch new && afew -a -t\"
   \"mbsync %s -a && notmuch new && afew -a -t\"")
 
+(defvar +notmuch-mail-folders '()
+  "A list containing different mail account folders that can be synced.")
+
 (defvar +notmuch-mail-folder "~/.mail/account.gmail"
-  "Where your email folder is located (for use with gmailieer).")
+  "The default mail folder, where your email is located (for use with gmailieer).")
 
 
 ;;

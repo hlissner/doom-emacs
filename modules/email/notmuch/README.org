@@ -14,6 +14,7 @@
   - [[#opensuse][openSUSE]]
   - [[#debianubuntu][Debian/Ubuntu]]
 - [[#features][Features]]
+  - [[#multiple-mail-folders][Multiple Mail Folders]]
 - [[#configuration][Configuration]]
   - [[#downloading-your-email][Downloading your email]]
   - [[#sending-mail][Sending mail]]
@@ -76,6 +77,19 @@ environment.systemPackages = with pkgs; [
 | Keymap    | Command            | Description                                   |
 | ~SPC m u~ | =+notmuch/update=  | Download, sync, and index emails with notmuch |
 | ~SPC m c~ | =+notmuch/compose= | Compose new email                             |
+
+** Multiple Mail Folders
+
+When using =lieer=/=gmi= the =+notmuch/update= command downloads and indexes emails for the mail account at the directory held in the =+notmuch-mail-folder= variable. By default this folder is assumed to be your default mail folder. If you have multiple mail folders however you can configure =+notmuch-mail-folders=, a list containing paths to multiple mail folders. This makes syncing a work email account and a personal email account from within doom-emacs possible.
+
+#+begin_src emacs-lisp :eval never
+(use-package! notmuch
+  :init
+  (setq +notmuch-mail-folders '("~/.mail/work.gmail" "~/.mail/personal.gmail")
+        +notmuch-mail-folder "~/.mail/work.gmail"))
+#+end_src
+
+The =+notmuch-mail-folder= acts as the default mail folder. When running =+notmuch/update= it will target this folder for syncing and indexing. By using a prefix argument ~SPC u SPC m u~ or ~C-u M-x +notmuch/update RET~ the command will allow you to make a selection for which folder you wish to update. For this example this means a normal execution of the command will sync the work.gmail folder, and by running the command with a prefix you can select the personal.gmail folder to be updated.
 
 * Configuration
 ** Downloading your email
