@@ -25,6 +25,7 @@ us know!
       - [[#arch-linux][Arch Linux]]
       - [[#nixos][NixOS]]
       - [[#opensuse][openSUSE]]
+      - [[#gentoo-linux][Gentoo Linux]]
     - [[#on-macos][On macOS]]
       - [[#with-homebrew][With Homebrew]]
       - [[#with-macports][With MacPorts]]
@@ -219,6 +220,46 @@ zypper install rust
 #+END_SRC
 
 See the [[https://github.com/BurntSushi/ripgrep#building][ripgrep documentation]] for instructions on building from source.
+
+**** Gentoo Linux
+Everything you need is in Gentoo's official =::gentoo= repository.
+
+***** Emacs
+To use Emacs graphically, enable the =gui= USE flag. And enable the =xft= USE flag to render fonts correctly (see
+[[https://github.com/hlissner/doom-emacs/issues/4876][issue #4876]])
+#+begin_src sh
+echo "app-editors/emacs gui xft" >> /etc/portage/package.use/emacs
+#+end_src
+
+To install the latest unmasked version compatible with Doom:
+#+begin_src sh
+emerge '>=app-editors/emacs-26.3'
+#+end_src
+
+Or, for GCCEmacs/Native Compilation, use the live ebuild for version 28.0 with the =jit= USE flag:
+
+Unmask the desired ebuild by adding the following to =package.accept_keywords=:
+#+begin_src
+=app-editors/emacs-28.0.9999 **
+#+end_src
+
+Add the =jit= USE flag to =package.use=:
+#+begin_src
+=app-editors/emacs-28.0.9999 jit
+#+end_src
+
+And emerge:
+#+begin_src sh
+emerge =app-editors/emacs-28.0.9999
+#+end_src
+
+***** Other Dependencies
+#+begin_src sh
+# required
+emerge '>=dev-vcs/git-2.23' '>=sys-apps/ripgrep-11.0' sys-apps/findutils
+# optional
+emerge '>=sys-apps/fd-7.3.0'
+#+end_src
 
 *** On macOS
 MacOS users have many options for installing Emacs, but not all of them are well
