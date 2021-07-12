@@ -113,6 +113,11 @@
                        '(t (:eval cider-modeline-icon))
                        'append)))))
 
+  ;; Ensure that CIDER is used for sessions in org buffers.
+  (when (featurep! :lang org)
+    (after! ob-clojure
+      (setq! org-babel-clojure-backend 'cider)))
+
   ;; The CIDER welcome message obscures error messages that the above code is
   ;; supposed to be make visible.
   (setq cider-repl-display-help-banner nil)
