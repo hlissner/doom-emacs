@@ -33,12 +33,14 @@ arcane wizardry.
 This module has no dedicated maintainers.
 
 ** Module Flags
-This module provides no flags.
++ =+jq= Enable jq hooks
 
 ** Plugins
 + [[https://github.com/pashky/restclient.el][restclient]]
 + =:completion company=
   + [[https://github.com/iquiw/company-restclient][company-restclient]]
++ =+jq=
+  + [[https://github.com/ljos/jq-mode][jq-mode]]
 
 ** Hacks
 + restclient has been modified not to silently reject self-signed or invalid

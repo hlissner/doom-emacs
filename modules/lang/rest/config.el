@@ -33,3 +33,6 @@ certs, rather than reject them silently."
   :when (featurep! :completion company)
   :after restclient
   :config (set-company-backend! 'restclient-mode 'company-restclient))
+
+(when (featurep! +jq)
+  (require 'restclient-jq))
