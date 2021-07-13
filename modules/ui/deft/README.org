@@ -1,11 +1,53 @@
-#+TITLE: :ui deft
+#+TITLE:   ui/deft
+#+DATE:    July 11, 2021
+#+SINCE:   v2.0.9
+#+STARTUP: inlineimages nofold
 
-[[https://jblevins.org/projects/deft/][Deft]] is a major mode for browsing and filtering notes written in plain text
-formats, such as org-mode, markdown, and LaTeX.
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+  - [[#maintainers][Maintainers]]
+  - [[#module-flags][Module Flags]]
+  - [[#plugins][Plugins]]
+- [[#prerequisites][Prerequisites]]
+- [[#configuration][Configuration]]
+  - [[#note][Note]]
 
-To use this module, in your config file set the value of the variable ~deft-directory~ to the folder in which you
-want to keep your notes. 
+* Description
+[[https://jblevins.org/projects/deft/][Deft]] is a major mode for creating, browsing, and filtering notes written in plain text
+formats, such as org-mode, markdown, and LaTeX. It enables you to quickly jot down thoughts and easily retrieve them later.
+
+** Maintainers
+This module has no dedicated maintainers.
+
+** Module Flags
+This module provides no flags.
+
+** Plugins
++ [[https://github.com/jrblevin/deft][deft]]
+
+* Prerequisites
+This module has no prerequisites.
+
+* Configuration
+To use deft, you first need to specify the directory in which your notes are stored:
+
+#+begin_src elisp
+;; ~/.doom.d/config.el
+(setq deft-directory "~/notes")
+#+end_src
 
 The default note format is org-mode. You can change this by setting the value of
-the variable ~deft-default-extension~. Changing the value to ~"md"~ for example,
-will change the default note format to markdown.
+the variable ~deft-default-extension~. Replacing the value with ~"md"~, for example,
+will change the default note format to markdown:
+
+#+begin_src elisp
+(setq deft-default-extension "md")
+#+end_src
+
+You may also want to alter the way titles and file names are automatically
+created by editing ~deft-use-filename-as-title~ and/or ~deft-use-filter-string-for-filename~.
+
+Further customization options can be found here: https://github.com/jrblevin/deft#other-customizations
+
+** Note
+It is [[https://github.com/hlissner/doom-emacs/pull/2845/commits/dce80a3c8032f5390f4e763e18a108d5f3f08772][not recommended]] to re-enable deft's buffer auto-save.
