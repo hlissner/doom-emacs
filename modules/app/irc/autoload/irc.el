@@ -68,8 +68,19 @@ workspace for it."
 argument) is non-nil only show channels in current server."
   (interactive "P")
   (call-interactively
-   (cond ((featurep! :completion ivy)  #'+irc/ivy-jump-to-channel)
-         ((user-error "No jump-to-channel backend is enabled. Enable ivy!")))))
+   (cond ((featurep! :completion ivy)       #'+irc/ivy-jump-to-channel)
+         ((featurep! :completion vertico)   #'+irc/vertico-jump-to-channel)
+         ((user-error "No jump-to-channel backend is enabled. Enable vertico or ivy!")))))
+
+;;;###autoload
+(defun +irc--circe-all-buffers ()
+  (cl-loop with servers = (circe-server-buffers)
+           for server in servers
+           collect server
+           nconc
+           (with-current-buffer server
+             (cl-loop for buf in (circe-server-chat-buffers)
+                      collect buf))))
 
 ;;;###autoload
 (defun +irc/tracking-next-buffer ()

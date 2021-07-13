@@ -138,8 +138,9 @@
          "C-u"     #'company-previous-page
          "C-d"     #'company-next-page
          "C-s"     #'company-filter-candidates
-         "C-S-s"   (cond ((featurep! :completion helm) #'helm-company)
-                         ((featurep! :completion ivy)  #'counsel-company))
+         "C-S-s"   (cond ((featurep! :completion helm)     #'helm-company)
+                         ((featurep! :completion ivy)      #'counsel-company)
+                         ((featurep! :completion vertico)  #'completion-at-point))
          "C-SPC"   #'company-complete-common
          "TAB"     #'company-complete-common-or-cycle
          [tab]     #'company-complete-common-or-cycle
@@ -200,7 +201,20 @@
        (:after helm-occur :map helm-occur-map
         [C-return] #'helm-occur-run-goto-line-ow)
        (:after helm-grep :map helm-grep-map
-        [C-return] #'helm-grep-run-other-window-action)))
+        [C-return] #'helm-grep-run-other-window-action))
+
+      (:when (featurep! :completion vertico)
+        (:after vertico
+         :map vertico-map
+         "M-RET" #'vertico-exit-input
+         "C-SPC" #'+vertico/embark-preview
+         "C-j"   #'vertico-next
+         "C-M-j" #'+vertico/next-candidate-preview
+         "C-S-j" #'vertico-next-group
+         "C-k"   #'vertico-previous
+         "C-M-k" #'+vertico/previous-candidate-preview
+         "C-S-k" #'vertico-previous-group)))
+
 
 ;;; :ui
 (map! (:when (featurep! :ui popup)
@@ -290,8 +304,9 @@
        :desc "Switch buffer"           "<" #'switch-to-buffer)
       :desc "Switch to last buffer" "`"    #'evil-switch-to-windows-last-buffer
       :desc "Resume last search"    "'"
-      (cond ((featurep! :completion ivy)   #'ivy-resume)
-            ((featurep! :completion helm)  #'helm-resume))
+      (cond ((featurep! :completion ivy)        #'ivy-resume)
+            ((featurep! :completion helm)       #'helm-resume)
+            ((featurep! :completion vertico)  #'vertico-repeat))
 
       :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
       :desc "Search project"               "/" #'+default/search-project
@@ -369,14 +384,19 @@
         (:when (featurep! :completion helm)
          :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
          :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol)
+        (:when (featurep! :completion vertico)
+         :desc "Jump to symbol in current workspace" "j"   #'consult-lsp-symbols
+         :desc "Jump to symbol in any workspace"     "J"   (lambda () (interactive)
+                                                             (universal-argument)
+                                                             (call-interactively #'consult-lsp-symbols)))
         (:when (featurep! :ui treemacs +lsp)
          :desc "Errors list"                         "X"   #'lsp-treemacs-errors-list
          :desc "Incoming call hierarchy"             "y"   #'lsp-treemacs-call-hierarchy
          :desc "Outgoing call hierarchy"             "Y"   (cmd!! #'lsp-treemacs-call-hierarchy t)
          :desc "References tree"                     "R"   (cmd!! #'lsp-treemacs-references t)
          :desc "Symbols"                             "S"   #'lsp-treemacs-symbols)
-        :desc "LSP"                                  "l"   #'+default/lsp-command-map
-        :desc "LSP Rename"                           "r"   #'lsp-rename)
+         :desc "LSP"                                 "l"   #'+default/lsp-command-map
+         :desc "LSP Rename"                          "r"   #'lsp-rename)
        (:when (featurep! :tools lsp +eglot)
         :desc "LSP Execute code action" "a" #'eglot-code-actions
         :desc "LSP Rename" "r" #'eglot-rename
@@ -498,8 +518,9 @@
        :desc "Org agenda"                   "a" #'org-agenda
        (:when (featurep! :tools biblio)
         :desc "Bibliographic entries"        "b"
-        (cond ((featurep! :completion ivy)   #'ivy-bibtex)
-              ((featurep! :completion helm)  #'helm-bibtex)))
+        (cond ((featurep! :completion ivy)      #'ivy-bibtex)
+              ((featurep! :completion helm)     #'helm-bibtex)
+              ((featurep! :completion vertico)  #'bibtex-actions-open-entry)))
 
        :desc "Toggle last org-clock"        "c" #'+org/toggle-last-clock
        :desc "Cancel current org-clock"     "C" #'org-clock-cancel
@@ -658,8 +679,13 @@
 
       ;;; <leader> s --- search
       (:prefix-map ("s" . "search")
-       :desc "Search buffer"                "b" #'swiper
-       :desc "Search all open buffers"      "B" #'swiper-all
+       :desc "Search buffer"                "b"
+       (cond ((featurep! :completion helm)      #'swiper)
+             ((featurep! :completion ivy)       #'swiper)
+             ((featurep! :completion vertico)   #'consult-line))
+       :desc "Search all open buffers"      "B"
+       (cond ((featurep! :completion helm)      #'swiper-all)
+             ((featurep! :completion ivy)       #'swiper-all))
        :desc "Search current directory"     "d" #'+default/search-cwd
        :desc "Search other directory"       "D" #'+default/search-other-cwd
        :desc "Locate file"                  "f" #'locate
@@ -676,7 +702,10 @@
        :desc "Search other project"         "P" #'+default/search-other-project
        :desc "Jump to mark"                 "r" #'evil-show-marks
        :desc "Search buffer"                "s" #'+default/search-buffer
-       :desc "Search buffer for thing at point" "S" #'swiper-isearch-thing-at-point
+       :desc "Search buffer for thing at point" "S"
+       (cond ((featurep! :completion helm)      #'swiper-isearch-thing-at-point)
+             ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
+             ((featurep! :completion vertico)   #'+vertico/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 

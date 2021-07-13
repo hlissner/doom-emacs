@@ -54,13 +54,17 @@
         (:when (featurep! :completion helm)
          :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
          :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol)
+        (:when (featurep! :completion vertico)
+         :desc "Jump to symbol in current workspace" "j"   #'consult-lsp-symbols
+         :desc "Jump to symbol in any workspace"     "J"   (lambda () (interactive)
+                                                             (universal-argument)
+                                                             (call-interactively #'consult-lsp-symbols)))
         (:when (featurep! :ui treemacs +lsp)
          :desc "Errors list"                         "X"   #'lsp-treemacs-errors-list
          :desc "Incoming call hierarchy"             "y"   #'lsp-treemacs-call-hierarchy
          :desc "Outgoing call hierarchy"             "Y"   (cmd!! #'lsp-treemacs-call-hierarchy t)
          :desc "References tree"                     "R"   (cmd!! #'lsp-treemacs-references t)
          :desc "Symbols"                             "S"   #'lsp-treemacs-symbols))
-
        (:when (featurep! :tools lsp +eglot)
         :desc "LSP Execute code action"              "a" #'eglot-code-actions
         :desc "LSP Rename"                           "r" #'eglot-rename
@@ -111,8 +115,13 @@
       ;;; <leader> s --- search
       (:prefix-map ("s" . "search")
        :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
-       :desc "Search buffer"                "b" #'swiper
-       :desc "Search all open buffers"      "B" #'swiper-all
+       :desc "Search buffer"                "b"
+       (cond ((featurep! :completion helm)      #'swiper)
+             ((featurep! :completion ivy)       #'swiper)
+             ((featurep! :completion vertico) #'consult-line))
+       :desc "Search all open buffers"      "B"
+       (cond ((featurep! :completion helm)      #'swiper-all)
+             ((featurep! :completion ivy)       #'swiper-all))
        :desc "Search current directory"     "d" #'+default/search-cwd
        :desc "Search other directory"       "D" #'+default/search-other-cwd
        :desc "Locate file"                  "f" #'+lookup/file
@@ -127,7 +136,10 @@
        :desc "Search project"               "p" #'+default/search-project
        :desc "Search other project"         "P" #'+default/search-other-project
        :desc "Search buffer"                "s" #'+default/search-buffer
-       :desc "Search buffer for thing at point" "S" #'swiper-isearch-thing-at-point
+       :desc "Search buffer for thing at point" "S"
+       (cond ((featurep! :completion helm)      #'swiper-isearch-thing-at-point)
+             ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
+             ((featurep! :completion vertico) #'+vertico/search-symbol-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 
@@ -146,8 +158,9 @@
        :desc "Org agenda"                     "a" #'org-agenda
        (:when (featurep! :tools biblio)
         :desc "Bibliographic entries"        "b"
-        (cond ((featurep! :completion ivy)   #'ivy-bibtex)
-              ((featurep! :completion helm)  #'helm-bibtex)))
+        (cond ((featurep! :completion ivy)       #'ivy-bibtex)
+              ((featurep! :completion helm)      #'helm-bibtex)
+              ((featurep! :completion vertico)   #'bibtex-actions-open-entry)))
 
        :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
        :desc "Cancel current org-clock"       "C" #'org-clock-cancel
@@ -420,7 +433,9 @@
         :desc "Reconnect all"      "r" #'circe-reconnect-all
         :desc "Send message"       "s" #'+irc/send-message
         (:when (featurep! :completion ivy)
-         :desc "Jump to channel"  "j" #'+irc/ivy-jump-to-channel)))
+         :desc "Jump to channel"  "j" #'+irc/ivy-jump-to-channel)
+        (:when (featurep! :completion vertico)
+         :desc "Jump to channel"  "j" #'+irc/vertico-jump-to-channel)))
 
       ;;; <leader> T --- twitter
       (:when (featurep! :app twitter)
@@ -448,6 +463,8 @@
       (:when (featurep! :completion helm)
         "C-S-s"        #'swiper-helm
         "C-S-r"        #'helm-resume)
+      (:when (featurep! :completion vertico)
+        "C-S-r"        #'vertico-repeat)
 
       ;;; objed
       (:when (featurep! :editor objed +manual)
@@ -479,7 +496,9 @@
         [C-tab]      #'company-complete-common-or-cycle
         [tab]        #'company-complete-common-or-cycle
         [backtab]    #'company-select-previous
-        "C-RET"      #'counsel-company
+        "C-RET"      (cond ((featurep! :completion helm)     #'helm-company)
+                           ((featurep! :completion ivy)      #'counsel-company)
+                           ((featurep! :completion vertico)  #'completion-at-point))
         :map company-search-map
         "C-n"        #'company-search-repeat-forward
         "C-p"        #'company-search-repeat-backward

@@ -1,0 +1,179 @@
+#+TITLE:   completion/vertico
+#+DATE:    February 16, 2021
+#+SINCE:   v3.0.0
+#+STARTUP: inlineimages
+
+* Table of Contents :TOC_2:noexport:
+- [[#description][Description]]
+  - [[#module-flags][Module Flags]]
+  - [[#plugins][Plugins]]
+- [[#prerequisites][Prerequisites]]
+- [[#features][Features]]
+  - [[#jump-to-navigation][Jump-to navigation]]
+  - [[#project-search--replace][Project search & replace]]
+  - [[#in-buffer-searching][In-buffer searching]]
+  - [[#vertico-integration-for-various-completing-commands][Vertico integration for various completing commands]]
+  - [[#orderless-filtering][Orderless filtering]]
+- [[#troubleshooting][Troubleshooting]]
+
+* Description
+This module provides Vertico integration for a variety of Emacs commands, as
+well as a unified interface for project search and replace, powered by ripgrep.
+
+#+begin_quote
+TODO
+#+end_quote
+
+** Module Flags
++ ~+icons~ Adds icons to ~file~ and ~buffer~ category completion selections.
+
+** Plugins
+[[https://github.com/minad/vertico][vertico]]
+[[https://github.com/minad/consult][consult]]
+[[https://github.com/oantolin/embark/][embark]]
+[[https://github.com/oantolin/embark/][embark-consult]]
+[[https://github.com/minad/marginalia][marginalia]]
+[[https://github.com/oantolin/orderless][orderless]]
+[[https://github.com/minad/consult/][consult-flycheck]] (~:checkers syntax~)
+[[https://github.com/iyefrat/all-the-icons-completion][all-the-icons-completion]] (~+icons~)
+
+* Prerequisites
+This module has no prerequisites.
+
+* Features
+
+The packages in this module modify and use the built-in ~completing-read~
+function, which is used by any function that requires completion. Due to this
+the full scope of these packages is too large to cover here and you are
+encouraged to go and read their excellent documentation. We will detail
+Doom-specific additions:
+
+** Jump-to navigation
+This module provides an interface to navigate within a project using
+=projectile=:
+
+https://assets.doomemacs.org/completion/vertico/projectile.png
+
+| Keybind              | Description                         |
+|----------------------+-------------------------------------|
+| =SPC p f=, =SPC SPC= | Jump to file in project             |
+| =SPC f f=, =SPC .=   | Jump to file from current directory |
+| =SPC s i=            | Jump to symbol in file              |
+
+** Project search & replace
+This module provides interactive text search and replace using ripgrep.
+
+| Keybind   | Description              |
+|-----------+--------------------------|
+| =SPC s p= | Search project           |
+| =SPC s P= | Search another project   |
+| =SPC s d= | Search this directory    |
+| =SPC s D= | Search another directory |
+
+https://assets.doomemacs.org/completion/vertico/search.png
+
+Prefixing these keys with the universal argument (=SPC u= for evil users; =C-u=
+otherwise) changes the behavior of these commands, instructing the underlying
+search engine to include ignored files.
+
+This module also provides Ex Commands for evil users:
+
+| Ex command             | Description                                                      |
+|------------------------+------------------------------------------------------------------|
+| ~:pg[rep][!] [QUERY]~  | Search project (if ~!~, include hidden files)                    |
+| ~:pg[rep]d[!] [QUERY]~ | Search from current directory (if ~!~, don't search recursively) |
+
+The optional `!` is equivalent to the universal argument for the previous
+commands.
+
+-----
+
+These keybindings are available while a search is active:
+
+| Keybind             | Description                                        |
+|---------------------+----------------------------------------------------|
+| =C-;=, =<leader> a= | Open an ~embark-act~ menu to chose a useful action |
+| =C-c C-;=           | Open a buffer with your search results             |
+| =C-c C-e=           | Open a writable buffer of your search results      |
+| =C-SPC=             | Preview the current candidate                      |
+| =C-M-j=             | Scroll down and preview.                           |
+| =C-M-k=             | Scroll up and preview.                             |
+| =C-RET=             | Open the selected candidate in other-window        |
+
+Changes to the resulting wgrep buffer (opened by =C-c C-e=) can be committed
+with =C-c C-c= and aborted with =C-c C-k= (alternatively =ZZ= and =ZQ=, for evil
+users).
+
+https://assets.doomemacs.org/completion/vertico/search-replace.png
+
+** In-buffer searching
+This module provides some in buffer searching bindings:
+
++ =SPC s s= (~isearch~)
++ =SPC s S= (~+vertico/search-symbol-at-point~ via ~consult-line~)
++ =SPC s b= (~consult-line~)
+
+https://assets.doomemacs.org/completion/vertico/buffer-search.png
+
+An ~occur-edit~ buffer can be opened from ~consult-line~ with =C-c C-e=.
+
+** Vertico integration for various completing commands
+*** General
+| Keybind        | Description                 |
+|----------------+-----------------------------|
+| =M-x=, =SPC := | Enhanced M-x                |
+| =SPC '=        | Resume last Vertico session |
+
+*** Jump to files, buffers or projects
+| Keybind              | Description                           |
+|----------------------+---------------------------------------|
+| =SPC RET=            | Find bookmark                         |
+| =SPC f f=, =SPC .=   | Browse from current directory         |
+| =SPC p f=, =SPC SPC= | Find file in project                  |
+| =SPC f r=            | Find recently opened file             |
+| =SPC p p=            | Open another project                  |
+| =SPC b b=, =SPC ,=   | Switch to buffer in current workspace |
+| =SPC b B=, =SPC <=   | Switch to buffer                      |
+
+=SPC b b=/=SPC ,= support changing the workspace you're selecting a buffer from
+via [[https://github.com/minad/consult#narrowing-and-grouping][Consult narrowing]], e.g. if you're on the first workspace, you can switch to
+selecting a buffer from the third workspace by typing =3 SPC= into the prompt,
+or the last workspace by typing =0 SPC=. =SPC f f=/=SPC .= support exported to a
+=wdired= buffer using =C-c C-e=.
+
+*** Search
+| Keybind   | Description                               |
+|-----------+-------------------------------------------|
+| =SPC p t= | List all TODO/FIXMEs in project           |
+| =SPC s b= | Search the current buffer                 |
+| =SPC s d= | Search this directory                     |
+| =SPC s D= | Search another directory                  |
+| =SPC s i= | Search for symbol in current buffer       |
+| =SPC s p= | Search project                            |
+| =SPC s P= | Search another project                    |
+| =SPC s s= | Search the current buffer (incrementally) |
+
+** Orderless filtering
+When using orderless to filter through candidates, the default behaviour is for
+each space separated input to match the candidate as a regular expression or
+literally.
+
+Note that due to this style of matching, pressing tab does not expand the input
+to the longest matching prefix (like shell completion), but rather uses the
+first matched candidate as input. Filtering further is instead achieved by
+pressing space and entering another input. In essence, when trying to match
+=foobar.org=, instead of option 1., use option 2.:
+
+1. (BAD) Enter =foo TAB=, completes to =foobar.=, enter =org RET=
+2. (GOOD) Enter =foo SPC org RET=
+
+Doom has some builtin [[https://github.com/oantolin/orderless#style-dispatchers][style dispatchers]] for more finegrained filtering. You can
+further specify each space separated input in the following ways:
+| Input            | Description                                |
+|------------------+--------------------------------------------|
+| =!foo=           | match without literal input =foo=          |
+| =`bar= or =bar`= | match input =bar= as an initialism         |
+| ==baz= or =baz== | match only with literal input =baz=        |
+| =~qux= or =qux~= | match input =qux= with fuzzy/flex matching |
+
+* TODO Troubleshooting

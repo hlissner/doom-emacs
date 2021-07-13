@@ -67,8 +67,9 @@ As of this writing, this is the state of LSP support in Doom Emacs:
 ** Plugins
 + [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]]
 + [[https://github.com/emacs-lsp/lsp-ui][lsp-ui]]
-+ [[https://github.com/emacs-lsp/lsp-ivy][lsp-ivy]]
-+ [[https://github.com/emacs-lsp/helm-lsp][helm-lsp]]
++ [[https://github.com/emacs-lsp/lsp-ivy][lsp-ivy]] (=:completion ivy=)
++ [[https://github.com/emacs-lsp/helm-lsp][helm-lsp]] (=:completion helm=)
++ [[https://github.com/gagbo/consult-lsp][consult-lsp]] (=:completion vertico=)
 + [[https://github.com/joaotavora/eglot][eglot]]
 
 * Prerequisites
@@ -85,8 +86,9 @@ including instructions to register your own.
 
 * TODO Features
 ** LSP-powered project search
-Without the =+eglot= flag, and when =:completion ivy= or =:completion helm= is
-active, LSP is used to search a symbol indexed by the LSP server :
+Without the =+eglot= flag, and when =:completion ivy=, =:completion helm= or
+=:completion vertico= is active, LSP is used to search a symbol indexed by the
+LSP server :
 | Keybind   | Description                         |
 |-----------+-------------------------------------|
 | =SPC c j= | Jump to symbol in current workspace |

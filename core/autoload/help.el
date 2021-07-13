@@ -226,6 +226,8 @@ will be automatically appended to the result."
                   #'+ivy-file-search)
                  ((fboundp '+helm-file-search)
                   #'+helm-file-search)
+                 ((fboundp '+vertico-file-search)
+                  #'+vertico-file-search)
                  ((rgrep
                    (read-regexp
                     "Search for" (or initial-input 'grep-tag-default)
