@@ -1,0 +1,149 @@
+#+TITLE:   tools/biblio
+#+DATE:    April 11, 2020
+#+SINCE:   3.0
+#+STARTUP: inlineimages
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+  - [[#maintainers][Maintainers]]
+  - [[#module-flags][Module Flags]]
+  - [[#plugins][Plugins]]
+  - [[#note-about-org-ref][Note about org-ref]]
+- [[#prerequisites][Prerequisites]]
+  - [[#pdf-viewing][PDF viewing]]
+  - [[#bibtex-completion][Bibtex completion]]
+- [[#features][Features]]
+  - [[#org-roam-bibtex][org-roam-bibtex]]
+- [[#configuration][Configuration]]
+  - [[#path-configuration][Path configuration]]
+    - [[#bibtex-completion-helm-bibtex-ivy-bibtex][bibtex-completion (helm-bibtex, ivy-bibtex)]]
+    - [[#org-ref][org-ref]]
+  - [[#templates][Templates]]
+    - [[#bibtex-completion-1][Bibtex-completion]]
+    - [[#org-roam-bibtex-1][org-roam-bibtex]]
+- [[#troubleshooting][Troubleshooting]]
+
+* Description
+This module adds tools to help when working with bibliographies and citations.
+Minimal modifications have been made to the packages and the configuration
+details are listed in [[*Configuration][Configuration]] below. Some sensible defaults have been
+selected so it should be possible to use without modifications.
+
+** Maintainers
++ [[https://github.com/bdarcus][bdarcus]]
++ [[https://github.com/brianmcgillion][bmg]]
+
+** Module Flags
+This module provides no flags.
+
+** Plugins
++  [[https://github.com/tmalsburg/helm-bibtex][bibtex-completion]]
++ ~:completion helm~
+  + [[https://github.com/tmalsburg/helm-bibtex][helm-bibtex]]
++ ~:completion ivy~
+  +  [[https://github.com/tmalsburg/helm-bibtex][ivy-bibtex]]
++ ~:lang org~
+  + [[https://github.com/jkitchin/org-ref][org-ref]]
++ ~:lang org +roam~
+  + [[https://github.com/Zaeph/org-roam-bibtex][org-roam-bibtex]]
+** Note about org-ref
+Although org-ref supports both ivy and helm, certain functionality e.g. the ability to drag-n-drop a pdf into a bib file in order to have org-ref automatically generate a new bibtex entry will pull in helm, as it is hard coded to support that.
+
+For this reason many of the options are not enabled by default, if you wish to enable the other functions see: [[https://github.com/jkitchin/org-ref#some-other-useful-libraries-in-org-ref][org-ref additional libraries]]
+
+* Prerequisites
+There are no hard dependencies for this module.
+
+** PDF viewing
+An application for opening PDF files is required. By default =DocView= is used
+though it is highly recommended to enable =:tools pdf= in your personal ~init.el~
+file to enable [[https://github.com/politza/pdf-tools][pdf-tools]].
+
+** Bibtex completion
+For helm or ivy bibtex completion you should enable either =:completion helm= or
+=:completion ivy=.
+
+* Features
+Both [[https://github.com/tmalsburg/helm-bibtex][helm-bibtex]] (includes helm-bibtex, ivy-bibtex and bibtex-completion code)
+and [[https://github.com/jkitchin/org-ref][org-ref]] provide and extensive range of features so it is best to check their
+respective sites for a full list of features.
+
+On a highlevel you can expect:
++ bibliography management
++ Notes per reference
++ citation support
++ citation lookup
++ org integration for writing literate latex (org-roam)
++ fast indexing and searching of references.
+
+To understand the interaction of these packages this [[https://www.reddit.com/r/emacs/comments/cxu0qg/emacs_org_and_bibtex_as_alternative_to_zotero_and/eyqe4vq/][reddit]] thread will explain the unique features and the overlapping functionality if any.
+
+** org-roam-bibtex
+This package integrates org-ref and bibtex-completion into [[https://github.com/jethrokuan/org-roam][org-roam]] mode, which can be enabled via =lang org +roam=. For academics and those working extensively with documents which they need to keep detailed notes on for cross-referencing.
+
+* Configuration
+For all these packages it is advisable to use ~(after! package)~ in your ~config.el~ to override any default settings and tune the packages to your needs.
+
+** Path configuration
+This module provides variables that will allow for easier configuration of
+the paths of the respective packages.
+
+It is of course possible to set the variables directly through their respective packages as shown below, in which case you can ignore the ~+biblio...~ versions. See [[*bibtex-completion (helm-bibtex, ivy-bibtex)][bibtex-completion]] and [[*org-ref][org-ref]] configurations below.
+
+#+BEGIN_src emacs-lisp
+(setq! +biblio-pdf-library-dir "/path/to/bibrary/"
+       +biblio-default-bibliography-files '("/path/to/bibliography.bib")
+       +biblio-notes-path "/path/to/notes/")
+#+END_src
+
+Unless ~+biblio-notes-path~ ends in a ~/~ it is assumed to be a single file and not a directory.
+
+Each of the variables overlays the corresponding variables in the following way
++ ~+biblio-default-bibliography-files~
+  - ~bibtex-completion-library-path~
+  - ~org-ref-pdf-directory~
++ ~+biblio-default-bibliography-files~
+  - ~reftex-default-bibliography~
+  - ~bibtex-completion-bibliography~
+  - ~org-ref-default-bibliography~
++ ~+biblio-notes-path~
+  - ~+bibibtex-completion-notes-path~
+  - ~org-ref-bibliography-notes~
+  - ~org-ref-notes-directory~
+
+*** bibtex-completion (helm-bibtex, ivy-bibtex)
+These packages share the same common backend ~bibtex-completion~
+#+BEGIN_src emacs-lisp
+(after! bibtex-completion
+  (setq! bibtex-completion-bibliography "/path/to/bib/"
+        bibtex-completion-library-path "/path/to/Papers/"
+        bibtex-completion-notes-path "/path/to/your/notes/"))
+#+END_src
+*** org-ref
+#+BEGIN_src emacs-lisp
+(after! org-ref
+  (setq! org-ref-bibliography-notes "/path/to/notes/"
+        org-ref-default-bibliography "/path/to/bib"
+        org-ref-pdf-directory "/path/to/papers/"
+        reftex-default-bibliography org-ref-default-bibliography))
+#+END_src
+** Templates
+Reasonable default templates are provided for the packages, however, if you wish to change these refer to the respective packages for indepth instructions.
+
+*** Bibtex-completion
+#+BEGIN_src emacs-lisp
+(after! bibtex-completion
+  (setq!  bibtex-completion-notes-template-multiple-files
+         "${title} : (${=key=})\n Some more format options"))
+#+END_src
+
+*** org-roam-bibtex
+To change the default template you can change it according to [[https://github.com/Zaeph/org-roam-bibtex][org-roam-bibtex]]
+#+BEGIN_src emacs-lisp
+(after! org-roam-bibtex
+  (setq org-roam-bibtex-preformat-keywords '("some" "key" "words"))
+  (setq org-roam-bibtex-template '(("Some template"))))
+#+END_src
+
+* Troubleshooting
+# Common issues and their solution, or places to look for help.
